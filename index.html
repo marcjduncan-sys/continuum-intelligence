@@ -113,7 +113,18 @@ a:hover { color: var(--accent-sage); }
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--text-primary);
 }
-.brand-infinity { color: var(--signal-green); font-size: 1.15em; line-height: 1; }
+.brand-infinity {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -0.5px;
+    margin: 0 0.02em;
+}
+.brand-infinity svg {
+    height: 0.85em;
+    width: auto;
+    display: block;
+}
 .nav-links { display: flex; align-items: center; gap: var(--space-lg); }
 .nav-links a {
     font-size: 0.75rem; font-weight: 500;
@@ -164,7 +175,8 @@ a:hover { color: var(--accent-sage); }
     color: var(--text-muted);
     margin-bottom: var(--space-sm);
 }
-.footer-brand-name .brand-infinity { color: var(--signal-green); font-size: 1.15em; line-height: 1; }
+.footer-brand-name .brand-infinity { display: inline-block; vertical-align: middle; position: relative; top: -0.5px; margin: 0 0.02em; }
+.footer-brand-name .brand-infinity svg { height: 0.85em; width: auto; display: block; }
 .footer-tagline {
     font-family: var(--font-narrative);
     font-size: 0.85rem; color: var(--text-secondary);
@@ -1256,7 +1268,8 @@ a:hover { color: var(--accent-sage); }
     letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--text-muted);
 }
-.rf-brand .brand-infinity { color: var(--signal-green); font-size: 1.15em; line-height: 1; }
+.rf-brand .brand-infinity { display: inline-block; vertical-align: middle; position: relative; top: -0.5px; margin: 0 0.02em; }
+.rf-brand .brand-infinity svg { height: 0.85em; width: auto; display: block; }
 
 /* ============================================================
    EPISTEMIC BADGES: Leadership & Ownership
@@ -1493,7 +1506,7 @@ a:hover { color: var(--accent-sage); }
 <nav class="site-nav" id="siteNav">
     <div class="nav-inner">
         <a class="nav-brand" onclick="navigate('home')">
-            <div class="nav-brand-text">c<span class="brand-infinity">&#8734;</span>ntinuum intelligence</div>
+            <div class="nav-brand-text"><span class="brand-infinity"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><path d="M15 5C8 5 2 10.5 2 15s6 10 13 10c4 0 7.5-2 10-5" fill="none" stroke="#E8E6E1" stroke-width="4" stroke-linecap="round"/><path d="M45 25c7 0 13-5.5 13-10S52 5 45 5c-4 0-7.5 2-10 5" fill="none" stroke="#3DAA6D" stroke-width="4" stroke-linecap="round"/><path d="M25 20c2.5 3 6 5 10 5" fill="none" stroke="#3DAA6D" stroke-width="4" stroke-linecap="round"/><path d="M35 10c-2.5-3-6-5-10-5" fill="none" stroke="#E8E6E1" stroke-width="4" stroke-linecap="round"/></svg></span>ntinuum intelligence</div>
         </a>
         <div class="nav-links">
             <a href="#home" class="active" data-nav="home">Research</a>
@@ -1548,7 +1561,7 @@ a:hover { color: var(--accent-sage); }
         <div class="footer-inner">
             <div class="footer-top">
                 <div>
-                    <div class="footer-brand-name">c<span class="brand-infinity">&#8734;</span>ntinuum intelligence</div>
+                    <div class="footer-brand-name"><span class="brand-infinity"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><path d="M15 5C8 5 2 10.5 2 15s6 10 13 10c4 0 7.5-2 10-5" fill="none" stroke="#E8E6E1" stroke-width="4" stroke-linecap="round"/><path d="M45 25c7 0 13-5.5 13-10S52 5 45 5c-4 0-7.5 2-10 5" fill="none" stroke="#3DAA6D" stroke-width="4" stroke-linecap="round"/><path d="M25 20c2.5 3 6 5 10 5" fill="none" stroke="#3DAA6D" stroke-width="4" stroke-linecap="round"/><path d="M35 10c-2.5-3-6-5-10-5" fill="none" stroke="#E8E6E1" stroke-width="4" stroke-linecap="round"/></svg></span>ntinuum intelligence</div>
                     <div class="footer-tagline">Independent cross-domain equity research. Evidence-driven analysis for institutional and sophisticated investors.</div>
                 </div>
                 <div class="footer-links">
@@ -2695,7 +2708,7 @@ function renderReportFooter(data) {
     '<div class="rf-inner">' +
       '<div class="rf-disclaimer-text">' + data.footer.disclaimer + '</div>' +
       '<div class="rf-meta-row">' +
-        '<div class="rf-brand">c<span class="brand-infinity">&#8734;</span>ntinuum intelligence</div>' +
+        '<div class="rf-brand"><span class="brand-infinity"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><path d="M15 5C8 5 2 10.5 2 15s6 10 13 10c4 0 7.5-2 10-5" fill="none" stroke="#E8E6E1" stroke-width="4" stroke-linecap="round"/><path d="M45 25c7 0 13-5.5 13-10S52 5 45 5c-4 0-7.5 2-10 5" fill="none" stroke="#3DAA6D" stroke-width="4" stroke-linecap="round"/><path d="M25 20c2.5 3 6 5 10 5" fill="none" stroke="#3DAA6D" stroke-width="4" stroke-linecap="round"/><path d="M35 10c-2.5-3-6-5-10-5" fill="none" stroke="#E8E6E1" stroke-width="4" stroke-linecap="round"/></svg></span>ntinuum intelligence</div>' +
         '<div class="rf-meta-item">ID: ' + data.reportId + '</div>' +
         '<div class="rf-meta-item">Mode: Narrative Intelligence</div>' +
         '<div class="rf-meta-item">Domains: ' + data.footer.domainCount + '</div>' +
