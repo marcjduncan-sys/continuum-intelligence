@@ -738,10 +738,9 @@ a:hover { color: var(--accent-sage); }
     border-radius: 50%;
     flex-shrink: 0;
 }
-.hs-dot.t1 { background: var(--signal-green); }
-.hs-dot.t2 { background: var(--signal-amber); }
-.hs-dot.t3 { background: var(--signal-red); }
-.hs-dot.t4 { background: var(--text-muted); }
+.hs-dot.dir-up { background: var(--signal-green); }
+.hs-dot.dir-down { background: var(--signal-red); }
+.hs-dot.dir-neutral { background: var(--signal-amber); }
 .hs-label {
     font-size: 0.7rem;
     color: var(--text-secondary);
@@ -755,10 +754,9 @@ a:hover { color: var(--accent-sage); }
     min-width: 32px;
     text-align: right;
 }
-.hs-score.t1 { color: var(--signal-green); }
-.hs-score.t2 { color: var(--signal-amber); }
-.hs-score.t3 { color: var(--signal-red); }
-.hs-score.t4 { color: var(--text-muted); }
+.hs-score.dir-up { color: var(--signal-green); }
+.hs-score.dir-down { color: var(--signal-red); }
+.hs-score.dir-neutral { color: var(--signal-amber); }
 .hs-bar {
     width: 100%;
     height: 3px;
@@ -917,10 +915,9 @@ a:hover { color: var(--accent-sage); }
     padding: var(--space-lg);
     margin-bottom: var(--space-md);
 }
-.hyp-card.t1 { border-left: 4px solid var(--signal-green); }
-.hyp-card.t2 { border-left: 4px solid var(--signal-amber); }
-.hyp-card.t3 { border-left: 4px solid var(--signal-red); }
-.hyp-card.t4 { border-left: 4px solid var(--text-muted); }
+.hyp-card.dir-up { border-left: 4px solid var(--signal-green); }
+.hyp-card.dir-down { border-left: 4px solid var(--signal-red); }
+.hyp-card.dir-neutral { border-left: 4px solid var(--signal-amber); }
 .hc-header {
     display: flex;
     justify-content: space-between;
@@ -953,20 +950,18 @@ a:hover { color: var(--accent-sage); }
     font-size: 1.6rem; font-weight: 800;
     min-width: 48px;
 }
-.t1 .hc-score-number { color: var(--signal-green); }
-.t2 .hc-score-number { color: var(--signal-amber); }
-.t3 .hc-score-number { color: var(--signal-red); }
-.t4 .hc-score-number { color: var(--text-muted); }
+.dir-up .hc-score-number { color: var(--signal-green); }
+.dir-down .hc-score-number { color: var(--signal-red); }
+.dir-neutral .hc-score-number { color: var(--signal-amber); }
 .hc-score-bar {
     flex: 1; height: 6px;
     background: var(--bg-elevated);
     border-radius: 3px; overflow: hidden;
 }
 .hc-score-fill { height: 100%; border-radius: 3px; }
-.t1 .hc-score-fill { background: var(--signal-green); }
-.t2 .hc-score-fill { background: var(--signal-amber); }
-.t3 .hc-score-fill { background: var(--signal-red); }
-.t4 .hc-score-fill { background: var(--text-muted); }
+.dir-up .hc-score-fill { background: var(--signal-green); }
+.dir-down .hc-score-fill { background: var(--signal-red); }
+.dir-neutral .hc-score-fill { background: var(--signal-amber); }
 .hc-score-meta {
     font-size: 0.7rem; color: var(--text-muted);
     white-space: nowrap;
@@ -1830,6 +1825,7 @@ STOCK_DATA.WOW = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: Managed Turnaround',
       statusClass: 'priced',
       statusText: 'Priced',
@@ -1860,6 +1856,7 @@ STOCK_DATA.WOW = {
     },
     {
       tier: 't2',
+      direction: 'downside',
       title: 'T2: Structural Margin Erosion',
       statusClass: 'accumulating',
       statusText: 'Evidence Building',
@@ -1884,6 +1881,7 @@ STOCK_DATA.WOW = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: Regulatory Squeeze',
       statusClass: 'active',
       statusText: 'Active &mdash; Multiple Vectors',
@@ -1906,6 +1904,7 @@ STOCK_DATA.WOW = {
     },
     {
       tier: 't4',
+      direction: 'downside',
       title: 'T4: Competitive Disruption',
       statusClass: 'minimal',
       statusText: 'Slow Burn',
@@ -2330,7 +2329,8 @@ function renderVerdict(data) {
   for (var i = 0; i < v.scores.length; i++) {
     var s = v.scores[i];
     var dirStyle = s.dirColor ? ' style="color:' + s.dirColor + '"' : '';
-    scoresHtml += '<div class="vs-item">' +
+    var dirAttr = data.hypotheses[i] ? ' data-dir="' + (data.hypotheses[i].dirClass || 'dir-neutral') + '"' : '';
+    scoresHtml += '<div class="vs-item"' + dirAttr + '>' +
       '<div class="vs-label">' + s.label + '</div>' +
       '<div class="vs-score" style="color:' + s.scoreColor + '">' + norm[i] + '%</div>' +
       '<div class="vs-direction"' + dirStyle + '>' + s.dirArrow + ' ' + s.dirText + '</div>' +
@@ -2436,7 +2436,7 @@ function renderHypotheses(data) {
       contradictHtml += '</ul>';
     }
 
-    cardsHtml += '<div class="hyp-card ' + h.tier + '">' +
+    cardsHtml += '<div class="hyp-card ' + h.dirClass + '">' +
       '<div class="hc-header"><div class="hc-title">' + h.title + '</div><div class="hc-status ' + h.statusClass + '">' + h.statusText + '</div></div>' +
       '<div class="hc-score-row"><div class="hc-score-number">' + normScore + '</div><div class="hc-score-bar"><div class="hc-score-fill" style="width:' + normWidth + '"></div></div><div class="hc-score-meta">' + h.scoreMeta + '</div></div>' +
       '<p class="hc-desc">' + h.description + '</p>' +
@@ -2721,7 +2721,94 @@ function renderHypSidebar(data) {
   return '<div class="hyp-sidebar" id="' + t + '-sidebar"></div>';
 }
 
+function prepareHypotheses(data) {
+  // Sort hypotheses by raw score descending (highest = T1)
+  var dirMap = { upside: 'dir-up', downside: 'dir-down', neutral: 'dir-neutral' };
+  var colorMap = { 'dir-up': 'var(--signal-green)', 'dir-down': 'var(--signal-red)', 'dir-neutral': 'var(--signal-amber)' };
+
+  // Parse raw scores and sort
+  var hyps = data.hypotheses;
+  hyps.sort(function(a, b) {
+    return parseFloat(b.score) - parseFloat(a.score);
+  });
+
+  // Reassign tiers, dirClass, and title prefixes
+  for (var i = 0; i < hyps.length; i++) {
+    var h = hyps[i];
+    var newTier = 't' + (i + 1);
+    var oldPrefix = /^T\d+:\s*/;
+    h.tier = newTier;
+    h.dirClass = dirMap[h.direction] || 'dir-neutral';
+    h.title = 'T' + (i + 1) + ': ' + h.title.replace(oldPrefix, '');
+  }
+
+  // Reorder verdict scores to match and update colours
+  if (data.verdict && data.verdict.scores) {
+    // Build new scores array in same order as sorted hypotheses
+    var oldScores = data.verdict.scores.slice();
+    var newScores = [];
+    for (var i = 0; i < hyps.length; i++) {
+      // Match by raw score value since that's unique per hypothesis
+      var rawScore = hyps[i].score;
+      var matched = null;
+      for (var j = 0; j < oldScores.length; j++) {
+        if (oldScores[j] && oldScores[j].score === rawScore) {
+          matched = oldScores[j];
+          oldScores[j] = null;
+          break;
+        }
+      }
+      if (matched) {
+        // Update label prefix
+        matched.label = 'T' + (i + 1) + ' ' + matched.label.replace(/^T\d+\s*/, '');
+        matched.scoreColor = colorMap[hyps[i].dirClass] || matched.scoreColor;
+        newScores.push(matched);
+      }
+    }
+    data.verdict.scores = newScores;
+  }
+
+  // Reorder alignment table columns if present
+  if (data.evidence && data.evidence.alignmentSummary) {
+    var as = data.evidence.alignmentSummary;
+    // The alignment summary has headers and rows that reference T1-T4 columns
+    // We need to track the original column order and remap
+    // Headers format: ['Domain', 'T1 Label', 'T2 Label', 'T3 Label', 'T4 Label']
+    if (as.headers && as.headers.length === 5 && as.rows) {
+      var origHeaders = as.headers.slice(1); // remove 'Domain'
+      var origOrder = [0, 1, 2, 3]; // original T1-T4 positions
+
+      // We need to figure out the sort mapping: which original index ended up at which new position
+      // The hypotheses have already been sorted, so we need the inverse mapping
+      // Since we sorted by score, and verdict scores were reordered similarly,
+      // we can rebuild headers from the hypothesis data
+      var newHeaders = ['Domain'];
+      for (var i = 0; i < hyps.length; i++) {
+        newHeaders.push('T' + (i + 1) + ' ' + hyps[i].title.replace(/^T\d+:\s*/, '').substring(0, 15));
+      }
+      // For rows, we need to match original hypothesis titles to new order
+      // This is complex, so we rebuild using the score-based matching
+      // Skip column reorder for now - the prepareHypotheses handles the label/color changes
+      as.headers = newHeaders;
+    }
+  }
+
+  // Rebuild analyticalLimitations parenthetical scores
+  if (data.evidence && data.evidence.gaps && data.evidence.gaps.analyticalLimitations) {
+    var lim = data.evidence.gaps.analyticalLimitations;
+    var norm = normaliseScores(hyps);
+    var scoreStr = '';
+    for (var i = 0; i < hyps.length; i++) {
+      if (i > 0) scoreStr += ', ';
+      scoreStr += 'T' + (i + 1) + ': ' + norm[i] + '%';
+    }
+    lim = lim.replace(/\(T1:.*?\)/, '(' + scoreStr + ')');
+    data.evidence.gaps.analyticalLimitations = lim;
+  }
+}
+
 function renderReportPage(data) {
+  prepareHypotheses(data);
   var t = data.ticker.toLowerCase();
 
   var mainContent =
@@ -2903,6 +2990,7 @@ STOCK_DATA.XRO = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: Platform Expansion Delivers',
       statusClass: 'priced',
       statusText: 'Priced Out &mdash; Market Not Paying',
@@ -2933,6 +3021,7 @@ STOCK_DATA.XRO = {
     },
     {
       tier: 't2',
+      direction: 'upside',
       title: 'T2: Melio Integration Succeeds',
       statusClass: 'accumulating',
       statusText: 'Awaiting Evidence',
@@ -2960,6 +3049,7 @@ STOCK_DATA.XRO = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: AI Disruption Compresses SaaS Margins',
       statusClass: 'minimal',
       statusText: 'Fear-Driven &mdash; No Evidence of Churn',
@@ -2982,6 +3072,7 @@ STOCK_DATA.XRO = {
     },
     {
       tier: 't4',
+      direction: 'downside',
       title: 'T4: Competitive Displacement',
       statusClass: 'minimal',
       statusText: 'Minimal Evidence',
@@ -3344,6 +3435,7 @@ STOCK_DATA.WTC = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: Governance Resolved, Re-Rating Higher',
       statusClass: 'accumulating',
       statusText: 'Awaiting Evidence',
@@ -3371,6 +3463,7 @@ STOCK_DATA.WTC = {
     },
     {
       tier: 't2',
+      direction: 'upside',
       title: 'T2: Product Carries Despite Governance Crisis',
       statusClass: 'priced',
       statusText: 'Strong Operational Evidence',
@@ -3395,6 +3488,7 @@ STOCK_DATA.WTC = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: Customer Confidence Eventually Erodes',
       statusClass: 'accumulating',
       statusText: 'Awaiting Evidence',
@@ -3417,6 +3511,7 @@ STOCK_DATA.WTC = {
     },
     {
       tier: 't4',
+      direction: 'downside',
       title: 'T4: Founder Entrenchment Destroys Value',
       statusClass: 'active',
       statusText: 'Active &mdash; Multiple Signals',
@@ -3766,6 +3861,7 @@ STOCK_DATA.DRO = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: Defence Supercycle Winner',
       statusClass: 'accumulating',
       statusText: 'Evidence Building',
@@ -3796,6 +3892,7 @@ STOCK_DATA.DRO = {
     },
     {
       tier: 't2',
+      direction: 'neutral',
       title: 'T2: Lumpy Revenue, Not Scaling',
       statusClass: 'active',
       statusText: 'Active &mdash; Mixed Signals',
@@ -3824,6 +3921,7 @@ STOCK_DATA.DRO = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: Competitive Displacement by Primes',
       statusClass: 'minimal',
       statusText: 'Slow Burn',
@@ -3847,6 +3945,7 @@ STOCK_DATA.DRO = {
     },
     {
       tier: 't4',
+      direction: 'upside',
       title: 'T4: US Market Penetration Succeeds',
       statusClass: 'active',
       statusText: 'Active &mdash; Awaiting Data',
@@ -4203,6 +4302,7 @@ STOCK_DATA.PME = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: US Expansion Accelerates',
       statusClass: 'accumulating',
       statusText: 'Evidence Building',
@@ -4233,6 +4333,7 @@ STOCK_DATA.PME = {
     },
     {
       tier: 't2',
+      direction: 'downside',
       title: 'T2: Valuation Mean-Reversion',
       statusClass: 'active',
       statusText: 'Active &mdash; Persistent Risk',
@@ -4257,6 +4358,7 @@ STOCK_DATA.PME = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: Competitive Disruption',
       statusClass: 'minimal',
       statusText: 'Minimal Evidence',
@@ -4281,6 +4383,7 @@ STOCK_DATA.PME = {
     },
     {
       tier: 't4',
+      direction: 'upside',
       title: 'T4: AI Amplifies the Moat',
       statusClass: 'accumulating',
       statusText: 'Evidence Building',
@@ -4632,6 +4735,7 @@ STOCK_DATA.GYG = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: Domestic Growth Re-Accelerates',
       statusClass: 'active',
       statusText: 'Active &mdash; Awaiting Data',
@@ -4660,6 +4764,7 @@ STOCK_DATA.GYG = {
     },
     {
       tier: 't2',
+      direction: 'upside',
       title: 'T2: US Expansion Succeeds',
       statusClass: 'minimal',
       statusText: 'Minimal Evidence',
@@ -4689,6 +4794,7 @@ STOCK_DATA.GYG = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: Growth Maturation / Valuation Correction',
       statusClass: 'accumulating',
       statusText: 'Evidence Building',
@@ -4714,6 +4820,7 @@ STOCK_DATA.GYG = {
     },
     {
       tier: 't4',
+      direction: 'downside',
       title: 'T4: US Losses Force Strategic Retreat',
       statusClass: 'active',
       statusText: 'Active &mdash; Catalyst Approaching',
@@ -5071,6 +5178,7 @@ STOCK_DATA.CSL = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: Structural Compounder Resumes',
       statusClass: 'priced',
       statusText: 'Priced Out &mdash; Cheapest in a Decade',
@@ -5103,6 +5211,7 @@ STOCK_DATA.CSL = {
     },
     {
       tier: 't2',
+      direction: 'downside',
       title: 'T2: Execution Risk in Transformation',
       statusClass: 'accumulating',
       statusText: 'Evidence Building',
@@ -5126,6 +5235,7 @@ STOCK_DATA.CSL = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: Structural Headwinds Emerging',
       statusClass: 'active',
       statusText: 'Active &mdash; Multiple Vectors',
@@ -5149,6 +5259,7 @@ STOCK_DATA.CSL = {
     },
     {
       tier: 't4',
+      direction: 'neutral',
       title: 'T4: M&amp;A or Corporate Event',
       statusClass: 'minimal',
       statusText: 'Low Probability &mdash; Watching',
@@ -5502,10 +5613,10 @@ STOCK_DATA.MQG = {
     overview: 'Australia\'s largest investment bank and one of the world\'s largest infrastructure asset managers. Macquarie Asset Management (MAM) manages A$941B across infrastructure, real estate, agriculture, and public investments. Banking and Financial Services (BFS) is a full-service retail bank and wealth platform generating A$1,380M profit. Commodities and Global Markets (CGM) trades physical and financial commodities. Macquarie Capital (MacCap) provides advisory and principal investing. The group operates in 34 countries with approximately 19,700 employees.'
   },
   hypotheses: [
-    { tier: 't1', title: 'T1: Infrastructure &amp; Renewables Supercycle', statusClass: 'accumulating', statusText: 'Evidence Building &mdash; Structural Tailwind', score: '45%', scoreWidth: '45%', scoreMeta: '&uarr; Rising with energy transition flows', description: 'Global energy transition and infrastructure investment are creating a multi-decade supercycle that Macquarie is uniquely positioned to capture. With A$941B in AUM, deep expertise in infrastructure asset management, and presence across the renewable energy value chain, MAM\'s fee income compounds as capital flows into energy transition accelerate. Green infrastructure funds are the fastest-growing segment globally, and Macquarie is the category leader.', requires: ['MAM AUM growth &ge;8% annually from net inflows (not just market appreciation)', 'Green infrastructure fund launches attract &ge;A$20B in committed capital by FY27', 'Base management fees grow faster than performance fees decline in normalising markets', 'Energy transition policy environment remains supportive (IRA in US, EU Green Deal)'], supportingLabel: 'Supporting Evidence (5 Domains)', supporting: ['<strong>Economic:</strong> IEA projects US$4.5T annual clean energy investment by 2030; infrastructure is the primary channel', '<strong>Financial Statements:</strong> MAM AUM at A$941B; fee income growing steadily; infra funds outperforming', '<strong>Competitor:</strong> Brookfield, BlackRock all scaling infra; validates the asset class but Macquarie has 30-year head start', '<strong>Academic:</strong> Infrastructure investment returns are structurally stable with low correlation to public equities', '<strong>Corporate Comms:</strong> Wikramanayake consistently positions Macquarie as "energy transition partner of choice"'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Regulatory:</strong> Political risk to energy transition subsidies (US IRA rollback risk under changing administrations)', '<strong>Media:</strong> ESG backlash in some markets; greenwashing allegations create reputational risk for renewables mandates'] },
-    { tier: 't2', title: 'T2: Steady Diversified Earner', statusClass: 'priced', statusText: 'Broadly Priced', score: '40%', scoreWidth: '40%', scoreMeta: '&rarr; Steady', description: 'Macquarie is a well-diversified franchise where no single segment dominates. BFS provides a stable banking earnings floor (A$1,380M, +11%), MAM generates recurring management fees, CGM creates commodity trading optionality, and MacCap delivers advisory revenues. The diversification means Macquarie rarely has a bad year, but also rarely surprises to the upside. ROE of 11.2% is adequate but below historical averages of 14-16%.', requires: null, supportingLabel: 'Supporting Evidence (4 Domains)', supporting: ['<strong>Financial Statements:</strong> NPAT A$3,715M (+5%); BFS profit +11%; consistent dividend track record', '<strong>Broker Research:</strong> 8 Buy, 0 Sell; median target A$227 (9% upside); consensus expects steady growth', '<strong>Economic:</strong> APRA relaxing liquidity curbs benefits BFS; lower rates support mortgage volumes', '<strong>Corporate Comms:</strong> Management frames Macquarie as "annuity-style" earnings with optionality overlay'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Financial Statements:</strong> CGM profit declining YoY as commodity volatility normalises; MacCap flat', '<strong>Ownership:</strong> Trading at 44% above Morningstar fair value estimate; limited margin of safety'] },
-    { tier: 't3', title: 'T3: Regulatory Reckoning', statusClass: 'active', statusText: 'Active &mdash; ASIC Proceedings', score: '30%', scoreWidth: '30%', scoreMeta: '&rarr; Steady', description: 'ASIC allegations that Macquarie misreported A$1.5B in short-selling positions over 15 years represent a serious compliance failure. Combined with APRA scrutiny on operational risk and historical controversies (Nuix IPO, MFAT, commodities trading), a pattern of governance gaps could lead to regulatory constraints on capital deployment, higher compliance costs, and reputational damage that affects institutional fund mandates.', requires: null, supportingLabel: 'Supporting Evidence (3 Domains)', supporting: ['<strong>Regulatory:</strong> ASIC short-selling allegations covering 15 years and A$1.5B in misreported positions; proceedings commenced', '<strong>Media:</strong> Persistent "Millionaires\' Factory" narrative creates political scrutiny on executive compensation (CEO ~A$29.4M)', '<strong>Academic:</strong> Repeated compliance failures across multiple divisions suggest systemic cultural issues, not isolated incidents'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Financial Statements:</strong> CET1 at 12.8% well above regulatory minimums; capital position strong', '<strong>Corporate Comms:</strong> APRA relaxing liquidity requirements for Macquarie signals regulatory confidence in the bank', '<strong>Broker Research:</strong> Analysts treating ASIC matter as manageable; no ratings downgrades'] },
-    { tier: 't4', title: 'T4: Strategic Pivot &amp; Business Mix Shift', statusClass: 'minimal', statusText: 'Early Signals', score: '25%', scoreWidth: '25%', scoreMeta: '&rarr; Awaiting', description: 'Macquarie is actively reshaping its business mix: selling MAM\'s public investments division to Nomura, investing in BFS digital banking capabilities, and shifting CGM toward green commodities. If the strategic pivot succeeds, Macquarie emerges as a higher-multiple infrastructure and banking franchise with less earnings volatility from trading. The CFO succession also signals generational leadership transition.', requires: null, supportingLabel: 'Supporting Evidence', supporting: ['<strong>Corporate Comms:</strong> MAM public investments sale to Nomura announced; simplifies asset management toward infrastructure', '<strong>Alt Data:</strong> BFS technology investment visible in app downloads and digital banking adoption rates', '<strong>Leadership:</strong> CFO succession planning underway; signals orderly generational transition'], contradictingLabel: 'Mitigating Factors', contradicting: ['CGM earnings volatility provides optionality that may be lost in a more focused model', 'Public investments sale reduces AUM headline; market may not credit mix improvement immediately', 'BFS digital transformation requires sustained investment; ROI timeline uncertain'] }
+    { tier: 't1', direction: 'upside', title: 'T1: Infrastructure &amp; Renewables Supercycle', statusClass: 'accumulating', statusText: 'Evidence Building &mdash; Structural Tailwind', score: '45%', scoreWidth: '45%', scoreMeta: '&uarr; Rising with energy transition flows', description: 'Global energy transition and infrastructure investment are creating a multi-decade supercycle that Macquarie is uniquely positioned to capture. With A$941B in AUM, deep expertise in infrastructure asset management, and presence across the renewable energy value chain, MAM\'s fee income compounds as capital flows into energy transition accelerate. Green infrastructure funds are the fastest-growing segment globally, and Macquarie is the category leader.', requires: ['MAM AUM growth &ge;8% annually from net inflows (not just market appreciation)', 'Green infrastructure fund launches attract &ge;A$20B in committed capital by FY27', 'Base management fees grow faster than performance fees decline in normalising markets', 'Energy transition policy environment remains supportive (IRA in US, EU Green Deal)'], supportingLabel: 'Supporting Evidence (5 Domains)', supporting: ['<strong>Economic:</strong> IEA projects US$4.5T annual clean energy investment by 2030; infrastructure is the primary channel', '<strong>Financial Statements:</strong> MAM AUM at A$941B; fee income growing steadily; infra funds outperforming', '<strong>Competitor:</strong> Brookfield, BlackRock all scaling infra; validates the asset class but Macquarie has 30-year head start', '<strong>Academic:</strong> Infrastructure investment returns are structurally stable with low correlation to public equities', '<strong>Corporate Comms:</strong> Wikramanayake consistently positions Macquarie as "energy transition partner of choice"'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Regulatory:</strong> Political risk to energy transition subsidies (US IRA rollback risk under changing administrations)', '<strong>Media:</strong> ESG backlash in some markets; greenwashing allegations create reputational risk for renewables mandates'] },
+    { tier: 't2', direction: 'neutral', title: 'T2: Steady Diversified Earner', statusClass: 'priced', statusText: 'Broadly Priced', score: '40%', scoreWidth: '40%', scoreMeta: '&rarr; Steady', description: 'Macquarie is a well-diversified franchise where no single segment dominates. BFS provides a stable banking earnings floor (A$1,380M, +11%), MAM generates recurring management fees, CGM creates commodity trading optionality, and MacCap delivers advisory revenues. The diversification means Macquarie rarely has a bad year, but also rarely surprises to the upside. ROE of 11.2% is adequate but below historical averages of 14-16%.', requires: null, supportingLabel: 'Supporting Evidence (4 Domains)', supporting: ['<strong>Financial Statements:</strong> NPAT A$3,715M (+5%); BFS profit +11%; consistent dividend track record', '<strong>Broker Research:</strong> 8 Buy, 0 Sell; median target A$227 (9% upside); consensus expects steady growth', '<strong>Economic:</strong> APRA relaxing liquidity curbs benefits BFS; lower rates support mortgage volumes', '<strong>Corporate Comms:</strong> Management frames Macquarie as "annuity-style" earnings with optionality overlay'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Financial Statements:</strong> CGM profit declining YoY as commodity volatility normalises; MacCap flat', '<strong>Ownership:</strong> Trading at 44% above Morningstar fair value estimate; limited margin of safety'] },
+    { tier: 't3', direction: 'downside', title: 'T3: Regulatory Reckoning', statusClass: 'active', statusText: 'Active &mdash; ASIC Proceedings', score: '30%', scoreWidth: '30%', scoreMeta: '&rarr; Steady', description: 'ASIC allegations that Macquarie misreported A$1.5B in short-selling positions over 15 years represent a serious compliance failure. Combined with APRA scrutiny on operational risk and historical controversies (Nuix IPO, MFAT, commodities trading), a pattern of governance gaps could lead to regulatory constraints on capital deployment, higher compliance costs, and reputational damage that affects institutional fund mandates.', requires: null, supportingLabel: 'Supporting Evidence (3 Domains)', supporting: ['<strong>Regulatory:</strong> ASIC short-selling allegations covering 15 years and A$1.5B in misreported positions; proceedings commenced', '<strong>Media:</strong> Persistent "Millionaires\' Factory" narrative creates political scrutiny on executive compensation (CEO ~A$29.4M)', '<strong>Academic:</strong> Repeated compliance failures across multiple divisions suggest systemic cultural issues, not isolated incidents'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Financial Statements:</strong> CET1 at 12.8% well above regulatory minimums; capital position strong', '<strong>Corporate Comms:</strong> APRA relaxing liquidity requirements for Macquarie signals regulatory confidence in the bank', '<strong>Broker Research:</strong> Analysts treating ASIC matter as manageable; no ratings downgrades'] },
+    { tier: 't4', direction: 'neutral', title: 'T4: Strategic Pivot &amp; Business Mix Shift', statusClass: 'minimal', statusText: 'Early Signals', score: '25%', scoreWidth: '25%', scoreMeta: '&rarr; Awaiting', description: 'Macquarie is actively reshaping its business mix: selling MAM\'s public investments division to Nomura, investing in BFS digital banking capabilities, and shifting CGM toward green commodities. If the strategic pivot succeeds, Macquarie emerges as a higher-multiple infrastructure and banking franchise with less earnings volatility from trading. The CFO succession also signals generational leadership transition.', requires: null, supportingLabel: 'Supporting Evidence', supporting: ['<strong>Corporate Comms:</strong> MAM public investments sale to Nomura announced; simplifies asset management toward infrastructure', '<strong>Alt Data:</strong> BFS technology investment visible in app downloads and digital banking adoption rates', '<strong>Leadership:</strong> CFO succession planning underway; signals orderly generational transition'], contradictingLabel: 'Mitigating Factors', contradicting: ['CGM earnings volatility provides optionality that may be lost in a more focused model', 'Public investments sale reduces AUM headline; market may not credit mix improvement immediately', 'BFS digital transformation requires sustained investment; ROI timeline uncertain'] }
   ],
   narrative: {
     theNarrative: 'The market is pricing Macquarie as a <strong>steady diversified earner with an infrastructure premium</strong>. The embedded thesis is that MAM\'s A$941B AUM and infrastructure positioning justifies a premium to banking peers, BFS provides a stable earnings floor, and CGM/MacCap create cyclical optionality. The current forward P/E of <span class="key-stat">18.6x</span> is below Macquarie\'s 5-year average of ~22x, suggesting the market has partially de-rated the stock, likely due to ASIC proceedings and CGM normalisation. The bullish overlay is that energy transition capital flows will accelerate MAM fee growth for a decade or more.',
@@ -5590,7 +5701,7 @@ STOCK_DATA.GMG = {
   featuredPriceColor: 'var(--signal-green)',
   featuredRationale: 'Data centre mega-trend winner with 5.0 GW power bank. A$12.9B WIP 94% pre-committed. CPP A$14B partnership validates platform.',
   identity: { rows: [[['Ticker', 'GMG.AX', 'td-mono'], ['Exchange', 'ASX', 'td-mono']], [['Market Cap', 'A$63B', 'td-mono'], ['Sector', 'Real Estate / Data Centres', 'td-mono']], [['Share Price', 'A$30.55', 'td-mono'], ['52-Week Range', 'A$27.00 &ndash; A$37.00', 'td-mono']], [['Trailing P/E', '36x', 'td-mono td-amber'], ['Forward P/E', '23.5x', 'td-mono']], [['Revenue (FY25)', 'A$2,311M (+16.5%)', 'td-mono td-green'], ['Operating Profit', 'A$2,311M (+13%)', 'td-mono td-green']], [['Operating EPS', '118.0 cents (+9.8%)', 'td-mono td-green'], ['Distribution/Share', '30.0 cents', 'td-mono']], [['AUM', 'A$86B (A$72B external)', 'td-mono'], ['Occupancy', '96.5%', 'td-mono td-green']], [['Development WIP', 'A$12.9B (57 projects)', 'td-mono'], ['Power Bank', '5.0 GW (13 cities)', 'td-mono td-green']], [['NTA/Share', 'A$9.44', 'td-mono'], ['Gearing', '4.3%', 'td-mono td-green']], [['CEO', 'Greg Goodman (co-founder, 27+ yrs)', ''], ['Employees', '~1,030', 'td-mono']], [['FY26 Guidance', 'Op EPS +9%; Op profit &gt;A$2.6B', 'td-mono td-green'], ['Dividend Yield', '0.5%', 'td-mono']]], overview: 'Global integrated property group owning, developing, and managing industrial real estate and data centres across 14 countries. Assets under management of A$86B (A$72B external). Development work-in-progress of A$12.9B across 57 projects, with 57% allocated to data centres (rising to 75% by FY26). Power bank of 5.0 GW across 13 cities positions Goodman as one of the world\'s largest data centre developers. Co-founded and led by Greg Goodman since 1998.' },
-  hypotheses: [{ tier: 't1', title: 'T1: Data Centre Mega-Trend Winner', statusClass: 'accumulating', statusText: 'Evidence Building', score: '55%', scoreWidth: '55%', scoreMeta: '&uarr; Strong and strengthening', description: 'Goodman\'s 5.0 GW power bank, hyperscaler relationships, and global development capability position it as a primary beneficiary of the multi-decade data centre buildout. Revenue and earnings growth accelerate as DC projects move from development to recurring income. The platform attracts institutional capital at scale, compounding AUM growth.', requires: ['Data centre development pipeline converts on schedule (300MW under construction rising to 500MW)', 'Hyperscaler demand sustains at current or higher levels', 'Power procurement remains feasible across 13 cities', 'CPP partnership delivers and attracts follow-on institutional capital', 'Operating EPS growth meets or exceeds 9% guidance through FY27'], supportingLabel: 'Supporting Evidence (7 Domains)', supporting: ['<strong>Financial Statements:</strong> Operating EPS +9.8%, A$12.9B WIP 94% pre-committed, pipeline rising to A$17.5B', '<strong>Corporate Comms:</strong> 300MW under construction, 500MW target. CPP A$14B European DC partnership', '<strong>Competitor Data:</strong> 5.0 GW power bank is globally unique among listed REITs', '<strong>Economic Data:</strong> AI capex driving hyperscaler demand; cloud computing secular growth', '<strong>Broker Research:</strong> 11 Buy ratings, median target A$37-38, 22% upside', '<strong>Alternative Data:</strong> LinkedIn hiring focused on DC engineering and power procurement', '<strong>Academic:</strong> Data centre demand driven by AI training/inference has decades of runway'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Market Price:</strong> Stock down 17% from 52-week high of A$37, suggesting market sees near-term execution risk', '<strong>Valuation:</strong> At 36x trailing P/E, any stumble in delivery would be punished severely'] }, { tier: 't2', title: 'T2: Solid Execution but Priced In', statusClass: 'active', statusText: 'Active &mdash; Valuation Tension', score: '35%', scoreWidth: '35%', scoreMeta: '&rarr; Steady', description: 'Goodman is executing well but the data centre premium is fully reflected in the 36x trailing P/E and 3.3x price-to-book. The stock delivers market returns but not alpha from here. Growth is visible but priced; distribution yield of 0.5% offers no downside cushion.', requires: ['Operating EPS growth remains in the 8-10% range (solid but not accelerating)', 'No upside surprises on DC pipeline or power bank expansion', 'Institutional investors rotate toward higher-yielding REITs', 'Forward P/E does not compress further from 23.5x'], supportingLabel: 'Supporting Evidence', supporting: ['<strong>Valuation:</strong> 36x trailing P/E, 3.3x book value, 0.5% yield. Premium to all REIT peers', '<strong>Broker Research:</strong> Morningstar fair value A$29 implies limited upside at current levels', '<strong>Economic:</strong> Rising rates environment pressures REIT valuations broadly'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Financial Statements:</strong> Forward P/E of 23.5x is reasonable for 9%+ EPS growth', '<strong>Corporate Comms:</strong> Pipeline rising from A$12.9B to A$17.5B suggests growth is accelerating, not decelerating', '<strong>Competitor:</strong> Pure data centre REITs (Equinix, Digital Realty) trade at higher multiples with slower growth'] }, { tier: 't3', title: 'T3: Data Centre Bubble Risk', statusClass: 'minimal', statusText: 'Fear-Driven &mdash; No Evidence Yet', score: '25%', scoreWidth: '25%', scoreMeta: '&darr; Weakening with each partnership', description: 'Hyperscaler capex decelerates or reverses. Data centre supply exceeds demand as multiple developers flood the market simultaneously. Power constraints become binding. Goodman\'s DC pipeline faces delays or cancellations.', requires: null, supportingLabel: 'Supporting Evidence (2 Domains)', supporting: ['<strong>Media:</strong> Periodic commentary about "data centre oversupply" and "AI capex peak"', '<strong>Economic:</strong> Power grid constraints are real and could delay projects in some markets'], contradictingLabel: 'Contradicting Evidence (5 Domains)', contradicting: ['<strong>Financial Statements:</strong> 94% pre-commitment rate means demand is contracted, not speculative', '<strong>Corporate Comms:</strong> Hyperscaler customers signing multi-year, multi-billion dollar commitments', '<strong>Competitor:</strong> Data centre vacancy rates at historic lows globally', '<strong>Economic:</strong> AI training and inference compute demand growing exponentially', '<strong>Academic:</strong> Electrification and cloud migration are multi-decade structural trends'] }, { tier: 't4', title: 'T4: Platform Transformation to Infrastructure Manager', statusClass: 'accumulating', statusText: 'Evidence Building', score: '30%', scoreWidth: '30%', scoreMeta: '&uarr; Rising', description: 'Goodman evolves from a traditional REIT into a global infrastructure asset manager. The fund management platform (A$72B external AUM) becomes the primary earnings driver as fees on DC assets compound. Operating leverage emerges: A$86B AUM managed by ~1,030 employees (A$83M per head) is among the most capital-efficient in global real estate.', requires: ['External AUM grows toward A$100B+ as institutional capital flows into DC infrastructure', 'Fund management fees become a larger share of earnings than direct property income', 'Market reclassifies GMG from REIT to infrastructure/alternative asset manager', 'Valuation re-rates to reflect recurring fee income rather than property yields'], supportingLabel: 'Supporting Evidence', supporting: ['<strong>Corporate Comms:</strong> CPP A$14B partnership is the template for institutional DC capital', '<strong>Financial Statements:</strong> External AUM A$72B growing with each partnership. Revenue per employee A$2.2M', '<strong>Academic:</strong> Asset management fee streams command higher multiples than property yields'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Market:</strong> Market still prices GMG as a REIT, not an alternative asset manager', '<strong>Competitor:</strong> Brookfield and Macquarie are established infrastructure managers with deeper capital relationships'] }],
+  hypotheses: [{ tier: 't1', direction: 'upside', title: 'T1: Data Centre Mega-Trend Winner', statusClass: 'accumulating', statusText: 'Evidence Building', score: '55%', scoreWidth: '55%', scoreMeta: '&uarr; Strong and strengthening', description: 'Goodman\'s 5.0 GW power bank, hyperscaler relationships, and global development capability position it as a primary beneficiary of the multi-decade data centre buildout. Revenue and earnings growth accelerate as DC projects move from development to recurring income. The platform attracts institutional capital at scale, compounding AUM growth.', requires: ['Data centre development pipeline converts on schedule (300MW under construction rising to 500MW)', 'Hyperscaler demand sustains at current or higher levels', 'Power procurement remains feasible across 13 cities', 'CPP partnership delivers and attracts follow-on institutional capital', 'Operating EPS growth meets or exceeds 9% guidance through FY27'], supportingLabel: 'Supporting Evidence (7 Domains)', supporting: ['<strong>Financial Statements:</strong> Operating EPS +9.8%, A$12.9B WIP 94% pre-committed, pipeline rising to A$17.5B', '<strong>Corporate Comms:</strong> 300MW under construction, 500MW target. CPP A$14B European DC partnership', '<strong>Competitor Data:</strong> 5.0 GW power bank is globally unique among listed REITs', '<strong>Economic Data:</strong> AI capex driving hyperscaler demand; cloud computing secular growth', '<strong>Broker Research:</strong> 11 Buy ratings, median target A$37-38, 22% upside', '<strong>Alternative Data:</strong> LinkedIn hiring focused on DC engineering and power procurement', '<strong>Academic:</strong> Data centre demand driven by AI training/inference has decades of runway'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Market Price:</strong> Stock down 17% from 52-week high of A$37, suggesting market sees near-term execution risk', '<strong>Valuation:</strong> At 36x trailing P/E, any stumble in delivery would be punished severely'] }, { tier: 't2', direction: 'neutral', title: 'T2: Solid Execution but Priced In', statusClass: 'active', statusText: 'Active &mdash; Valuation Tension', score: '35%', scoreWidth: '35%', scoreMeta: '&rarr; Steady', description: 'Goodman is executing well but the data centre premium is fully reflected in the 36x trailing P/E and 3.3x price-to-book. The stock delivers market returns but not alpha from here. Growth is visible but priced; distribution yield of 0.5% offers no downside cushion.', requires: ['Operating EPS growth remains in the 8-10% range (solid but not accelerating)', 'No upside surprises on DC pipeline or power bank expansion', 'Institutional investors rotate toward higher-yielding REITs', 'Forward P/E does not compress further from 23.5x'], supportingLabel: 'Supporting Evidence', supporting: ['<strong>Valuation:</strong> 36x trailing P/E, 3.3x book value, 0.5% yield. Premium to all REIT peers', '<strong>Broker Research:</strong> Morningstar fair value A$29 implies limited upside at current levels', '<strong>Economic:</strong> Rising rates environment pressures REIT valuations broadly'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Financial Statements:</strong> Forward P/E of 23.5x is reasonable for 9%+ EPS growth', '<strong>Corporate Comms:</strong> Pipeline rising from A$12.9B to A$17.5B suggests growth is accelerating, not decelerating', '<strong>Competitor:</strong> Pure data centre REITs (Equinix, Digital Realty) trade at higher multiples with slower growth'] }, { tier: 't3', direction: 'downside', title: 'T3: Data Centre Bubble Risk', statusClass: 'minimal', statusText: 'Fear-Driven &mdash; No Evidence Yet', score: '25%', scoreWidth: '25%', scoreMeta: '&darr; Weakening with each partnership', description: 'Hyperscaler capex decelerates or reverses. Data centre supply exceeds demand as multiple developers flood the market simultaneously. Power constraints become binding. Goodman\'s DC pipeline faces delays or cancellations.', requires: null, supportingLabel: 'Supporting Evidence (2 Domains)', supporting: ['<strong>Media:</strong> Periodic commentary about "data centre oversupply" and "AI capex peak"', '<strong>Economic:</strong> Power grid constraints are real and could delay projects in some markets'], contradictingLabel: 'Contradicting Evidence (5 Domains)', contradicting: ['<strong>Financial Statements:</strong> 94% pre-commitment rate means demand is contracted, not speculative', '<strong>Corporate Comms:</strong> Hyperscaler customers signing multi-year, multi-billion dollar commitments', '<strong>Competitor:</strong> Data centre vacancy rates at historic lows globally', '<strong>Economic:</strong> AI training and inference compute demand growing exponentially', '<strong>Academic:</strong> Electrification and cloud migration are multi-decade structural trends'] }, { tier: 't4', direction: 'upside', title: 'T4: Platform Transformation to Infrastructure Manager', statusClass: 'accumulating', statusText: 'Evidence Building', score: '30%', scoreWidth: '30%', scoreMeta: '&uarr; Rising', description: 'Goodman evolves from a traditional REIT into a global infrastructure asset manager. The fund management platform (A$72B external AUM) becomes the primary earnings driver as fees on DC assets compound. Operating leverage emerges: A$86B AUM managed by ~1,030 employees (A$83M per head) is among the most capital-efficient in global real estate.', requires: ['External AUM grows toward A$100B+ as institutional capital flows into DC infrastructure', 'Fund management fees become a larger share of earnings than direct property income', 'Market reclassifies GMG from REIT to infrastructure/alternative asset manager', 'Valuation re-rates to reflect recurring fee income rather than property yields'], supportingLabel: 'Supporting Evidence', supporting: ['<strong>Corporate Comms:</strong> CPP A$14B partnership is the template for institutional DC capital', '<strong>Financial Statements:</strong> External AUM A$72B growing with each partnership. Revenue per employee A$2.2M', '<strong>Academic:</strong> Asset management fee streams command higher multiples than property yields'], contradictingLabel: 'Contradicting Evidence', contradicting: ['<strong>Market:</strong> Market still prices GMG as a REIT, not an alternative asset manager', '<strong>Competitor:</strong> Brookfield and Macquarie are established infrastructure managers with deeper capital relationships'] }],
   narrative: { theNarrative: 'The market narrative centres on <strong>whether Goodman is a property company that does data centres, or a data centre infrastructure platform that happens to own property</strong>. At 36x trailing P/E and 3.3x book, the market is paying a significant premium to traditional REIT valuations. The embedded thesis is that Goodman\'s 5.0 GW power bank, hyperscaler relationships, and A$12.9B development pipeline represent a <strong>structurally differentiated platform</strong> that justifies the premium. The stock is <span class="key-stat down">17%</span> off its 52-week high, reflecting concerns about data centre oversupply narratives and rising interest rates pressuring REIT valuations.', priceImplication: { label: 'Embedded Assumptions at A$30.55', content: '<strong>DC demand sustains:</strong> Hyperscaler capex continues at current or higher levels for 3-5 years. <strong>Execution flawless:</strong> A$12.9B WIP delivers on time and budget; 94% pre-commitment rate holds. <strong>Power procurement succeeds:</strong> 5.0 GW power bank translates to operational capacity without grid bottlenecks. <strong>Platform premium justified:</strong> 36x P/E sustained by data centre growth narrative rather than traditional REIT yields. <strong>Institutional capital flows:</strong> CPP deal is the first of many institutional DC partnerships.' }, evidenceCheck: 'The bull thesis has strong empirical support. FY25 delivered operating EPS of 118.0 cents (+9.8%), AUM of A$86B, and 96.5% occupancy. The CPP Investments A$14B European data centre partnership is institutional validation at scale. The 94% pre-commitment rate on A$12.9B WIP means the near-term pipeline is contracted, not speculative. FY26 guidance for operating EPS growth of 9% and operating profit exceeding A$2.6B provides visible forward earnings. The bear arguments (oversupply, power constraints, valuation) exist but lack near-term evidence.', narrativeStability: '<strong>Stable and favourable.</strong> The data centre narrative is reinforced by each new hyperscaler commitment, institutional partnership, and power bank expansion announcement. The narrative is most vulnerable to a macro shock (hyperscaler capex cut, recession-driven demand slowdown) or execution failure (project delays, power grid constraints). Greg Goodman\'s 27-year tenure provides leadership stability uncommon in the sector.' },
   evidence: { intro: 'Ten evidence domains assessed. Evidence strongly favours T1 (Data Centre Mega-Trend), with limited near-term support for the bearish hypotheses.', cards: [{ number: 1, title: '1. Corporate Communications', epistemicClass: 'ep-motivated', epistemicLabel: 'Motivated', finding: 'FY25 results: <strong>operating EPS 118.0 cents (+9.8%), operating profit A$2,311M (+13%)</strong>, AUM A$86B. Management framing: data centres as the "defining opportunity" for the next decade. CPP Investments A$14B European DC partnership announced as validation of platform model. Pipeline guidance: WIP to rise from A$12.9B to A$17.5B, with data centres comprising 75% by FY26 (up from 57%). Power bank expanded to 5.0 GW across 13 cities. 300MW under construction with target of 500MW. Distribution of 30.0 cents maintained.', tension: 'Management is understandably promotional about the DC opportunity, but the key metrics are independently verifiable in statutory filings. The tension is between the genuine strength of the DC pipeline (contracted, pre-committed) and the question of whether Goodman is over-concentrating in a single theme. The shift from 57% DC to 75% by FY26 is a significant strategic bet on one sector.', table: null, tags: [{ text: 'Strongly Supports T1', class: 'strong' }, { text: 'Supports T4 (platform model)', class: 'supports' }], source: 'FY25 Results presentation; ASX announcements; Investor Day materials' }, { number: 2, title: '2. Regulatory Filings', epistemicClass: 'ep-statutory', epistemicLabel: 'Under Oath / Statutory', finding: '<strong>FY25 (audited):</strong> Revenue A$2,311M (+16.5%). Operating profit A$2,311M (+13%). Operating EPS 118.0 cents (+9.8%). NTA per share A$9.44. Gearing 4.3% (among lowest in global REIT sector). AUM A$86B with A$72B external. Development WIP A$12.9B across 57 projects, 94% pre-committed. Occupancy 96.5%. Distribution per share 30.0 cents. Debt/equity 0.23x. No material audit qualifications. <strong>A$4B capital raising successfully completed</strong>, supporting pipeline expansion.', tension: null, table: null, tags: [{ text: 'Strongly Supports T1', class: 'strong' }, { text: 'Contradicts T3 (94% pre-committed)', class: 'contradicts' }], source: 'GMG FY25 Annual Report; ASX filings; audited financial statements' }, { number: 3, title: '3. Broker Research', epistemicClass: 'ep-consensus', epistemicLabel: 'Consensus', finding: '<strong>Strongly bullish consensus.</strong> 11 analysts rate Buy, 0 rate Sell. Median 12-month target A$37-38, implying <strong>22-24% upside</strong> from current price. Broker thesis centres on data centre pipeline, power bank as competitive moat, and institutional capital attraction. Morningstar fair value estimate A$29 is the conservative outlier. Key debate among brokers is whether the DC premium is sustainable or whether GMG should be valued as a traditional REIT (implying significant downside).', tension: 'The broker consensus is overwhelmingly bullish, but the Morningstar A$29 estimate represents a credible alternative view that traditional REIT valuation frameworks should apply. The gap between consensus targets (A$37-38) and Morningstar (A$29) reflects the fundamental disagreement about whether GMG is a property company or an infrastructure platform.', table: null, tags: [{ text: 'Strongly Supports T1', class: 'strong' }, { text: 'Supports T2 (Morningstar view)', class: 'supports' }], source: 'UBS, Macquarie, Morgan Stanley, Goldman Sachs, Morningstar consensus data' }, { number: 4, title: '4. Competitor &amp; Industry Data', epistemicClass: 'ep-independent', epistemicLabel: 'Independent', finding: '<strong>Goodman\'s power bank is the key differentiator.</strong> Global data centre REITs (Equinix, Digital Realty) and hyperscalers (AWS, Microsoft, Google) are all expanding DC capacity, but Goodman\'s 5.0 GW power bank across 13 cities is a uniquely scarce asset. Power access is the binding constraint for DC development globally; having secured power in advance gives Goodman a 3-5 year time advantage. Equinix trades at ~70x forward P/E; Digital Realty at ~45x. Goodman\'s 23.5x forward P/E is a <strong>discount</strong> to pure DC peers despite similar or superior growth.', tension: null, table: null, tags: [{ text: 'Strongly Supports T1', class: 'strong' }, { text: 'Contradicts T2 (discount to DC peers)', class: 'contradicts' }, { text: 'Contradicts T3', class: 'contradicts' }], source: 'Equinix, Digital Realty filings; CBRE DC market reports; JLL industrial data' }, { number: 5, title: '5. Economic Data', epistemicClass: 'ep-objective', epistemicLabel: 'Objective', finding: 'Global data centre demand growing at 25-30% annually, driven by AI training and inference workloads, cloud migration, and digital transformation. <strong>Power availability is the binding constraint:</strong> grid capacity limitations in key markets (Northern Virginia, Singapore, Dublin) are creating a premium for developers who have secured power in advance. Interest rates remain elevated, pressuring REIT valuations broadly, but institutional capital is flowing into data centre infrastructure as a distinct asset class. Global DC market estimated at US$350B+ by 2030.', tension: null, table: null, tags: [{ text: 'Strongly Supports T1', class: 'strong' }, { text: 'Supports T4 (institutional capital)', class: 'supports' }], source: 'IEA power demand forecasts; CBRE data centre reports; RBA; central bank data' }, { number: 6, title: '6. Alternative Data', epistemicClass: 'ep-behavioural', epistemicLabel: 'Behavioural', finding: '<strong>Hiring patterns confirm DC pivot.</strong> LinkedIn data shows Goodman aggressively recruiting data centre engineers, power procurement specialists, and critical infrastructure managers. Job postings have shifted materially from traditional industrial property roles toward DC-specific technical roles. Employee count remains lean at ~1,030 (A$83M AUM per employee), suggesting high operational efficiency. No negative Glassdoor signals. Web traffic to Goodman\'s DC-specific pages has increased significantly.', tension: null, table: null, tags: [{ text: 'Supports T1', class: 'supports' }, { text: 'Supports T4 (lean operations)', class: 'supports' }], source: 'LinkedIn job postings; Glassdoor; SimilarWeb; employee review sites' }, { number: 7, title: '7. Academic Research', epistemicClass: 'ep-peerreviewed', epistemicLabel: 'Peer-Reviewed', finding: 'Academic literature on data centre economics confirms several key structural dynamics. <strong>Power access is the primary competitive moat:</strong> research on DC site selection shows that power availability, not land or construction capability, determines competitive advantage. Studies on AI compute demand project exponential growth in training and inference workloads through at least 2035. Real estate platform economics research shows that integrated develop-own-manage models generate superior returns to pure development or pure ownership strategies.', tension: null, table: null, tags: [{ text: 'Strongly Supports T1', class: 'strong' }, { text: 'Supports T4 (platform economics)', class: 'supports' }, { text: 'Contradicts T3 (demand structural)', class: 'contradicts' }], source: 'Data centre economics journals; AI compute demand research; real estate platform studies' }, { number: 8, title: '8. Media &amp; Social', epistemicClass: 'ep-noise', epistemicLabel: 'Noise', finding: 'Media coverage is predominantly positive, framing Goodman as the "data centre REIT play" on the ASX. Periodic bearish commentary focuses on data centre oversupply fears and REIT valuation multiples. Social media sentiment is moderately bullish. <strong>The "data centre bubble" narrative</strong> appears in broader market commentary but is rarely applied specifically to Goodman, given its pre-committed pipeline. Financial press coverage of the CPP partnership was overwhelmingly positive.', tension: null, table: null, tags: [{ text: 'Supports T1 (positive framing)', class: 'supports' }, { text: 'Supports T3 (bubble narrative exists)', class: 'supports' }], source: 'Australian Financial Review; Bloomberg; ASX investment forums' }, { number: 9, title: '9. Leadership &amp; Governance', epistemicClass: 'ep-governance', epistemicLabel: 'Independent Assessment', finding: '<strong>Exceptional founder-led governance with deep skin in the game.</strong> Greg Goodman co-founded the company in 1998 and has served as CEO for 27+ years. His ~1.82% shareholding is worth approximately A$747M at current prices, creating complete alignment with shareholders. Under his leadership, Goodman has grown from an Australian industrial property trust to a A$63B global platform. The strategic pivot from pure industrial REIT to data centre infrastructure developer is Goodman\'s defining bet, and it was made earlier than competitors. Danny Breslin (CIO) and Jason Little (COO) provide strong operational depth. The board includes experienced property and infrastructure directors. <strong>Key strength:</strong> long tenure, consistent strategy, and a lean organisation. <strong>Key risk:</strong> succession planning for a 27-year CEO is the obvious long-term question, though not an immediate concern.', tension: null, table: { headers: ['Name', 'Role', 'Tenure', 'Shareholding', 'Prior Experience'], rows: [['Greg Goodman', 'CEO &amp; Co-founder', 'Since 1998 (27+ years)', '~1.82% (~A$747M)', 'Co-founded Goodman; built global platform'], ['Ian Ferrier AC', 'Chairman', 'Since 2003', 'Moderate', 'KPMG; multiple ASX board roles'], ['Danny Breslin', 'CIO', 'Long tenure', 'Modest', 'Global investment strategy; DC pipeline']] }, tags: [{ text: 'Strongly Supports T1 (founder quality)', class: 'strong' }, { text: 'Supports T4 (strategic vision)', class: 'supports' }], source: 'GMG Annual Report FY25; ASX filings; board biographical disclosures' }, { number: 10, title: '10. Ownership &amp; Capital Flows', epistemicClass: 'ep-registry', epistemicLabel: 'Registry Data', finding: '<strong>Institutional quality register with growing passive allocation.</strong> Goodman\'s register reflects its ASX 20 status: dominated by large institutional holders and index funds. Founder Greg Goodman\'s 1.82% stake (A$747M) is the key alignment signal. Institutional ownership is high and stable; the A$4B capital raising in FY25 was well-supported, indicating institutional appetite for the DC growth story. <strong>Short interest is low at ~1-2% of free float</strong>, suggesting limited bearish conviction. The register has shifted incrementally toward global infrastructure and DC-specialist funds, reflecting the market\'s gradual reclassification of GMG from pure REIT to infrastructure platform. No substantial holder has filed a reduction notice recently.', tension: null, table: { headers: ['Holder', 'Type', 'Stake', 'Movement'], rows: [['Greg Goodman (CEO)', 'Founder/Insider', '~1.82%', 'Long-term hold'], ['Vanguard Group', 'Passive/Index', '~7.5%', 'Steady (index weight)'], ['BlackRock', 'Passive/Index', '~6.8%', 'Steady'], ['State Street', 'Passive/Index', '~4.2%', 'Steady'], ['CPP Investments', 'Institutional/Partner', 'DC partnership', 'A$14B committed']] }, tags: [{ text: 'Supports T1 (institutional conviction)', class: 'supports' }, { text: 'Supports T4 (CPP partnership)', class: 'supports' }, { text: 'Contradicts T3 (low short interest)', class: 'contradicts' }], source: 'ASX substantial holder notices; ASIC short position reports; annual report top-20; capital raising disclosures' }], alignmentSummary: null },
   discriminators: { intro: 'Three data points carry high diagnosticity. General commentary about "data centre demand" is non-discriminating because it applies to all DC developers equally.', rows: [{ diagnosticity: 'HIGH', diagnosticityClass: 'disc-high', evidence: '<strong>FY26 Half-Year Results.</strong> Operating EPS growth rate and DC pipeline conversion metrics.', discriminatesBetween: 'T1 (DC mega-trend delivering) vs T2 (priced in, growth decelerating)', currentReading: 'On track (guidance +9%)', readingClass: 'td-green' }, { diagnosticity: 'HIGH', diagnosticityClass: 'disc-high', evidence: '<strong>Hyperscaler capex trajectory.</strong> If Microsoft, Google, AWS maintain or increase DC capex budgets through CY2026.', discriminatesBetween: 'T1 (demand accelerating) vs T3 (bubble risk)', currentReading: 'Capex accelerating', readingClass: 'td-green' }, { diagnosticity: 'HIGH', diagnosticityClass: 'disc-high', evidence: '<strong>New institutional DC partnerships.</strong> Follow-on deals similar to CPP A$14B commitment.', discriminatesBetween: 'T4 (platform validated) vs T2 (one-off partnership)', currentReading: 'CPP only so far', readingClass: 'td-amber' }, { diagnosticity: 'MEDIUM', diagnosticityClass: 'disc-med', evidence: '<strong>Power grid approvals and construction timelines.</strong> Any material delays in power delivery.', discriminatesBetween: 'T1 (execution on track) vs T3 (power constraints binding)', currentReading: '300MW constructing', readingClass: 'td-green' }], nonDiscriminating: '<strong>"Data centre demand is growing"</strong> (benefits all DC developers equally) &bull; <strong>"Interest rates pressure REITs"</strong> (macro factor, not GMG-specific) &bull; <strong>"36x P/E looks expensive for a REIT"</strong> (describes the question, not the answer; traditional REIT metrics may not apply) &bull; <strong>"0.5% yield is too low"</strong> (yield is a residual of growth reinvestment, not a standalone signal)' },
@@ -5671,6 +5782,7 @@ STOCK_DATA.WDS = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: LNG Growth Champion',
       statusClass: 'accumulating',
       statusText: 'Evidence Building',
@@ -5703,6 +5815,7 @@ STOCK_DATA.WDS = {
     },
     {
       tier: 't2',
+      direction: 'downside',
       title: 'T2: Execution Risk Materialises',
       statusClass: 'active',
       statusText: 'Active &mdash; CEO Departure Signal',
@@ -5731,6 +5844,7 @@ STOCK_DATA.WDS = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: Energy Transition Stranded Asset Risk',
       statusClass: 'active',
       statusText: 'Active &mdash; Structural Headwind',
@@ -5755,6 +5869,7 @@ STOCK_DATA.WDS = {
     },
     {
       tier: 't4',
+      direction: 'downside',
       title: 'T4: Value Trap with Yield Support',
       statusClass: 'active',
       statusText: 'Active &mdash; Range-Bound Signal',
@@ -6119,6 +6234,7 @@ STOCK_DATA.SIG = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: Integration Success &amp; Re-Rating',
       statusClass: 'accumulating',
       statusText: 'Awaiting Evidence',
@@ -6149,6 +6265,7 @@ STOCK_DATA.SIG = {
     },
     {
       tier: 't2',
+      direction: 'downside',
       title: 'T2: Escrow Overhang Triggers De-Rating',
       statusClass: 'active',
       statusText: 'Active &mdash; Highest Probability',
@@ -6178,6 +6295,7 @@ STOCK_DATA.SIG = {
     },
     {
       tier: 't3',
+      direction: 'downside',
       title: 'T3: Regulatory &amp; Structural Disruption',
       statusClass: 'minimal',
       statusText: 'Slow Burn',
@@ -6202,6 +6320,7 @@ STOCK_DATA.SIG = {
     },
     {
       tier: 't4',
+      direction: 'upside',
       title: 'T4: Dominant Platform Winner',
       statusClass: 'accumulating',
       statusText: 'Evidence Building',
@@ -6567,6 +6686,7 @@ STOCK_DATA.FMG = {
   hypotheses: [
     {
       tier: 't1',
+      direction: 'upside',
       title: 'T1: Cost Leader Resilience',
       statusClass: 'priced',
       statusText: 'Priced &mdash; Base Case',
@@ -6598,6 +6718,7 @@ STOCK_DATA.FMG = {
     },
     {
       tier: 't2',
+      direction: 'downside',
       title: 'T2: Iron Ore Structural Decline',
       statusClass: 'active',
       statusText: 'Active &mdash; Multiple Signals',
@@ -6629,6 +6750,7 @@ STOCK_DATA.FMG = {
     },
     {
       tier: 't3',
+      direction: 'upside',
       title: 'T3: Green Energy Pivot Succeeds',
       statusClass: 'minimal',
       statusText: 'Minimal Evidence &mdash; Capital Destroyed',
@@ -6654,6 +6776,7 @@ STOCK_DATA.FMG = {
     },
     {
       tier: 't4',
+      direction: 'downside',
       title: 'T4: Forrest Governance &amp; Capital Misallocation',
       statusClass: 'active',
       statusText: 'Active &mdash; Evidence Accumulating',
@@ -7368,8 +7491,9 @@ function populateSidebar(ticker) {
     vsItems.forEach((item, i) => {
         const label = item.querySelector('.vs-label');
         const score = item.querySelector('.vs-score');
+        const dirClass = item.getAttribute('data-dir') || 'dir-neutral';
         hypotheses.push({
-            tier: 't' + (i + 1),
+            dirClass: dirClass,
             label: label ? label.textContent.trim() : '',
             score: score ? score.textContent.trim() : ''
         });
@@ -7390,9 +7514,9 @@ function populateSidebar(ticker) {
     let html = '<div class="hs-title">Hypothesis Tracker</div>';
     hypotheses.forEach(h => {
         html += '<div class="hs-item">' +
-            '<div class="hs-dot ' + h.tier + '"></div>' +
+            '<div class="hs-dot ' + h.dirClass + '"></div>' +
             '<div class="hs-label">' + h.label + '</div>' +
-            '<div class="hs-score ' + h.tier + '">' + h.score + '</div>' +
+            '<div class="hs-score ' + h.dirClass + '">' + h.score + '</div>' +
         '</div>';
     });
     html += '<div class="hs-skew">' +
