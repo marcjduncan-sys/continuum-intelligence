@@ -1791,6 +1791,17 @@ a:hover { color: var(--accent-sage); }
 
 <!-- Snapshot Report Pages (dynamically rendered) -->
 <div class="page" id="page-snapshot-WOW"></div>
+<div class="page" id="page-snapshot-XRO"></div>
+<div class="page" id="page-snapshot-WTC"></div>
+<div class="page" id="page-snapshot-DRO"></div>
+<div class="page" id="page-snapshot-PME"></div>
+<div class="page" id="page-snapshot-GYG"></div>
+<div class="page" id="page-snapshot-CSL"></div>
+<div class="page" id="page-snapshot-MQG"></div>
+<div class="page" id="page-snapshot-GMG"></div>
+<div class="page" id="page-snapshot-WDS"></div>
+<div class="page" id="page-snapshot-SIG"></div>
+<div class="page" id="page-snapshot-FMG"></div>
 
 <!-- ============================================================
      PAGE: PORTFOLIO
@@ -3177,7 +3188,259 @@ SNAPSHOT_DATA.WOW = {
   ]
 };
 
-const SNAPSHOT_ORDER = ['WOW'];
+const SNAPSHOT_ORDER = ['WOW', 'XRO', 'WTC', 'DRO', 'PME', 'GYG', 'CSL', 'MQG', 'GMG', 'WDS', 'SIG', 'FMG'];
+
+// Auto-generate snapshot data from STOCK_DATA for any stock without a manual snapshot
+function buildSnapshotFromStock(ticker) {
+  var stock = STOCK_DATA[ticker];
+  if (!stock) return null;
+
+  // 1. Clone and sort hypotheses by score descending
+  var hyps = [];
+  for (var i = 0; i < stock.hypotheses.length; i++) {
+    var h = stock.hypotheses[i];
+    hyps.push({
+      originalTier: h.tier,
+      direction: h.direction,
+      title: h.title.replace(/^T\d+:\s*/, ''),
+      statusClass: h.statusClass,
+      statusText: h.statusText,
+      score: parseInt(h.score) || 0,
+      scoreMeta: h.scoreMeta,
+      description: h.description
+    });
+  }
+  hyps.sort(function(a, b) { return b.score - a.score; });
+
+  // Build original tier → new position mapping
+  var tierMap = {};
+  for (var i = 0; i < hyps.length; i++) {
+    tierMap[hyps[i].originalTier] = i;
+  }
+
+  // 2. Normalise scores to 100%
+  var sum = 0;
+  for (var i = 0; i < hyps.length; i++) sum += hyps[i].score;
+  var normScores = [];
+  var allocated = 0;
+  for (var i = 0; i < hyps.length; i++) {
+    if (i === hyps.length - 1) {
+      normScores.push(100 - allocated);
+    } else {
+      var n = Math.round(hyps[i].score / sum * 100);
+      normScores.push(n);
+      allocated += n;
+    }
+  }
+
+  // 3. Direction → CSS class mappings
+  var dirCls = { upside: 'snap-upside', downside: 'snap-downside', neutral: 'snap-neutral' };
+  var dirSbCls = { upside: 'snap-sb-upside', downside: 'snap-sb-downside', neutral: 'snap-sb-neutral' };
+  var dirColor = { upside: 'var(--signal-green)', downside: 'var(--signal-red)', neutral: 'var(--signal-amber)' };
+  var dirScoreCls = { upside: 'priced', downside: 'high', neutral: 'medium' };
+  var statusTagMap = { priced: 'snap-tag-priced', accumulating: 'snap-tag-accumulating', active: 'snap-tag-tail', minimal: 'snap-tag-minimal' };
+
+  // Parse direction and label from scoreMeta
+  function parseDirMeta(meta) {
+    if (!meta) return { direction: 'flat', dirLabel: '&rarr; Steady' };
+    var label = meta.replace(/^[^&]*/, '').trim();
+    if (!label) label = meta;
+    if (meta.indexOf('&uarr;') >= 0) return { direction: 'up', dirLabel: label };
+    if (meta.indexOf('&darr;') >= 0) return { direction: 'down', dirLabel: label };
+    return { direction: 'flat', dirLabel: label };
+  }
+
+  // 4. Build survival bar
+  var survivalBar = [];
+  var survivalLegend = [];
+  for (var i = 0; i < hyps.length; i++) {
+    survivalBar.push({
+      cls: dirSbCls[hyps[i].direction] || 'snap-sb-neutral',
+      width: normScores[i] + '%',
+      label: 'T' + (i + 1) + ': ' + normScores[i] + '%'
+    });
+    survivalLegend.push({
+      color: dirColor[hyps[i].direction] || 'var(--signal-amber)',
+      label: hyps[i].title
+    });
+  }
+
+  // 5. Build hypothesis cards
+  var snapHyps = [];
+  for (var i = 0; i < hyps.length; i++) {
+    var dm = parseDirMeta(hyps[i].scoreMeta);
+    var desc = hyps[i].description;
+    if (desc.length > 200) desc = desc.substring(0, 197) + '...';
+    snapHyps.push({
+      cls: dirCls[hyps[i].direction] || 'snap-neutral',
+      label: 'T' + (i + 1) + ': ' + hyps[i].title,
+      statusTag: statusTagMap[hyps[i].statusClass] || 'snap-tag-minimal',
+      statusText: hyps[i].statusText,
+      desc: desc,
+      score: normScores[i] + '%',
+      scoreCls: dirScoreCls[hyps[i].direction] || 'medium',
+      direction: dm.direction,
+      dirLabel: dm.dirLabel
+    });
+  }
+
+  // 6. Build evidence matrix from evidence card tags
+  var matrixHeaders = ['Domain'];
+  for (var i = 0; i < hyps.length; i++) {
+    matrixHeaders.push('T' + (i + 1) + ' ' + hyps[i].title.substring(0, 12));
+  }
+
+  var matrixRows = [];
+  var cards = stock.evidence && stock.evidence.cards ? stock.evidence.cards : [];
+  var maxCards = Math.min(cards.length, 8);
+  for (var c = 0; c < maxCards; c++) {
+    var card = cards[c];
+    var cells = [];
+    for (var h2 = 0; h2 < hyps.length; h2++) {
+      cells.push({ cls: 'snap-signal-neutral', text: '&mdash;' });
+    }
+    if (card.tags) {
+      for (var t = 0; t < card.tags.length; t++) {
+        var tag = card.tags[t];
+        var tierMatch = tag.text.match(/T(\d)/);
+        if (tierMatch) {
+          var origTier = 't' + tierMatch[1];
+          var newPos = tierMap[origTier];
+          if (newPos !== undefined) {
+            if (tag.class === 'strong') {
+              cells[newPos] = { cls: 'snap-signal-strong-support', text: '&#9650;&#9650;' };
+            } else if (tag.class === 'supports') {
+              cells[newPos] = { cls: 'snap-signal-support', text: '&#9650;' };
+            } else if (tag.class === 'contradicts') {
+              cells[newPos] = { cls: 'snap-signal-contradict', text: '&#9660;' };
+            }
+          }
+        }
+      }
+    }
+    var domainName = card.title.replace(/^\d+\.\s*/, '');
+    var epistemic = card.epistemicLabel || '';
+    if (epistemic.indexOf('/') >= 0) epistemic = epistemic.split('/')[0].trim();
+    matrixRows.push({ domain: domainName, epistemic: epistemic, cells: cells });
+  }
+
+  // 7. Build discriminators
+  var snapDiscrim = [];
+  var discRows = stock.discriminators && stock.discriminators.rows ? stock.discriminators.rows : [];
+  for (var d = 0; d < Math.min(discRows.length, 4); d++) {
+    var disc = discRows[d];
+    snapDiscrim.push({
+      level: disc.diagnosticity,
+      cls: disc.diagnosticityClass.replace('disc-', ''),
+      text: disc.evidence
+    });
+  }
+
+  // Non-discriminating chips
+  var ndText = stock.discriminators && stock.discriminators.nonDiscriminating ? stock.discriminators.nonDiscriminating : '';
+  var ndChips = [];
+  if (typeof ndText === 'string') {
+    var parts = ndText.split('&bull;');
+    for (var p = 0; p < Math.min(parts.length, 5); p++) {
+      var chip = parts[p].replace(/<[^>]+>/g, '').trim();
+      if (chip) ndChips.push(chip);
+    }
+  }
+
+  // 8. Build tripwires
+  var snapTripwires = [];
+  var tripCards = stock.tripwires && stock.tripwires.cards ? stock.tripwires.cards : [];
+  for (var tc2 = 0; tc2 < Math.min(tripCards.length, 4); tc2++) {
+    var tw = tripCards[tc2];
+    var conds = [];
+    for (var co = 0; co < tw.conditions.length; co++) {
+      var cond = tw.conditions[co];
+      var icon = cond.valence === 'positive' ? '&#9650;' : '&#9660;';
+      var iconCls = cond.valence === 'positive' ? 'up' : 'down';
+      var condText = cond.if.replace(/^If\s+/i, '');
+      var thenShort = cond.then.split('.')[0];
+      conds.push({ icon: icon, iconCls: iconCls, text: condText + ' &rarr; ' + thenShort });
+    }
+    snapTripwires.push({ date: tw.date, name: tw.name.replace(/\s*&mdash;.*/, ''), conditions: conds });
+  }
+
+  // 9. Evidence coverage
+  var snapCoverage = [];
+  var coverageRows = stock.gaps && stock.gaps.coverageRows ? stock.gaps.coverageRows : [];
+  for (var g = 0; g < Math.min(coverageRows.length, 8); g++) {
+    var gr = coverageRows[g];
+    var sCls = gr.coverageLevel === 'full' || gr.coverageLevel === 'good' ? 'snap-gap-full' :
+              gr.coverageLevel === 'partial' ? 'snap-gap-partial' : 'snap-gap-limited';
+    snapCoverage.push({ domain: gr.domain, status: gr.coverageLabel.toUpperCase(), cls: sCls });
+  }
+
+  // 10. Questions from gaps
+  var snapQuestions = [];
+  var couldntAssess = stock.gaps && stock.gaps.couldntAssess ? stock.gaps.couldntAssess : [];
+  for (var q = 0; q < Math.min(couldntAssess.length, 3); q++) {
+    snapQuestions.push(couldntAssess[q].replace(/<[^>]+>/g, ''));
+  }
+
+  // 11. Price metrics from heroMetrics
+  var priceMetrics = [];
+  for (var m = 0; m < stock.heroMetrics.length; m++) {
+    priceMetrics.push({
+      label: stock.heroMetrics[m].label,
+      value: stock.heroMetrics[m].value,
+      cls: stock.heroMetrics[m].colorClass || ''
+    });
+  }
+
+  // 12. Skew badge
+  var skewBadge = stock.skew.direction === 'downside' ? '&#9660; DOWNSIDE' :
+                  stock.skew.direction === 'upside' ? '&#9650; UPSIDE' : '&#9670; BALANCED';
+
+  // 13. Date formatting
+  var dateStr = stock.date;
+  var dateMatch = dateStr.match(/(\d+)\s+(\w+)\s+(\d+)/);
+  if (dateMatch) dateStr = dateMatch[1] + ' ' + dateMatch[2].toUpperCase().substring(0, 3) + ' ' + dateMatch[3];
+
+  return {
+    ticker: stock.ticker,
+    tickerFull: stock.tickerFull,
+    company: stock.company,
+    sector: stock.sector,
+    sectorSub: stock.sectorSub,
+    price: stock.price,
+    currency: stock.currency,
+    date: dateStr,
+    version: 'v1.0',
+    reportId: stock.reportId,
+    priceMetrics: priceMetrics,
+    riskSkew: { direction: stock.skew.direction, badge: skewBadge, rationale: stock.skew.rationale },
+    narrative: { text: stock.narrative.theNarrative || '', verdict: stock.verdict.text || '' },
+    survivalBar: survivalBar,
+    survivalLegend: survivalLegend,
+    hypotheses: snapHyps,
+    evidenceMatrix: { headers: matrixHeaders, rows: matrixRows },
+    discriminators: snapDiscrim,
+    nonDiscriminating: ndChips,
+    tripwires: snapTripwires,
+    evidenceCoverage: snapCoverage,
+    questions: snapQuestions,
+    footerDisclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using ACH methodology. All data sourced from ASX filings, broker consensus, and publicly available data as at report date. Hypothesis scores reflect editorial assessment.',
+    footerMeta: [
+      { label: 'ID: ' + stock.reportId },
+      { label: 'MODE: Narrative Intelligence' },
+      { label: 'NEXT: Mar 2026' }
+    ]
+  };
+}
+
+// Auto-populate SNAPSHOT_DATA for all stocks in SNAPSHOT_ORDER
+(function() {
+  for (var i = 0; i < SNAPSHOT_ORDER.length; i++) {
+    var t = SNAPSHOT_ORDER[i];
+    if (!SNAPSHOT_DATA[t] && STOCK_DATA[t]) {
+      SNAPSHOT_DATA[t] = buildSnapshotFromStock(t);
+    }
+  }
+})();
 
 function renderSnapshotListCard(data) {
   return '<div class="snapshot-card" onclick="navigate(\'snapshot-' + data.ticker + '\')">' +
