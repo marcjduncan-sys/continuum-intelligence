@@ -2587,6 +2587,83 @@ STOCK_DATA.WOW = {
     analyticalLimitations: 'Hypothesis survival scores (T1: 36%, T2: 25%, T3: 21%, T4: 18%) reflect editorial assessment based on publicly available evidence. These are qualitative judgments, not algorithmic outputs.'
   },
 
+
+  technicalAnalysis: {
+    date: '10 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Range-bound',
+    clarity: 'Mixed',
+
+    price: { current: 31.41, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 29.94, date: '10 Feb 2026' },
+      ma200: { value: 29.90, date: '10 Feb 2026' },
+      crossover: {
+        type: 'Golden Cross',
+        date: 'w/c 20 January 2026',
+        description: '50-day MA crossed above 200-day MA'
+      },
+      priceVsMa50:  4.9,
+      priceVsMa200: 5.0
+    },
+
+    trend: {
+      direction: 'Recovering',
+      duration: '4 months',
+      structure: 'Higher lows from October 2025 trough; approaching prior range resistance',
+      peak:   { price: 33.61, date: 'w/c 8 September 2025' },
+      trough: { price: 25.91, date: 'w/c 20 October 2025' },
+      drawdown: -22.9
+    },
+
+    keyLevels: {
+      support:    { price: 29.30, method: 'Prior consolidation zone (Dec 2025 – Jan 2026)' },
+      resistance: { price: 32.00, method: 'Round number and prior range ceiling (Jun–Aug 2025)' },
+      fiftyTwoWeekHigh: { price: 33.61, date: 'w/c 8 September 2025' },
+      fiftyTwoWeekLow:  { price: 25.91, date: 'w/c 20 October 2025' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.1,
+      latestDate: '10 February 2026',
+      priorSpikes: [
+        { period: 'w/c 15 September 2025', ratio: 2.8, context: 'Sharp selloff from A$33.42 to A$28.51; likely earnings reaction' },
+        { period: 'w/c 20 October 2025', ratio: 1.9, context: 'Capitulation low at A$25.91' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 31.69, low: 31.41, date: '10 February 2026' },
+      latestRangePercent: 0.9,
+      avgDailyRangePercent30: 0.6,
+      avgDailyRangePercent90: 0.8
+    },
+
+    meanReversion: {
+      vsMa50:  4.9,
+      vsMa200: 5.0,
+      rangePosition: 71,
+      rangeHigh: 33.61,
+      rangeLow:  25.91
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 8 September 2025',  price: 33.61, event: '12-month high' },
+      { date: 'w/c 15 September 2025', price: 28.51, event: 'Sharp selloff; price drops 15% in one week' },
+      { date: 'w/c 20 October 2025',   price: 25.91, event: '12-month low; capitulation' },
+      { date: 'w/c 15 December 2025',  price: 29.32, event: 'Recovery rally clears A$29 resistance' },
+      { date: 'w/c 20 January 2026',   price: 30.08, event: 'Golden cross forms; 50-day MA crosses above 200-day MA' },
+      { date: '10 February 2026',      price: 31.41, event: 'Approaching A$32 resistance; momentum intact' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: 5.4, indexReturn: -2.3, relativeReturn: 7.7 },
+      vsSector: { name: 'S&amp;P/ASX Consumer Staples', period: '12 months', stockReturn: 5.4, sectorReturn: 1.2, relativeReturn: 4.2 }
+    }
+  },
+
   // Footer
   footer: {
     disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, ACCC publications, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.',
@@ -5033,6 +5110,84 @@ STOCK_DATA.WTC = {
     analyticalLimitations: 'Hypothesis survival scores (T1: 36%, T2: 25%, T3: 21%, T4: 18%) reflect editorial assessment. T4 (Founder Entrenchment) scores highest because it is driven by observable structural facts: White\'s 36% shareholding, his return as Executive Chairman, and the mass board departure. T2 (Product Carries) scores second because the operational evidence genuinely is strong. These two hypotheses can coexist: a great product can persist inside a poorly governed company, but value accrual to minority shareholders may be impaired.'
   },
 
+
+  technicalAnalysis: {
+    date: '10 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Trending',
+    clarity: 'Clear',
+
+    price: { current: 49.30, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 65.47, date: '10 Feb 2026' },
+      ma200: { value: 89.66, date: '10 Feb 2026' },
+      crossover: {
+        type: 'Death Cross',
+        date: 'w/c 14 July 2025',
+        description: '50-day MA crossed below 200-day MA'
+      },
+      priceVsMa50:  -24.7,
+      priceVsMa200: -45.0
+    },
+
+    trend: {
+      direction: 'Down',
+      duration: '10 months',
+      structure: 'Lower highs, lower lows; accelerating decline since December 2025',
+      peak:   { price: 124.07, date: 'w/c 17 February 2025' },
+      trough: { price: 47.60, date: 'w/c 3 February 2026' },
+      drawdown: -60.3
+    },
+
+    keyLevels: {
+      support:    { price: 47.00, method: 'Recent intraday low cluster (Feb 2026)' },
+      resistance: { price: 68.00, method: 'Prior breakdown level (Jan 2026)' },
+      fiftyTwoWeekHigh: { price: 124.07, date: 'w/c 17 February 2025' },
+      fiftyTwoWeekLow:  { price: 47.60,  date: 'w/c 3 February 2026' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 2.4,
+      latestDate: '10 February 2026',
+      priorSpikes: [
+        { period: 'w/c 24 February 2025', ratio: 3.1, context: 'Governance shock; initial break below A$100' },
+        { period: 'w/c 14 July 2025', ratio: 2.3, context: 'Death cross week; break below A$90' },
+        { period: 'w/c 22 December 2025', ratio: 2.6, context: 'Break below A$70; capitulation selling' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 50.59, low: 47.60, date: '10 February 2026' },
+      latestRangePercent: 6.3,
+      avgDailyRangePercent30: 3.2,
+      avgDailyRangePercent90: 2.4
+    },
+
+    meanReversion: {
+      vsMa50:  -24.7,
+      vsMa200: -45.0,
+      rangePosition: 2,
+      rangeHigh: 124.07,
+      rangeLow:  47.60
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 17 February 2025', price: 124.07, event: '12-month high' },
+      { date: 'w/c 24 February 2025', price: 97.25,  event: 'Governance shock; price drops 21% in one week' },
+      { date: 'w/c 14 July 2025',     price: 90.00,  event: 'Death cross forms; 50-day MA crosses below 200-day MA' },
+      { date: 'w/c 22 December 2025', price: 71.52,  event: 'Break below A$70; selling accelerates' },
+      { date: 'w/c 19 January 2026',  price: 62.63,  event: 'Break below A$65; no buying support' },
+      { date: 'w/c 3 February 2026',  price: 47.60,  event: 'New 12-month low; capitulation' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: -60.3, indexReturn: -2.3, relativeReturn: -58.0 },
+      vsSector: { name: 'S&amp;P/ASX IT Index', period: '12 months', stockReturn: -60.3, sectorReturn: -18.5, relativeReturn: -41.8 }
+    }
+  },
+
   // Footer
   footer: {
     disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, company disclosures, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.',
@@ -5473,6 +5628,85 @@ STOCK_DATA.DRO = {
     analyticalLimitations: 'Hypothesis survival scores (T1: 36%, T2: 25%, T3: 25%, T4: 14%) reflect genuinely balanced evidence. The narrow range between T1 and T2 is intentional: the data supports both the thesis that DroneShield is scaling into a structural tailwind and the thesis that revenue remains lumpy and contract-dependent. With only 2 covering analysts and limited institutional coverage, the information environment is relatively opaque compared to large-cap coverage. This uncertainty itself is a finding.'
   },
 
+
+  technicalAnalysis: {
+    date: '10 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Volatile',
+    clarity: 'Unclear',
+
+    price: { current: 2.90, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 3.18, date: '10 Feb 2026' },
+      ma200: { value: 3.09, date: '10 Feb 2026' },
+      crossover: {
+        type: 'Golden Cross',
+        date: 'w/c 16 June 2025',
+        description: '50-day MA crossed above 200-day MA during initial momentum rally'
+      },
+      priceVsMa50:  -8.9,
+      priceVsMa200: -6.1
+    },
+
+    trend: {
+      direction: 'Volatile / No Clear Trend',
+      duration: '12 months',
+      structure: 'Extreme swings; rallied from A$0.59 to A$6.60, then retraced to A$1.72 before partial recovery',
+      peak:   { price: 6.60, date: 'w/c 18 August 2025' },
+      trough: { price: 1.72, date: 'w/c 8 December 2025' },
+      drawdown: -56.1
+    },
+
+    keyLevels: {
+      support:    { price: 2.50, method: 'Prior consolidation cluster (Nov–Dec 2025)' },
+      resistance: { price: 4.00, method: 'Round number and prior breakdown level (Oct 2025)' },
+      fiftyTwoWeekHigh: { price: 6.60, date: 'w/c 18 August 2025' },
+      fiftyTwoWeekLow:  { price: 0.59, date: 'w/c 17 February 2025' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.5,
+      latestDate: '10 February 2026',
+      priorSpikes: [
+        { period: 'w/c 16 June 2025', ratio: 3.5, context: 'Breakout above A$3.00; defence spending momentum' },
+        { period: 'w/c 18 August 2025', ratio: 4.2, context: 'Blow-off top at A$6.60; record volume' },
+        { period: 'w/c 8 December 2025', ratio: 3.0, context: 'Capitulation at A$1.72; panic selling' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 3.38, low: 2.90, date: '10 February 2026' },
+      latestRangePercent: 16.6,
+      avgDailyRangePercent30: 5.8,
+      avgDailyRangePercent90: 6.2
+    },
+
+    meanReversion: {
+      vsMa50:  -8.9,
+      vsMa200: -6.1,
+      rangePosition: 38,
+      rangeHigh: 6.60,
+      rangeLow:  0.59
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 17 February 2025', price: 0.59,  event: '12-month low; pre-catalyst base' },
+      { date: 'w/c 16 June 2025',     price: 3.24,  event: 'Breakout above A$3.00; defence spending catalyst' },
+      { date: 'w/c 18 August 2025',   price: 6.60,  event: '12-month high; blow-off top' },
+      { date: 'w/c 29 September 2025', price: 3.83, event: 'Retracement to A$3.80; 42% drawdown from peak' },
+      { date: 'w/c 8 December 2025',  price: 1.72,  event: 'Capitulation low; 74% off peak' },
+      { date: 'w/c 26 January 2026',  price: 3.27,  event: 'Recovery rally regains A$3.00' },
+      { date: '10 February 2026',     price: 2.90,  event: 'Volatility continues; price oscillating around A$3.00' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: 391.5, indexReturn: -2.3, relativeReturn: 393.8 },
+      vsSector: { name: 'S&amp;P/ASX Small Ords', period: '12 months', stockReturn: 391.5, sectorReturn: -5.1, relativeReturn: 396.6 }
+    }
+  },
+
   // Footer
   footer: {
     disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, company disclosures, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.',
@@ -5904,6 +6138,84 @@ STOCK_DATA.PME = {
       '<strong>Key person risk:</strong> Co-founder Dr Sam Hupert is 71. Succession planning is not publicly detailed. The company\'s lean model (132 employees for an A$18.6B company) creates concentration risk in key personnel.'
     ],
     analyticalLimitations: 'Hypothesis survival scores (T1: 39%, T2: 25%, T3: 18%, T4: 18%) reflect the strong evidence asymmetry in this case. The high score for T1 (US Expansion) is driven by observable contract wins, market share data, and competitive positioning. The low score for T3 (Competitive Disruption) reflects the absence of any credible competitive threat in the near term. The Upside skew rating despite a 163x P/E is an editorial judgment: conventional valuation frameworks consistently undervalue platform businesses with this quality of economics. Whether the market agrees is a separate question from whether the evidence supports it.'
+  },
+
+
+  technicalAnalysis: {
+    date: '10 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Trending',
+    clarity: 'Clear',
+
+    price: { current: 166.35, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 212.70, date: '10 Feb 2026' },
+      ma200: { value: 269.57, date: '10 Feb 2026' },
+      crossover: {
+        type: 'Death Cross',
+        date: 'w/c 22 September 2025',
+        description: '50-day MA crossed below 200-day MA'
+      },
+      priceVsMa50:  -21.8,
+      priceVsMa200: -38.3
+    },
+
+    trend: {
+      direction: 'Down',
+      duration: '8 months',
+      structure: 'Lower highs, lower lows; occasional rally attempts fail at declining resistance',
+      peak:   { price: 330.48, date: 'w/c 14 July 2025' },
+      trough: { price: 157.62, date: 'w/c 3 February 2026' },
+      drawdown: -49.7
+    },
+
+    keyLevels: {
+      support:    { price: 157.00, method: 'Recent intraday low (Feb 2026)' },
+      resistance: { price: 220.00, method: 'Prior support turned resistance (Dec 2025)' },
+      fiftyTwoWeekHigh: { price: 330.48, date: 'w/c 14 July 2025' },
+      fiftyTwoWeekLow:  { price: 157.62, date: 'w/c 3 February 2026' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.8,
+      latestDate: '10 February 2026',
+      priorSpikes: [
+        { period: 'w/c 22 September 2025', ratio: 2.4, context: 'Death cross week; break below A$300' },
+        { period: 'w/c 15 December 2025', ratio: 2.1, context: 'Break below A$250; institutional selling' },
+        { period: 'w/c 3 February 2026', ratio: 2.6, context: 'Break below A$180; new 12-month low' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 167.66, low: 157.62, date: '10 February 2026' },
+      latestRangePercent: 6.4,
+      avgDailyRangePercent30: 3.2,
+      avgDailyRangePercent90: 2.1
+    },
+
+    meanReversion: {
+      vsMa50:  -21.8,
+      vsMa200: -38.3,
+      rangePosition: 5,
+      rangeHigh: 330.48,
+      rangeLow:  157.62
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 14 July 2025',     price: 330.48, event: '12-month high' },
+      { date: 'w/c 22 September 2025', price: 297.15, event: 'Death cross forms; break below A$300' },
+      { date: 'w/c 3 November 2025',  price: 263.34, event: 'Break below A$270; selling accelerates' },
+      { date: 'w/c 15 December 2025', price: 246.67, event: 'Break below A$250' },
+      { date: 'w/c 19 January 2026',  price: 214.86, event: 'Break below A$220; cascading stops' },
+      { date: 'w/c 3 February 2026',  price: 157.62, event: 'New 12-month low; acceleration to downside' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: -43.0, indexReturn: -2.3, relativeReturn: -40.7 },
+      vsSector: { name: 'S&amp;P/ASX Healthcare', period: '12 months', stockReturn: -43.0, sectorReturn: -12.4, relativeReturn: -30.6 }
+    }
   },
 
   // Footer
@@ -6343,6 +6655,83 @@ STOCK_DATA.GYG = {
       '<strong>CEO succession:</strong> The identity and strategic orientation of the incoming CEO is unknown. This is the single largest near-term uncertainty: the new CEO\'s stance on US expansion will likely determine whether T2 or T4 prevails.'
     ],
     analyticalLimitations: 'Hypothesis survival scores (T1: 32%, T2: 29%, T3: 21%, T4: 18%) reflect the weight of evidence against the IPO growth narrative. The high score for T3 (Growth Maturation) is driven by observable data: same-store sales at 3.7% vs 7.6% forecast, stock below IPO price, P/E at 166x for a QSR business. The low score for T2 (US Expansion Succeeds) reflects both the unit economics (A$2.6M loss per store) and the academic evidence on international QSR expansion failure rates. We note that 5 stores is a very small sample; it is possible (though not supported by current evidence) that unit economics will improve with scale. The Downside skew rating reflects our assessment that the most probable outcome is valuation correction, not business failure.'
+  },
+
+
+  technicalAnalysis: {
+    date: '10 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Trending',
+    clarity: 'Clear',
+
+    price: { current: 20.30, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 21.84, date: '10 Feb 2026' },
+      ma200: { value: 25.90, date: '10 Feb 2026' },
+      crossover: {
+        type: 'Death Cross',
+        date: 'w/c 7 July 2025',
+        description: '50-day MA crossed below 200-day MA'
+      },
+      priceVsMa50:  -7.1,
+      priceVsMa200: -21.6
+    },
+
+    trend: {
+      direction: 'Down',
+      duration: '12 months',
+      structure: 'Persistent lower highs; punctuated by a sharp gap-down in September 2025',
+      peak:   { price: 45.32, date: 'w/c 24 February 2025' },
+      trough: { price: 20.30, date: '10 February 2026' },
+      drawdown: -55.2
+    },
+
+    keyLevels: {
+      support:    { price: 20.00, method: 'Psychological round number and current 12-month low zone' },
+      resistance: { price: 23.00, method: 'Prior consolidation range (Dec 2025 – Jan 2026)' },
+      fiftyTwoWeekHigh: { price: 45.32, date: 'w/c 24 February 2025' },
+      fiftyTwoWeekLow:  { price: 20.30, date: '10 February 2026' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.4,
+      latestDate: '10 February 2026',
+      priorSpikes: [
+        { period: 'w/c 8 September 2025', ratio: 3.2, context: 'Gap-down from A$29 to A$23.70; likely earnings shock' },
+        { period: 'w/c 17 November 2025', ratio: 2.0, context: 'Break below A$24; selling pressure' },
+        { period: 'w/c 2 February 2026', ratio: 1.8, context: 'New 12-month low at A$20.30' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 20.87, low: 20.30, date: '10 February 2026' },
+      latestRangePercent: 2.8,
+      avgDailyRangePercent30: 2.4,
+      avgDailyRangePercent90: 2.3
+    },
+
+    meanReversion: {
+      vsMa50:  -7.1,
+      vsMa200: -21.6,
+      rangePosition: 0,
+      rangeHigh: 45.32,
+      rangeLow:  20.30
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 24 February 2025', price: 45.32, event: '12-month high; post-IPO peak' },
+      { date: 'w/c 7 July 2025',      price: 30.25, event: 'Death cross forms; 50-day MA crosses below 200-day MA' },
+      { date: 'w/c 8 September 2025', price: 23.70, event: 'Sharp gap-down; falls 18% in one week' },
+      { date: 'w/c 17 November 2025', price: 23.43, event: 'Breaks prior lows; accelerating decline' },
+      { date: 'w/c 2 February 2026',  price: 20.30, event: 'New 12-month low; at 55% below IPO peak' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: -49.2, indexReturn: -2.3, relativeReturn: -46.9 },
+      vsSector: { name: 'S&amp;P/ASX Consumer Disc.', period: '12 months', stockReturn: -49.2, sectorReturn: -8.7, relativeReturn: -40.5 }
+    }
   },
 
   // Footer
@@ -6794,6 +7183,84 @@ STOCK_DATA.CSL = {
     analyticalLimitations: 'Hypothesis survival scores (T1: 33%, T2: 26%, T3: 19%, T4: 22%) reflect editorial assessment. The unusually high score for T2 (Execution Risk) relative to CSL\'s historical stability reflects the specific circumstances of the CEO departure and Seqirus reversal. These are event-driven, not structural, and could resolve quickly with a clean 1H result and prompt CEO appointment.'
   },
 
+
+  technicalAnalysis: {
+    date: '11 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Transitional',
+    clarity: 'Mixed',
+
+    price: { current: 180.50, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 177.79, date: '11 Feb 2026' },
+      ma200: { value: 214.00, date: '11 Feb 2026' },
+      crossover: {
+        type: 'Death Cross',
+        date: 'w/c 22 September 2025',
+        description: '50-day MA crossed below 200-day MA following sharp selloff'
+      },
+      priceVsMa50:  1.5,
+      priceVsMa200: -15.7
+    },
+
+    trend: {
+      direction: 'Base-building',
+      duration: '3 months',
+      structure: 'Sharp decline arrested; price consolidating A$168–A$186 since November 2025',
+      peak:   { price: 272.00, date: 'w/c 28 July 2025' },
+      trough: { price: 168.29, date: 'w/c 12 January 2026' },
+      drawdown: -33.6
+    },
+
+    keyLevels: {
+      support:    { price: 168.00, method: '12-month low and recent support (Jan 2026)' },
+      resistance: { price: 186.00, method: 'Upper range of recent consolidation band' },
+      fiftyTwoWeekHigh: { price: 272.00, date: 'w/c 28 July 2025' },
+      fiftyTwoWeekLow:  { price: 168.29, date: 'w/c 12 January 2026' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.2,
+      latestDate: '11 February 2026',
+      priorSpikes: [
+        { period: 'w/c 1 September 2025', ratio: 3.4, context: 'Sharp selloff from A$271 to A$225; likely earnings miss or guidance cut' },
+        { period: 'w/c 27 October 2025', ratio: 2.2, context: 'Break below A$200; institutional rebalancing' },
+        { period: 'w/c 10 November 2025', ratio: 2.8, context: 'Crash to A$170; capitulation selling' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 181.70, low: 171.39, date: '11 February 2026' },
+      latestRangePercent: 6.0,
+      avgDailyRangePercent30: 1.5,
+      avgDailyRangePercent90: 1.8
+    },
+
+    meanReversion: {
+      vsMa50:  1.5,
+      vsMa200: -15.7,
+      rangePosition: 12,
+      rangeHigh: 272.00,
+      rangeLow:  168.29
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 28 July 2025',     price: 272.00, event: '12-month high' },
+      { date: 'w/c 1 September 2025', price: 225.50, event: 'Sharp selloff; drops 17% in one week' },
+      { date: 'w/c 22 September 2025', price: 205.81, event: 'Death cross forms; 50-day MA below 200-day MA' },
+      { date: 'w/c 10 November 2025', price: 170.77, event: 'Breaks below A$180; near capitulation' },
+      { date: 'w/c 12 January 2026',  price: 168.29, event: '12-month low; base formation begins' },
+      { date: '11 February 2026',     price: 180.50, event: 'Recovering toward 50-day MA; base-building continues' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: -29.7, indexReturn: -2.3, relativeReturn: -27.4 },
+      vsSector: { name: 'S&amp;P/ASX Healthcare', period: '12 months', stockReturn: -29.7, sectorReturn: -12.4, relativeReturn: -17.3 }
+    }
+  },
+
   // Footer
   footer: {
     disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, ACCC publications, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.',
@@ -6929,7 +7396,84 @@ STOCK_DATA.MQG = {
     ],
     analyticalLimitations: 'Hypothesis survival scores (T1: 33%, T2: 22%, T3: 19%, T4: 26%) reflect editorial assessment. The relatively tight spread between T1 and T2 reflects the genuine uncertainty about whether Macquarie\'s infrastructure positioning is a structural advantage (T1) or merely one pillar of a diversified franchise (T2). The answer depends on whether energy transition capital flows accelerate as projected, which is a macroeconomic question rather than a company-specific one.'
   },
-  footer: {
+  
+  technicalAnalysis: {
+    date: '11 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Range-bound',
+    clarity: 'Mixed',
+
+    price: { current: 207.83, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 204.71, date: '11 Feb 2026' },
+      ma200: { value: 213.09, date: '11 Feb 2026' },
+      crossover: {
+        type: 'Death Cross',
+        date: 'w/c 13 October 2025',
+        description: '50-day MA crossed below 200-day MA during range compression'
+      },
+      priceVsMa50:  1.5,
+      priceVsMa200: -2.5
+    },
+
+    trend: {
+      direction: 'Recovering',
+      duration: '3 months',
+      structure: 'V-shaped recovery from November 2025 lows; now testing 200-day MA from below',
+      peak:   { price: 237.11, date: 'w/c 24 February 2025' },
+      trough: { price: 170.97, date: 'w/c 5 May 2025' },
+      drawdown: -12.3
+    },
+
+    keyLevels: {
+      support:    { price: 195.00, method: 'Prior consolidation floor (Dec 2025 – Jan 2026)' },
+      resistance: { price: 215.00, method: '200-day MA cluster and prior range ceiling' },
+      fiftyTwoWeekHigh: { price: 237.11, date: 'w/c 24 February 2025' },
+      fiftyTwoWeekLow:  { price: 170.97, date: 'w/c 5 May 2025' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.1,
+      latestDate: '11 February 2026',
+      priorSpikes: [
+        { period: 'w/c 5 May 2025', ratio: 2.6, context: 'Selloff to A$170.97; 52-week low' },
+        { period: 'w/c 10 November 2025', ratio: 1.9, context: 'Break below A$195; late-year weakness' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 214.50, low: 207.83, date: '11 February 2026' },
+      latestRangePercent: 3.2,
+      avgDailyRangePercent30: 1.5,
+      avgDailyRangePercent90: 1.4
+    },
+
+    meanReversion: {
+      vsMa50:  1.5,
+      vsMa200: -2.5,
+      rangePosition: 56,
+      rangeHigh: 237.11,
+      rangeLow:  170.97
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 24 February 2025', price: 237.11, event: '12-month high' },
+      { date: 'w/c 5 May 2025',       price: 170.97, event: '12-month low; sharp selloff' },
+      { date: 'w/c 23 June 2025',     price: 215.30, event: 'Recovery rally to A$215; strong bounce' },
+      { date: 'w/c 13 October 2025',  price: 213.10, event: 'Death cross forms' },
+      { date: 'w/c 24 November 2025', price: 189.90, event: 'Retest of lows; A$190 holds' },
+      { date: '11 February 2026',     price: 207.83, event: 'Recovery; approaching 200-day MA resistance at A$213' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: -10.2, indexReturn: -2.3, relativeReturn: -7.9 },
+      vsSector: { name: 'S&amp;P/ASX Financials', period: '12 months', stockReturn: -10.2, sectorReturn: -4.1, relativeReturn: -6.1 }
+    }
+  },
+
+footer: {
     disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, ACCC publications, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.',
     domainCount: '10 of 10',
     hypothesesCount: '4 Active'
@@ -6958,7 +7502,85 @@ STOCK_DATA.GMG = {
   discriminators: { intro: 'Three data points carry high diagnosticity. General commentary about "data centre demand" is non-discriminating because it applies to all DC developers equally.', rows: [{ diagnosticity: 'HIGH', diagnosticityClass: 'disc-high', evidence: '<strong>FY26 Half-Year Results.</strong> Operating EPS growth rate and DC pipeline conversion metrics.', discriminatesBetween: 'T1 (DC mega-trend delivering) vs T2 (priced in, growth decelerating)', currentReading: 'On track (guidance +9%)', readingClass: 'td-green' }, { diagnosticity: 'HIGH', diagnosticityClass: 'disc-high', evidence: '<strong>Hyperscaler capex trajectory.</strong> If Microsoft, Google, AWS maintain or increase DC capex budgets through CY2026.', discriminatesBetween: 'T1 (demand accelerating) vs T3 (bubble risk)', currentReading: 'Capex accelerating', readingClass: 'td-green' }, { diagnosticity: 'HIGH', diagnosticityClass: 'disc-high', evidence: '<strong>New institutional DC partnerships.</strong> Follow-on deals similar to CPP A$14B commitment.', discriminatesBetween: 'T4 (platform validated) vs T2 (one-off partnership)', currentReading: 'CPP only so far', readingClass: 'td-amber' }, { diagnosticity: 'MEDIUM', diagnosticityClass: 'disc-med', evidence: '<strong>Power grid approvals and construction timelines.</strong> Any material delays in power delivery.', discriminatesBetween: 'T1 (execution on track) vs T3 (power constraints binding)', currentReading: '300MW constructing', readingClass: 'td-green' }], nonDiscriminating: '<strong>"Data centre demand is growing"</strong> (benefits all DC developers equally) &bull; <strong>"Interest rates pressure REITs"</strong> (macro factor, not GMG-specific) &bull; <strong>"36x P/E looks expensive for a REIT"</strong> (describes the question, not the answer; traditional REIT metrics may not apply) &bull; <strong>"0.5% yield is too low"</strong> (yield is a residual of growth reinvestment, not a standalone signal)' },
   tripwires: { intro: 'Four revision conditions. Data centre pipeline execution is the single most important variable for hypothesis revision.', cards: [{ date: '1H FY26 RESULTS', name: 'Half-Year Operating Performance', conditions: [{ if: 'If operating EPS growth &ge;9% and WIP rises toward A$17.5B guidance', valence: 'positive', then: 'T1 strengthens. Execution on track; DC pipeline expanding as guided. Growth flywheel confirmed.' }, { if: 'If operating EPS growth &lt;7% or WIP growth stalls', valence: 'negative', then: 'T2 strengthens. Growth narrative weakening; market premium at risk.' }], source: 'Source: ASX announcement; GMG half-year results' }, { date: 'CY 2026', name: 'Hyperscaler Capex Announcements', conditions: [{ if: 'If Microsoft, Google, AWS each commit US$50B+ to DC capex for CY2026', valence: 'positive', then: 'T1 and T4 strengthen materially. Multi-year demand runway confirmed.' }, { if: 'If any major hyperscaler materially reduces DC capex guidance', valence: 'negative', then: 'T3 strengthens sharply. First evidence of demand deceleration. DC oversupply narrative gains credibility.' }], source: 'Source: Microsoft, Alphabet, Amazon quarterly earnings; capex disclosures' }, { date: 'CY 2026', name: 'New Institutional DC Partnerships', conditions: [{ if: 'If 1-2 additional sovereign wealth or pension fund partnerships announced', valence: 'positive', then: 'T4 strengthens. Platform model validated. GMG reclassification as infrastructure manager accelerates.' }, { if: 'If no new institutional partnerships beyond CPP', valence: 'negative', then: 'T4 weakens. CPP was opportunistic, not a template. Platform thesis unproven.' }], source: 'Source: ASX announcements; institutional investor disclosures' }, { date: 'ONGOING', name: 'Power Grid and Construction Delivery', conditions: [{ if: 'If 500MW target achieved and power procurement on schedule', valence: 'positive', then: 'T1 execution confirmed. Power moat deepening.' }, { if: 'If material construction delays or power grid bottlenecks disclosed', valence: 'negative', then: 'T3 strengthens. Execution risk is real. Power constraints are binding.' }], source: 'Source: GMG quarterly updates; energy regulator approvals; ASX announcements' }] },
   gaps: { coverageRows: [{ domain: 'Corporate Comms', coverageLevel: 'full', coverageLabel: 'Full', freshness: 'FY25', confidence: 'High (but motivated)', confidenceClass: '' }, { domain: 'Regulatory Filings', coverageLevel: 'full', coverageLabel: 'Full', freshness: 'FY25', confidence: 'High (audited)', confidenceClass: 'td-green' }, { domain: 'Broker Research', coverageLevel: 'full', coverageLabel: 'Full', freshness: 'Recent', confidence: 'High (11 analysts)', confidenceClass: 'td-green' }, { domain: 'Competitor &amp; Industry Data', coverageLevel: 'good', coverageLabel: 'Good', freshness: 'Current', confidence: 'High (independent)', confidenceClass: 'td-green' }, { domain: 'Economic Data', coverageLevel: 'good', coverageLabel: 'Good', freshness: 'Current', confidence: 'High (objective)', confidenceClass: 'td-green' }, { domain: 'Alternative Data', coverageLevel: 'partial', coverageLabel: 'Partial', freshness: 'Mixed', confidence: 'Medium (limited DC-specific)', confidenceClass: 'td-amber' }, { domain: 'Academic Research', coverageLevel: 'good', coverageLabel: 'Good', freshness: 'Structural', confidence: 'High (peer-reviewed)', confidenceClass: 'td-green' }, { domain: 'Media &amp; Social', coverageLevel: 'full', coverageLabel: 'Full', freshness: 'Current', confidence: 'Low (noise)', confidenceClass: '' }, { domain: 'Leadership &amp; Governance', coverageLevel: 'full', coverageLabel: 'Full', freshness: 'Current', confidence: 'High (long track record)', confidenceClass: 'td-green' }, { domain: 'Ownership &amp; Capital Flows', coverageLevel: 'good', coverageLabel: 'Good', freshness: 'Recent', confidence: 'High (ASX 20 disclosures)', confidenceClass: 'td-green' }], couldntAssess: ['<strong>Hyperscaler contract terms:</strong> The specific terms, pricing, and duration of Goodman\'s data centre leases with hyperscalers are commercially confidential. Whether Goodman\'s DC yields are superior or inferior to competitors\' is not publicly available.', '<strong>Power procurement costs:</strong> The cost of securing 5.0 GW of power across 13 cities is not broken out in financial statements. Whether power costs are escalating faster than DC rental yields would be material to margin analysis.', '<strong>CEO succession planning:</strong> Greg Goodman is 27+ years into his tenure. While there is no immediate succession concern, the absence of a disclosed succession plan creates long-term uncertainty for a company whose strategy and culture are deeply founder-led.'], analyticalLimitations: 'Hypothesis survival scores (T1: 38%, T2: 24%, T3: 17%, T4: 21%) reflect the strong evidence asymmetry in this case. T1 (Data Centre Mega-Trend) scores highest because the supporting evidence spans 7 of 10 domains and includes both independently verified facts (audited financials, 94% pre-commitment) and forward-looking indicators (hyperscaler capex trends, power bank expansion). T3 (Bubble Risk) scores lowest because it is driven by narrative rather than observable data: the 94% pre-commitment rate directly contradicts the oversupply thesis for Goodman\'s specific pipeline.' },
-  footer: { disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, ACCC publications, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.', domainCount: '10 of 10', hypothesesCount: '4 Active' }
+  
+  technicalAnalysis: {
+    date: '11 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Transitional',
+    clarity: 'Mixed',
+
+    price: { current: 30.55, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 30.28, date: '11 Feb 2026' },
+      ma200: { value: 32.57, date: '11 Feb 2026' },
+      crossover: {
+        type: 'Death Cross',
+        date: 'w/c 20 October 2025',
+        description: '50-day MA crossed below 200-day MA during range breakdown'
+      },
+      priceVsMa50:  0.9,
+      priceVsMa200: -6.2
+    },
+
+    trend: {
+      direction: 'Base-building',
+      duration: '3 months',
+      structure: 'Decline from A$36 peak arrested; building base around A$29–A$31',
+      peak:   { price: 36.26, date: 'w/c 17 February 2025' },
+      trough: { price: 28.64, date: 'w/c 15 December 2025' },
+      drawdown: -15.7
+    },
+
+    keyLevels: {
+      support:    { price: 29.00, method: 'Recent consolidation floor (Nov 2025 – Jan 2026)' },
+      resistance: { price: 32.00, method: '200-day MA and prior range midpoint' },
+      fiftyTwoWeekHigh: { price: 36.26, date: 'w/c 17 February 2025' },
+      fiftyTwoWeekLow:  { price: 26.07, date: 'w/c 5 May 2025' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.3,
+      latestDate: '11 February 2026',
+      priorSpikes: [
+        { period: 'w/c 5 May 2025', ratio: 2.8, context: 'Selloff to A$26.07; 12-month low' },
+        { period: 'w/c 20 October 2025', ratio: 1.7, context: 'Death cross week; break below A$33' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 31.36, low: 28.89, date: '11 February 2026' },
+      latestRangePercent: 8.6,
+      avgDailyRangePercent30: 1.8,
+      avgDailyRangePercent90: 1.5
+    },
+
+    meanReversion: {
+      vsMa50:  0.9,
+      vsMa200: -6.2,
+      rangePosition: 44,
+      rangeHigh: 36.26,
+      rangeLow:  26.07
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 17 February 2025', price: 36.26, event: '12-month high' },
+      { date: 'w/c 5 May 2025',       price: 26.07, event: '12-month low; broad market selloff' },
+      { date: 'w/c 30 June 2025',     price: 33.58, event: 'Recovery rally; approaches prior highs' },
+      { date: 'w/c 1 September 2025', price: 36.14, event: 'Retests 12-month high; fails' },
+      { date: 'w/c 20 October 2025',  price: 32.26, event: 'Death cross forms; begins grinding lower' },
+      { date: 'w/c 15 December 2025', price: 28.64, event: 'Tests support at A$29' },
+      { date: '11 February 2026',     price: 30.55, event: 'Building base; reclaiming 50-day MA' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: -15.5, indexReturn: -2.3, relativeReturn: -13.2 },
+      vsSector: { name: 'S&amp;P/ASX Real Estate', period: '12 months', stockReturn: -15.5, sectorReturn: -9.8, relativeReturn: -5.7 }
+    }
+  },
+
+footer: { disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, ACCC publications, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.', domainCount: '10 of 10', hypothesesCount: '4 Active' }
 };
 
 STOCK_DATA.WDS = {
@@ -7402,6 +8024,85 @@ STOCK_DATA.WDS = {
       '<strong>Cultural heritage risk:</strong> The Burrup Peninsula cultural heritage risks related to Pluto and Scarborough are subject to ongoing legal and regulatory processes. The potential operational and financial impact is uncertain.'
     ],
     analyticalLimitations: 'Hypothesis survival scores (T1: 29%, T2: 25%, T3: 21%, T4: 25%) reflect a genuinely balanced evidence set. The narrow range between T1, T2, and T4 is intentional: the data supports both the thesis that Woodside is a well-run LNG producer approaching a growth inflection and the thesis that it is a yield stock trapped in a structural valuation discount. T3 (Energy Transition) scores at 21% because, while the stranded asset argument has academic support, it operates on a much longer time horizon than the other hypotheses. The key variable is Scarborough delivery; the other hypotheses are largely resolved or not by that single event.'
+  },
+
+
+  technicalAnalysis: {
+    date: '11 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Range-bound',
+    clarity: 'Clear',
+
+    price: { current: 25.48, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 24.29, date: '11 Feb 2026' },
+      ma200: { value: 24.23, date: '11 Feb 2026' },
+      crossover: {
+        type: 'Golden Cross',
+        date: 'w/c 6 January 2026',
+        description: '50-day MA crossed above 200-day MA during recovery'
+      },
+      priceVsMa50:  4.9,
+      priceVsMa200: 5.2
+    },
+
+    trend: {
+      direction: 'Up',
+      duration: '4 months',
+      structure: 'Higher lows since October 2025; grinding upward within historical range',
+      peak:   { price: 27.08, date: 'w/c 1 September 2025' },
+      trough: { price: 19.15, date: 'w/c 5 May 2025' },
+      drawdown: -5.9
+    },
+
+    keyLevels: {
+      support:    { price: 23.50, method: 'Prior consolidation zone (Nov–Dec 2025)' },
+      resistance: { price: 27.00, method: '12-month high and prior distribution zone (Aug–Sep 2025)' },
+      fiftyTwoWeekHigh: { price: 27.08, date: 'w/c 1 September 2025' },
+      fiftyTwoWeekLow:  { price: 19.15, date: 'w/c 5 May 2025' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.0,
+      latestDate: '11 February 2026',
+      priorSpikes: [
+        { period: 'w/c 5 May 2025', ratio: 2.4, context: 'Selloff to A$19.15; oil price weakness' },
+        { period: 'w/c 18 August 2025', ratio: 1.8, context: 'Rally to A$26; energy sector rotation' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 25.93, low: 25.48, date: '11 February 2026' },
+      latestRangePercent: 1.8,
+      avgDailyRangePercent30: 1.5,
+      avgDailyRangePercent90: 1.6
+    },
+
+    meanReversion: {
+      vsMa50:  4.9,
+      vsMa200: 5.2,
+      rangePosition: 80,
+      rangeHigh: 27.08,
+      rangeLow:  19.15
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 17 February 2025', price: 24.50, event: 'Starting position; mid-range' },
+      { date: 'w/c 5 May 2025',       price: 19.15, event: '12-month low; oil price selloff' },
+      { date: 'w/c 30 June 2025',     price: 22.12, event: 'Recovery begins; higher lows forming' },
+      { date: 'w/c 18 August 2025',   price: 25.96, event: 'Rally toward 12-month high' },
+      { date: 'w/c 1 September 2025', price: 27.08, event: '12-month high' },
+      { date: 'w/c 27 October 2025',  price: 22.27, event: 'Pullback to A$22; retests support' },
+      { date: 'w/c 6 January 2026',   price: 24.98, event: 'Golden cross forms; recovery confirmed' },
+      { date: '11 February 2026',     price: 25.48, event: 'Approaching 12-month highs; above both MAs' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: 4.0, indexReturn: -2.3, relativeReturn: 6.3 },
+      vsSector: { name: 'S&amp;P/ASX Energy', period: '12 months', stockReturn: 4.0, sectorReturn: -6.8, relativeReturn: 10.8 }
+    }
   },
 
   // Footer
@@ -7856,6 +8557,80 @@ STOCK_DATA.SIG = {
     analyticalLimitations: 'Hypothesis survival scores (T1: 26%, T2: 33%, T3: 19%, T4: 22%) reflect editorial assessment. T2 (Escrow Overhang) scores highest because it is driven by a known, dated structural event with clear precedent in academic literature. T1 (Integration) is scored cautiously because insufficient time has elapsed to assess execution. The narrow range between T1 and T4 reflects genuine uncertainty about whether this business is a platform (deserving a premium) or a retailer/distributor (deserving traditional multiples). The answer to this question determines whether the stock is worth A$1 or A$4.'
   },
 
+
+  technicalAnalysis: {
+    date: '11 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Range-bound',
+    clarity: 'Clear',
+
+    price: { current: 3.14, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 2.95, date: '11 Feb 2026' },
+      ma200: { value: 2.99, date: '11 Feb 2026' },
+      crossover: null,
+      priceVsMa50:  6.5,
+      priceVsMa200: 5.1
+    },
+
+    trend: {
+      direction: 'Up',
+      duration: '2 months',
+      structure: 'Narrow range stock; recent breakout toward 52-week highs from A$2.83 base',
+      peak:   { price: 3.27, date: 'w/c 24 February 2025' },
+      trough: { price: 2.74, date: 'w/c 14 July 2025' },
+      drawdown: -4.0
+    },
+
+    keyLevels: {
+      support:    { price: 2.90, method: 'Prior consolidation floor and 50-day MA' },
+      resistance: { price: 3.27, method: '12-month high (Feb 2025)' },
+      fiftyTwoWeekHigh: { price: 3.27, date: 'w/c 24 February 2025' },
+      fiftyTwoWeekLow:  { price: 2.74, date: 'w/c 14 July 2025' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.3,
+      latestDate: '11 February 2026',
+      priorSpikes: [
+        { period: 'w/c 1 September 2025', ratio: 1.8, context: 'Break above A$3.00; Chemist Warehouse merger speculation' },
+        { period: 'w/c 26 January 2026', ratio: 1.6, context: 'Rally from A$2.83 to A$3.09; momentum building' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 3.16, low: 3.09, date: '11 February 2026' },
+      latestRangePercent: 2.3,
+      avgDailyRangePercent30: 1.2,
+      avgDailyRangePercent90: 1.4
+    },
+
+    meanReversion: {
+      vsMa50:  6.5,
+      vsMa200: 5.1,
+      rangePosition: 75,
+      rangeHigh: 3.27,
+      rangeLow:  2.74
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 24 February 2025', price: 3.27,  event: '12-month high' },
+      { date: 'w/c 14 July 2025',     price: 2.74,  event: '12-month low' },
+      { date: 'w/c 1 September 2025', price: 3.04,  event: 'Breaks back above A$3.00' },
+      { date: 'w/c 6 October 2025',   price: 3.15,  event: 'Approaches 12-month high; fails to break through' },
+      { date: 'w/c 8 December 2025',  price: 2.76,  event: 'Retests lows; A$2.74 support holds' },
+      { date: 'w/c 26 January 2026',  price: 3.09,  event: 'Rally resumes; momentum building' },
+      { date: '11 February 2026',     price: 3.14,  event: 'Approaching 12-month high resistance at A$3.27' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: 12.5, indexReturn: -2.3, relativeReturn: 14.8 },
+      vsSector: { name: 'S&amp;P/ASX Healthcare', period: '12 months', stockReturn: 12.5, sectorReturn: -12.4, relativeReturn: 24.9 }
+    }
+  },
+
   // Footer
   footer: {
     disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, company accounts, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.',
@@ -8304,6 +9079,84 @@ STOCK_DATA.FMG = {
       '<strong>India demand offset:</strong> Whether India\'s steel demand growth can materially offset China\'s decline is an open question with wide uncertainty bands.'
     ],
     analyticalLimitations: 'Hypothesis survival scores (T1: 30%, T2: 30%, T3: 15%, T4: 26%) reflect editorial assessment. The equal weighting of T1 and T2 is deliberate: both are supported by strong evidence from different domains. T1 (Cost Leader) is supported by operational data; T2 (Structural Decline) is supported by macro data. The question is timeline: T1 may hold for 2-3 years while T2 plays out over 5-10 years. T3 (Green Pivot) is scored lowest because the evidence uniformly contradicts it following project cancellations and hydrogen cost gaps. T4 (Governance) is rising because each green writeoff provides additional evidence of capital misallocation.'
+  },
+
+
+  technicalAnalysis: {
+    date: '11 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Trending',
+    clarity: 'Clear',
+
+    price: { current: 21.23, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 22.09, date: '11 Feb 2026' },
+      ma200: { value: 19.10, date: '11 Feb 2026' },
+      crossover: {
+        type: 'Golden Cross',
+        date: 'w/c 15 September 2025',
+        description: '50-day MA crossed above 200-day MA during structural uptrend'
+      },
+      priceVsMa50:  -3.9,
+      priceVsMa200: 11.2
+    },
+
+    trend: {
+      direction: 'Up',
+      duration: '10 months',
+      structure: 'Higher lows from April 2025 trough; structural uptrend with recent pullback',
+      peak:   { price: 22.98, date: 'w/c 22 December 2025' },
+      trough: { price: 14.20, date: 'w/c 5 May 2025' },
+      drawdown: -7.6
+    },
+
+    keyLevels: {
+      support:    { price: 21.00, method: 'Round number and recent pullback low (Feb 2026)' },
+      resistance: { price: 23.00, method: '12-month high cluster (Dec 2025 – Jan 2026)' },
+      fiftyTwoWeekHigh: { price: 22.98, date: 'w/c 22 December 2025' },
+      fiftyTwoWeekLow:  { price: 14.20, date: 'w/c 5 May 2025' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 1.0,
+      latestDate: '11 February 2026',
+      priorSpikes: [
+        { period: 'w/c 5 May 2025', ratio: 2.2, context: 'Selloff to A$14.20; iron ore price weakness' },
+        { period: 'w/c 28 July 2025', ratio: 1.9, context: 'Breakout above A$19; iron ore recovery' },
+        { period: 'w/c 22 December 2025', ratio: 1.6, context: 'New 12-month high at A$22.98' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 21.78, low: 21.00, date: '11 February 2026' },
+      latestRangePercent: 3.7,
+      avgDailyRangePercent30: 1.7,
+      avgDailyRangePercent90: 1.6
+    },
+
+    meanReversion: {
+      vsMa50:  -3.9,
+      vsMa200: 11.2,
+      rangePosition: 80,
+      rangeHigh: 22.98,
+      rangeLow:  14.20
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 17 February 2025', price: 19.12, event: 'Starting position; mid-range' },
+      { date: 'w/c 5 May 2025',       price: 14.20, event: '12-month low; iron ore price weakness' },
+      { date: 'w/c 28 July 2025',     price: 19.42, event: 'Breaks above A$19; recovery confirmed' },
+      { date: 'w/c 15 September 2025', price: 19.72, event: 'Golden cross forms; structural uptrend' },
+      { date: 'w/c 22 December 2025', price: 22.98, event: '12-month high' },
+      { date: '11 February 2026',     price: 21.23, event: 'Pullback from highs; testing 50-day MA support' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: 11.0, indexReturn: -2.3, relativeReturn: 13.3 },
+      vsSector: { name: 'S&amp;P/ASX Materials', period: '12 months', stockReturn: 11.0, sectorReturn: -3.5, relativeReturn: 14.5 }
+    }
   },
 
   // Footer
