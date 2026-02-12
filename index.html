@@ -1464,6 +1464,167 @@ a:hover { color: var(--accent-sage); }
 }
 
 /* ============================================================
+   TECHNICAL ANALYSIS — Section Styles
+   ============================================================ */
+
+/* Container */
+.ta-section { margin-top: var(--space-lg); }
+
+/* Regime / Clarity / Key Level badges at top */
+.ta-regime-bar {
+    display: flex; gap: var(--space-md); flex-wrap: wrap;
+    padding: var(--space-md) 0; margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border);
+}
+.ta-regime-item {
+    display: flex; flex-direction: column; gap: 2px;
+}
+.ta-regime-label {
+    font-size: 0.55rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted);
+}
+.ta-regime-value {
+    font-family: var(--font-data); font-size: 0.88rem; font-weight: 600;
+    color: var(--text-primary);
+}
+.ta-regime-value.ta-down { color: var(--signal-red); }
+.ta-regime-value.ta-up { color: var(--signal-green); }
+.ta-regime-value.ta-neutral { color: var(--signal-amber); }
+
+/* Moving Average table */
+.ta-ma-table {
+    width: 100%; border-collapse: collapse; font-size: 0.75rem;
+    margin-bottom: var(--space-md);
+}
+.ta-ma-table th {
+    text-align: left; font-size: 0.6rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+}
+.ta-ma-table td {
+    padding: 8px 12px; border-bottom: 1px solid var(--border);
+    font-family: var(--font-data); font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+.ta-ma-table tr:last-child td { border-bottom: none; }
+.ta-ma-table .ta-label-cell { font-family: var(--font-ui); font-weight: 600; color: var(--text-primary); }
+
+/* Inflection points timeline */
+.ta-inflection-table {
+    width: 100%; border-collapse: collapse; font-size: 0.75rem;
+    margin-bottom: var(--space-md);
+}
+.ta-inflection-table th {
+    text-align: left; font-size: 0.6rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+}
+.ta-inflection-table td {
+    padding: 8px 12px; border-bottom: 1px solid var(--border);
+    font-size: 0.75rem; color: var(--text-secondary);
+}
+.ta-inflection-table tr:last-child td { border-bottom: none; }
+.ta-inflection-table .ta-date-cell { font-family: var(--font-data); font-weight: 500; white-space: nowrap; color: var(--text-primary); }
+.ta-inflection-table .ta-price-cell { font-family: var(--font-data); font-weight: 600; }
+.ta-inflection-table .ta-event-cell { font-family: var(--font-ui); color: var(--text-secondary); }
+
+/* Volume & Volatility metrics grid */
+.ta-metrics-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+.ta-metric-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 4px; padding: var(--space-md);
+}
+.ta-metric-card-title {
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--accent-teal); margin-bottom: var(--space-sm);
+}
+.ta-metric-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 4px 0; border-bottom: 1px solid var(--border);
+}
+.ta-metric-row:last-child { border-bottom: none; }
+.ta-metric-name { font-size: 0.72rem; color: var(--text-secondary); }
+.ta-metric-val {
+    font-family: var(--font-data); font-size: 0.78rem; font-weight: 600;
+    color: var(--text-primary);
+}
+.ta-metric-val.ta-neg { color: var(--signal-red); }
+.ta-metric-val.ta-pos { color: var(--signal-green); }
+
+/* Mean Reversion positioning bar */
+.ta-mr-container {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 4px; padding: var(--space-md); margin-bottom: var(--space-md);
+}
+.ta-mr-title {
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--accent-teal); margin-bottom: var(--space-sm);
+}
+.ta-mr-bar-track {
+    height: 24px; background: var(--bg-surface); border-radius: 3px;
+    position: relative; margin-bottom: var(--space-sm); overflow: visible;
+}
+.ta-mr-marker {
+    position: absolute; top: -2px; width: 4px; height: 28px;
+    background: var(--signal-red); border-radius: 2px;
+    transform: translateX(-50%);
+}
+.ta-mr-ma50-marker, .ta-mr-ma200-marker {
+    position: absolute; top: 0; width: 2px; height: 24px;
+    opacity: 0.6; transform: translateX(-50%);
+}
+.ta-mr-ma50-marker { background: var(--signal-amber); }
+.ta-mr-ma200-marker { background: var(--signal-blue); }
+.ta-mr-bar-labels {
+    display: flex; justify-content: space-between;
+    font-family: var(--font-data); font-size: 0.6rem; color: var(--text-muted);
+}
+.ta-mr-legend {
+    display: flex; gap: var(--space-md); margin-top: var(--space-sm); flex-wrap: wrap;
+}
+.ta-mr-legend-item {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 0.6rem; color: var(--text-muted);
+}
+.ta-mr-legend-dot {
+    width: 8px; height: 3px; border-radius: 1px;
+}
+
+/* Relative performance */
+.ta-rel-table {
+    width: 100%; border-collapse: collapse; font-size: 0.75rem;
+}
+.ta-rel-table th {
+    text-align: left; font-size: 0.6rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+}
+.ta-rel-table td {
+    padding: 8px 12px; border-bottom: 1px solid var(--border);
+    font-family: var(--font-data); font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+.ta-rel-table tr:last-child td { border-bottom: none; }
+
+/* TA Crossover callout */
+.ta-crossover-callout {
+    background: rgba(212,85,85,0.06); border: 1px solid rgba(212,85,85,0.15);
+    border-radius: 4px; padding: 10px 14px; margin-bottom: var(--space-md);
+    display: flex; gap: var(--space-sm); align-items: baseline;
+}
+.ta-crossover-label {
+    font-family: var(--font-data); font-size: 0.65rem; font-weight: 700;
+    color: var(--signal-red); white-space: nowrap;
+}
+.ta-crossover-text { font-size: 0.72rem; color: var(--text-secondary); }
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1024px) {
@@ -1473,6 +1634,7 @@ a:hover { color: var(--accent-sage); }
     .verdict-inner { flex-direction: column; }
     .verdict-scores { justify-content: flex-start; }
     .tw-conditions { grid-template-columns: 1fr; }
+    .ta-metrics-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
     :root { --space-lg: 16px; --space-xl: 24px; --space-2xl: 32px; --space-3xl: 48px; }
@@ -2577,8 +2739,14 @@ function renderSectionNav(data) {
     ['evidence', 'Evidence'],
     ['discriminates', 'Discriminates'],
     ['tripwires', 'Tripwires'],
-    ['gaps', 'Gaps']
+    ['gaps', 'Gaps'],
+    ['technical', 'Technical']
   ];
+
+  // Only include Technical if data exists
+  if (!data.technicalAnalysis) {
+    sections.pop();
+  }
 
   var linksHtml = '';
   for (var i = 0; i < sections.length; i++) {
@@ -2923,6 +3091,172 @@ function renderGaps(data) {
   '</div>';
 }
 
+function renderTechnicalAnalysis(data) {
+  if (!data.technicalAnalysis) return '';
+  var t = data.ticker.toLowerCase();
+  var ta = data.technicalAnalysis;
+
+  // Regime bar — categorical labels + key levels
+  var regimeHtml = '<div class="ta-regime-bar">' +
+    '<div class="ta-regime-item"><div class="ta-regime-label">Regime</div><div class="ta-regime-value">' + ta.regime + '</div></div>' +
+    '<div class="ta-regime-item"><div class="ta-regime-label">Clarity</div><div class="ta-regime-value">' + ta.clarity + '</div></div>' +
+    '<div class="ta-regime-item"><div class="ta-regime-label">Trend</div><div class="ta-regime-value ta-down">' + ta.trend.direction + ' (' + ta.trend.duration + ')</div></div>' +
+    '<div class="ta-regime-item"><div class="ta-regime-label">Structure</div><div class="ta-regime-value">' + ta.trend.structure + '</div></div>' +
+    '<div class="ta-regime-item"><div class="ta-regime-label">Support</div><div class="ta-regime-value">' + ta.price.currency + ta.keyLevels.support.price.toFixed(2) + '</div></div>' +
+    '<div class="ta-regime-item"><div class="ta-regime-label">Resistance</div><div class="ta-regime-value">' + ta.price.currency + ta.keyLevels.resistance.price.toFixed(2) + '</div></div>' +
+  '</div>';
+
+  // Moving averages table
+  var maHtml = '<div class="rs-subtitle">Moving Averages</div>' +
+    '<table class="ta-ma-table"><thead><tr>' +
+      '<th>Measure</th><th>Value</th><th>Price vs MA</th><th>Note</th>' +
+    '</tr></thead><tbody>' +
+    '<tr>' +
+      '<td class="ta-label-cell">50-Day MA</td>' +
+      '<td>' + ta.price.currency + ta.movingAverages.ma50.value.toFixed(2) + '</td>' +
+      '<td style="color:var(--signal-red)">' + ta.movingAverages.priceVsMa50.toFixed(1) + '%</td>' +
+      '<td>As at ' + ta.movingAverages.ma50.date + '</td>' +
+    '</tr>' +
+    '<tr>' +
+      '<td class="ta-label-cell">200-Day MA</td>' +
+      '<td>' + ta.price.currency + ta.movingAverages.ma200.value.toFixed(2) + '</td>' +
+      '<td style="color:var(--signal-red)">' + ta.movingAverages.priceVsMa200.toFixed(1) + '%</td>' +
+      '<td>As at ' + ta.movingAverages.ma200.date + '</td>' +
+    '</tr>' +
+    '</tbody></table>';
+
+  // Crossover callout
+  var crossoverHtml = '';
+  if (ta.movingAverages.crossover) {
+    var cx = ta.movingAverages.crossover;
+    crossoverHtml = '<div class="ta-crossover-callout">' +
+      '<div class="ta-crossover-label">' + cx.type + '</div>' +
+      '<div class="ta-crossover-text">' + cx.description + ' &mdash; ' + cx.date + '</div>' +
+    '</div>';
+  }
+
+  // Inflection points table
+  var inflHtml = '';
+  if (ta.inflectionPoints && ta.inflectionPoints.length > 0) {
+    var inflRows = '';
+    for (var i = 0; i < ta.inflectionPoints.length; i++) {
+      var ip = ta.inflectionPoints[i];
+      inflRows += '<tr>' +
+        '<td class="ta-date-cell">' + ip.date + '</td>' +
+        '<td class="ta-price-cell">' + ta.price.currency + ip.price.toFixed(2) + '</td>' +
+        '<td class="ta-event-cell">' + ip.event + '</td>' +
+      '</tr>';
+    }
+    inflHtml = '<div class="rs-subtitle">Price Inflection Points</div>' +
+      '<table class="ta-inflection-table"><thead><tr>' +
+        '<th>Date</th><th>Price</th><th>Observation</th>' +
+      '</tr></thead><tbody>' + inflRows + '</tbody></table>';
+  }
+
+  // Volume & Volatility metrics
+  var volHtml = '<div class="ta-metrics-grid">' +
+    '<div class="ta-metric-card">' +
+      '<div class="ta-metric-card-title">Volume</div>' +
+      '<div class="ta-metric-row"><div class="ta-metric-name">Latest vs 20-day avg</div><div class="ta-metric-val">' + ta.volume.latestVs20DayAvg.toFixed(1) + 'x</div></div>' +
+      '<div class="ta-metric-row"><div class="ta-metric-name">Date</div><div class="ta-metric-val">' + ta.volume.latestDate + '</div></div>';
+  if (ta.volume.priorSpikes) {
+    for (var v = 0; v < ta.volume.priorSpikes.length; v++) {
+      var sp = ta.volume.priorSpikes[v];
+      volHtml += '<div class="ta-metric-row"><div class="ta-metric-name">' + sp.period + '</div><div class="ta-metric-val">' + sp.ratio.toFixed(1) + 'x &mdash; ' + sp.context + '</div></div>';
+    }
+  }
+  volHtml += '</div>' +
+    '<div class="ta-metric-card">' +
+      '<div class="ta-metric-card-title">Volatility</div>' +
+      '<div class="ta-metric-row"><div class="ta-metric-name">Latest daily range</div><div class="ta-metric-val">' + ta.volatility.latestRangePercent.toFixed(1) + '%</div></div>' +
+      '<div class="ta-metric-row"><div class="ta-metric-name">30-day avg range</div><div class="ta-metric-val">' + ta.volatility.avgDailyRangePercent30.toFixed(1) + '%</div></div>' +
+      '<div class="ta-metric-row"><div class="ta-metric-name">90-day avg range</div><div class="ta-metric-val">' + ta.volatility.avgDailyRangePercent90.toFixed(1) + '%</div></div>' +
+      '<div class="ta-metric-row"><div class="ta-metric-name">Latest session</div><div class="ta-metric-val">' + ta.price.currency + ta.volatility.latestDailyRange.high.toFixed(2) + ' &ndash; ' + ta.price.currency + ta.volatility.latestDailyRange.low.toFixed(2) + '</div></div>' +
+    '</div>' +
+  '</div>';
+
+  // Mean reversion positioning
+  var mr = ta.meanReversion;
+  var rangeSpan = mr.rangeHigh - mr.rangeLow;
+  var pricePct = rangeSpan > 0 ? ((ta.price.current - mr.rangeLow) / rangeSpan) * 100 : 50;
+  var ma50Pct = rangeSpan > 0 ? ((ta.movingAverages.ma50.value - mr.rangeLow) / rangeSpan) * 100 : 50;
+  var ma200Pct = rangeSpan > 0 ? ((ta.movingAverages.ma200.value - mr.rangeLow) / rangeSpan) * 100 : 50;
+
+  var mrHtml = '<div class="ta-mr-container">' +
+    '<div class="ta-mr-title">Mean Reversion Positioning</div>' +
+    '<div class="ta-mr-bar-track">' +
+      '<div class="ta-mr-ma200-marker" style="left:' + ma200Pct.toFixed(1) + '%"></div>' +
+      '<div class="ta-mr-ma50-marker" style="left:' + ma50Pct.toFixed(1) + '%"></div>' +
+      '<div class="ta-mr-marker" style="left:' + pricePct.toFixed(1) + '%"></div>' +
+    '</div>' +
+    '<div class="ta-mr-bar-labels">' +
+      '<span>' + ta.price.currency + mr.rangeLow.toFixed(2) + '</span>' +
+      '<span>' + ta.price.currency + mr.rangeHigh.toFixed(2) + '</span>' +
+    '</div>' +
+    '<div class="ta-mr-legend">' +
+      '<div class="ta-mr-legend-item"><div class="ta-mr-legend-dot" style="background:var(--signal-red)"></div>Price (' + ta.price.currency + ta.price.current.toFixed(2) + ')</div>' +
+      '<div class="ta-mr-legend-item"><div class="ta-mr-legend-dot" style="background:var(--signal-amber)"></div>50-Day MA (' + ta.price.currency + ta.movingAverages.ma50.value.toFixed(2) + ')</div>' +
+      '<div class="ta-mr-legend-item"><div class="ta-mr-legend-dot" style="background:var(--signal-blue)"></div>200-Day MA (' + ta.price.currency + ta.movingAverages.ma200.value.toFixed(2) + ')</div>' +
+    '</div>' +
+    '<table class="ta-ma-table" style="margin-top:var(--space-sm)"><thead><tr><th>Measure</th><th>Value</th></tr></thead><tbody>' +
+      '<tr><td class="ta-label-cell">vs 50-Day MA</td><td style="color:var(--signal-red)">' + mr.vsMa50.toFixed(1) + '%</td></tr>' +
+      '<tr><td class="ta-label-cell">vs 200-Day MA</td><td style="color:var(--signal-red)">' + mr.vsMa200.toFixed(1) + '%</td></tr>' +
+      '<tr><td class="ta-label-cell">12-Month Range Position</td><td>Lower ' + mr.rangePosition + '%</td></tr>' +
+    '</tbody></table>' +
+  '</div>';
+
+  // Relative performance table
+  var relHtml = '';
+  if (ta.relativePerformance) {
+    var rp = ta.relativePerformance;
+    relHtml = '<div class="rs-subtitle">Relative Performance (' + rp.vsIndex.period + ')</div>' +
+      '<table class="ta-rel-table"><thead><tr>' +
+        '<th>Benchmark</th><th>Stock Return</th><th>Benchmark Return</th><th>Relative</th>' +
+      '</tr></thead><tbody>' +
+      '<tr>' +
+        '<td style="font-family:var(--font-ui);font-weight:600;color:var(--text-primary)">' + rp.vsIndex.name + '</td>' +
+        '<td style="color:var(--signal-red)">' + rp.vsIndex.stockReturn.toFixed(1) + '%</td>' +
+        '<td>' + (rp.vsIndex.indexReturn >= 0 ? '+' : '') + rp.vsIndex.indexReturn.toFixed(1) + '%</td>' +
+        '<td style="color:var(--signal-red)">' + rp.vsIndex.relativeReturn.toFixed(1) + '%</td>' +
+      '</tr>' +
+      '<tr>' +
+        '<td style="font-family:var(--font-ui);font-weight:600;color:var(--text-primary)">' + rp.vsSector.name + '</td>' +
+        '<td style="color:var(--signal-red)">' + rp.vsSector.stockReturn.toFixed(1) + '%</td>' +
+        '<td style="color:var(--signal-red)">' + rp.vsSector.sectorReturn.toFixed(1) + '%</td>' +
+        '<td style="color:var(--signal-red)">' + rp.vsSector.relativeReturn.toFixed(1) + '%</td>' +
+      '</tr>' +
+      '</tbody></table>';
+  }
+
+  // Key levels with methodology
+  var levelsHtml = '<div class="rs-subtitle">Key Levels</div>' +
+    '<table class="ta-ma-table"><thead><tr><th>Level</th><th>Price</th><th>Derivation</th></tr></thead><tbody>' +
+    '<tr><td class="ta-label-cell">Support</td><td>' + ta.price.currency + ta.keyLevels.support.price.toFixed(2) + '</td><td style="font-family:var(--font-ui)">' + ta.keyLevels.support.method + '</td></tr>' +
+    '<tr><td class="ta-label-cell">Resistance</td><td>' + ta.price.currency + ta.keyLevels.resistance.price.toFixed(2) + '</td><td style="font-family:var(--font-ui)">' + ta.keyLevels.resistance.method + '</td></tr>' +
+    '<tr><td class="ta-label-cell">52-Week High</td><td>' + ta.price.currency + ta.keyLevels.fiftyTwoWeekHigh.price.toFixed(2) + '</td><td style="font-family:var(--font-ui)">' + ta.keyLevels.fiftyTwoWeekHigh.date + '</td></tr>' +
+    '<tr><td class="ta-label-cell">52-Week Low</td><td>' + ta.price.currency + ta.keyLevels.fiftyTwoWeekLow.price.toFixed(2) + '</td><td style="font-family:var(--font-ui)">' + ta.keyLevels.fiftyTwoWeekLow.date + '</td></tr>' +
+    '</tbody></table>';
+
+  // Source & period footer
+  var footerHtml = '<div style="font-size:0.6rem;color:var(--text-muted);margin-top:var(--space-md);padding-top:var(--space-sm);border-top:1px solid var(--border)">' +
+    'Analysis period: ' + ta.period + ' &bull; Generated: ' + ta.date + ' &bull; Source: ' + (ta.source || 'Continuum Technical Intelligence') +
+  '</div>';
+
+  return '<div class="report-section ta-section" id="' + t + '-technical">' +
+    '<div class="rs-number">Section 08</div>' +
+    '<div class="rs-title">Technical Structure</div>' +
+    regimeHtml +
+    maHtml +
+    crossoverHtml +
+    levelsHtml +
+    inflHtml +
+    volHtml +
+    mrHtml +
+    relHtml +
+    footerHtml +
+  '</div>';
+}
+
 function renderReportFooter(data) {
   return '<div class="report-footer-section">' +
     '<div class="rf-inner">' +
@@ -3041,7 +3375,8 @@ function renderReportPage(data) {
     renderEvidence(data) +
     renderDiscriminators(data) +
     renderTripwires(data) +
-    renderGaps(data);
+    renderGaps(data) +
+    renderTechnicalAnalysis(data);
 
   return renderReportHero(data) +
     renderSkewBar(data) +
@@ -3423,6 +3758,18 @@ function buildSnapshotFromStock(ticker) {
     tripwires: snapTripwires,
     evidenceCoverage: snapCoverage,
     questions: snapQuestions,
+    technicalAnalysis: stock.technicalAnalysis ? {
+      regime: stock.technicalAnalysis.regime,
+      trend: stock.technicalAnalysis.trend.direction + ' (' + stock.technicalAnalysis.trend.duration + ')',
+      ma50: stock.technicalAnalysis.price.currency + stock.technicalAnalysis.movingAverages.ma50.value.toFixed(2),
+      ma200: stock.technicalAnalysis.price.currency + stock.technicalAnalysis.movingAverages.ma200.value.toFixed(2),
+      vsMa50: stock.technicalAnalysis.movingAverages.priceVsMa50.toFixed(1) + '%',
+      vsMa200: stock.technicalAnalysis.movingAverages.priceVsMa200.toFixed(1) + '%',
+      support: stock.technicalAnalysis.price.currency + stock.technicalAnalysis.keyLevels.support.price.toFixed(2),
+      resistance: stock.technicalAnalysis.price.currency + stock.technicalAnalysis.keyLevels.resistance.price.toFixed(2),
+      rangePosition: 'Lower ' + stock.technicalAnalysis.meanReversion.rangePosition + '%',
+      crossover: stock.technicalAnalysis.movingAverages.crossover ? stock.technicalAnalysis.movingAverages.crossover.type + ' (' + stock.technicalAnalysis.movingAverages.crossover.date + ')' : null
+    } : null,
     footerDisclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using ACH methodology. All data sourced from ASX filings, broker consensus, and publicly available data as at report date. Hypothesis scores reflect editorial assessment.',
     footerMeta: [
       { label: 'ID: ' + stock.reportId },
@@ -3630,6 +3977,18 @@ function renderSnapshotPage(data) {
         '<div><div class="snap-section-label">Evidence Coverage</div>' +
           '<div class="snap-gaps-box">' + coverageHtml + '</div>' +
         '</div>' +
+        (data.technicalAnalysis ? '<div><div class="snap-section-label">Technical Structure</div>' +
+          '<div class="snap-gaps-box">' +
+            '<div class="snap-gap-row"><span class="snap-gap-domain">Regime</span><span class="snap-gap-status snap-gap-full">' + data.technicalAnalysis.regime + '</span></div>' +
+            '<div class="snap-gap-row"><span class="snap-gap-domain">Trend</span><span class="snap-gap-status snap-gap-limited">' + data.technicalAnalysis.trend + '</span></div>' +
+            '<div class="snap-gap-row"><span class="snap-gap-domain">50-Day MA</span><span style="font-family:var(--font-data);font-size:0.58rem;color:var(--text-secondary)">' + data.technicalAnalysis.ma50 + ' (' + data.technicalAnalysis.vsMa50 + ')</span></div>' +
+            '<div class="snap-gap-row"><span class="snap-gap-domain">200-Day MA</span><span style="font-family:var(--font-data);font-size:0.58rem;color:var(--text-secondary)">' + data.technicalAnalysis.ma200 + ' (' + data.technicalAnalysis.vsMa200 + ')</span></div>' +
+            '<div class="snap-gap-row"><span class="snap-gap-domain">Support</span><span style="font-family:var(--font-data);font-size:0.58rem;color:var(--signal-green)">' + data.technicalAnalysis.support + '</span></div>' +
+            '<div class="snap-gap-row"><span class="snap-gap-domain">Resistance</span><span style="font-family:var(--font-data);font-size:0.58rem;color:var(--signal-red)">' + data.technicalAnalysis.resistance + '</span></div>' +
+            '<div class="snap-gap-row"><span class="snap-gap-domain">Range Position</span><span style="font-family:var(--font-data);font-size:0.58rem;color:var(--signal-red)">' + data.technicalAnalysis.rangePosition + '</span></div>' +
+            (data.technicalAnalysis.crossover ? '<div class="snap-gap-row"><span class="snap-gap-domain">Crossover</span><span style="font-family:var(--font-data);font-size:0.5rem;color:var(--signal-red)">' + data.technicalAnalysis.crossover + '</span></div>' : '') +
+          '</div>' +
+        '</div>' : '') +
         '<div><div class="snap-section-label">Unanswered Questions</div>' +
           '<div class="snap-questions-box">' + questionsHtml + '</div>' +
         '</div>' +
@@ -4175,6 +4534,84 @@ STOCK_DATA.XRO = {
     disclaimer: 'This report does not constitute personal financial advice. Continuum Intelligence synthesises cross-domain evidence using the Analysis of Competing Hypotheses (ACH) methodology. All factual claims are sourced from ASX filings, company accounts, broker consensus data, and publicly available information. This report does not contain buy, sell, or hold recommendations, price targets, or valuation models.',
     domainCount: '10 of 10',
     hypothesesCount: '4 Active'
+  },
+
+  // Technical Analysis — observation only, no editorial language
+  technicalAnalysis: {
+    date: '12 February 2026',
+    period: '1 Year',
+    source: 'Continuum Technical Intelligence',
+    regime: 'Trending',
+    clarity: 'Clear',
+
+    price: { current: 77.76, currency: 'A$' },
+
+    movingAverages: {
+      ma50:  { value: 105.28, date: '12 Feb 2026' },
+      ma200: { value: 136.58, date: '12 Feb 2026' },
+      crossover: {
+        type: 'Death Cross',
+        date: 'w/c 6 October 2025',
+        description: '50-day MA crossed below 200-day MA'
+      },
+      priceVsMa50:  -26.1,
+      priceVsMa200: -43.1
+    },
+
+    trend: {
+      direction: 'Down',
+      duration: '8 months',
+      structure: 'Lower highs, lower lows',
+      peak:   { price: 194.21, date: 'w/c 16 June 2025' },
+      trough: { price: 77.76,  date: '12 February 2026' },
+      drawdown: -60.0
+    },
+
+    keyLevels: {
+      support:    { price: 77.00, method: 'Prior intraday low cluster (Feb 2026 sessions)' },
+      resistance: { price: 90.00, method: 'Prior support turned resistance (Jan 2026 breakdown level)' },
+      fiftyTwoWeekHigh: { price: 194.21, date: 'w/c 16 June 2025' },
+      fiftyTwoWeekLow:  { price: 77.71,  date: '12 February 2026' }
+    },
+
+    volume: {
+      latestVs20DayAvg: 3.2,
+      latestDate: '12 February 2026',
+      priorSpikes: [
+        { period: 'w/c 23 June 2025', ratio: 2.8, context: 'Initial break below A$160' },
+        { period: 'w/c 6 October 2025', ratio: 2.1, context: 'Death cross week' },
+        { period: 'w/c 15 December 2025', ratio: 2.4, context: 'Break below A$120' }
+      ]
+    },
+
+    volatility: {
+      latestDailyRange: { high: 81.00, low: 77.71, date: '12 February 2026' },
+      latestRangePercent: 4.2,
+      avgDailyRangePercent30: 2.1,
+      avgDailyRangePercent90: 1.4
+    },
+
+    meanReversion: {
+      vsMa50:  -26.1,
+      vsMa200: -43.1,
+      rangePosition: 5,
+      rangeHigh: 194.21,
+      rangeLow:  77.71
+    },
+
+    inflectionPoints: [
+      { date: 'w/c 16 June 2025',     price: 194.21, event: '12-month high' },
+      { date: 'w/c 23 June 2025',     price: 184.00, event: 'Break below A$190; volume 2.8x 20-day avg' },
+      { date: 'w/c 6 October 2025',   price: 140.00, event: 'Death cross formed; 50-day MA crosses below 200-day MA' },
+      { date: 'w/c 15 December 2025', price: 120.00, event: 'Break below A$120; volume 2.4x 20-day avg' },
+      { date: 'w/c 2 February 2026',  price: 96.10,  event: 'Break below A$100' },
+      { date: '12 February 2026',     price: 77.76,  event: 'New 12-month low; volume 3.2x 20-day avg' }
+    ],
+
+    relativePerformance: {
+      vsIndex:  { name: 'S&amp;P/ASX 200',  period: '12 months', stockReturn: -60.0, indexReturn: -2.3, relativeReturn: -57.7 },
+      vsSector: { name: 'S&amp;P/ASX IT Index', period: '12 months', stockReturn: -60.0, sectorReturn: -18.5, relativeReturn: -41.5 }
+    }
   }
 };
 
