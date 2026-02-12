@@ -66,7 +66,21 @@ function main() {
     console.log('\n  [SKIP] Price update skipped (--skip-prices)');
   }
 
-  // Step 2: Run research monitor
+  // Step 2: Hydrate content (update narrative text, metrics, anchors)
+  let contentHydrated = false;
+  if (!reportOnly && pricesUpdated) {
+    contentHydrated = run(
+      `node ${path.join(SCRIPTS_DIR, 'hydrate-content.js')}`,
+      'Hydrate Dynamic Content (Narrative, Metrics, Scores)'
+    );
+    if (!contentHydrated) {
+      console.log('\n  [WARN] Content hydration failed — text may be stale');
+    }
+  } else if (reportOnly) {
+    console.log('\n  [SKIP] Content hydration skipped (--report-only)');
+  }
+
+  // Step 3: Run research monitor
   const monitorFlags = reportOnly ? '' : '--inject';
   const monitorOk = run(
     `node ${path.join(SCRIPTS_DIR, 'research-monitor.js')} ${monitorFlags}`,
@@ -80,6 +94,7 @@ function main() {
   console.log('  ORCHESTRATOR COMPLETE');
   console.log('='.repeat(60));
   console.log(`  Prices updated:     ${pricesUpdated ? 'YES' : skipPrices ? 'SKIPPED' : 'FAILED'}`);
+  console.log(`  Content hydrated:   ${contentHydrated ? 'YES' : reportOnly ? 'SKIPPED' : pricesUpdated ? 'FAILED' : 'SKIPPED (no price change)'}`);
   console.log(`  Monitor ran:        ${monitorOk ? 'YES' : 'FAILED'}`);
   console.log(`  Freshness injected: ${!reportOnly && monitorOk ? 'YES' : 'NO'}`);
   console.log(`  Elapsed:            ${elapsed}s`);
