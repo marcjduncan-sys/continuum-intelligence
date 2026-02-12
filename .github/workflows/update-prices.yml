@@ -1,0 +1,46 @@
+name: Update Stock Prices
+
+on:
+  schedule:
+    # Run at 07:00 UTC (6pm AEDT / 5pm AEST) — after ASX close
+    - cron: '0 7 * * 1-5'
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch latest prices
+        run: node scripts/update-prices.js
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet index.html; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No price changes detected."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Price changes detected:"
+            git diff --stat index.html
+          fi
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Update stock prices — $(date -u +'%d %b %Y')"
+          git push
