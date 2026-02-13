@@ -2,7 +2,7 @@
 /**
  * fetch-live-prices.js
  *
- * Meridian Intelligence — Intraday Price Fetcher
+ * Continuum Intelligence — Intraday Price Fetcher
  *
  * Lightweight script designed to run every 10-15 minutes during ASX trading
  * hours via GitHub Actions. Fetches current prices from Yahoo Finance and
@@ -11,6 +11,9 @@
  *
  * This is intentionally separate from the full update-prices.js pipeline
  * which handles priceHistory, hydration, and narrative updates daily.
+ *
+ * Yahoo Finance v8 API requires cookie + crumb authentication.
+ * This script obtains a session cookie and crumb before fetching prices.
  *
  * Usage: node scripts/fetch-live-prices.js
  */
@@ -28,15 +31,80 @@ const TICKERS = [
   'PME.AX', 'SIG.AX', 'DRO.AX', 'FMG.AX', 'WDS.AX', 'GYG.AX'
 ];
 
-function fetchJSON(url) {
+const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
+// --- Yahoo Finance authentication (cookie + crumb) ---
+
+function httpGet(url, options = {}) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Accept': 'application/json'
+        'User-Agent': USER_AGENT,
+        'Accept': 'text/html,application/json,*/*',
+        ...options.headers
       },
-      timeout: 10000
+      timeout: 15000
     }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ statusCode: res.statusCode, headers: res.headers, body: data }));
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error('Timeout')); });
+  });
+}
+
+async function getYahooSession() {
+  // Step 1: Hit Yahoo Finance consent endpoint to obtain session cookies
+  console.log('  Obtaining Yahoo Finance session...');
+  const consentRes = await httpGet('https://fc.yahoo.com/', {
+    headers: { 'Accept': 'text/html' }
+  });
+
+  // Extract Set-Cookie headers (may be an array or single string)
+  const setCookies = consentRes.headers['set-cookie'];
+  if (!setCookies) {
+    throw new Error('No cookies received from Yahoo Finance');
+  }
+
+  // Parse cookie names and values
+  const cookieArray = Array.isArray(setCookies) ? setCookies : [setCookies];
+  const cookies = cookieArray
+    .map(c => c.split(';')[0])
+    .join('; ');
+
+  // Step 2: Get crumb using session cookies
+  const crumbRes = await httpGet('https://query2.finance.yahoo.com/v1/test/getcrumb', {
+    headers: {
+      'Cookie': cookies,
+      'Accept': 'text/plain'
+    }
+  });
+
+  if (crumbRes.statusCode !== 200) {
+    throw new Error(`Crumb request failed: HTTP ${crumbRes.statusCode}`);
+  }
+
+  const crumb = crumbRes.body.trim();
+  if (!crumb || crumb.length < 5) {
+    throw new Error(`Invalid crumb received: "${crumb}"`);
+  }
+
+  console.log('  Session established (crumb obtained)');
+  return { cookies, crumb };
+}
+
+function fetchJSON(url, session) {
+  return new Promise((resolve, reject) => {
+    const headers = {
+      'User-Agent': USER_AGENT,
+      'Accept': 'application/json'
+    };
+    if (session) {
+      headers['Cookie'] = session.cookies;
+    }
+
+    const req = https.get(url, { headers, timeout: 15000 }, (res) => {
       if (res.statusCode !== 200) {
         reject(new Error(`HTTP ${res.statusCode} for ${url}`));
         res.resume();
@@ -54,17 +122,18 @@ function fetchJSON(url) {
   });
 }
 
-async function fetchTickerPrice(ticker) {
+async function fetchTickerPrice(ticker, session) {
   // Use 1d range with 1m interval for intraday data during market hours
-  // Falls back to 5d range for after-hours/weekend
+  // Falls back to 2d range with 1d interval for after-hours/weekend
+  const crumbParam = session ? `&crumb=${encodeURIComponent(session.crumb)}` : '';
   const urls = [
-    `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=1d&interval=1m&includePrePost=false`,
-    `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?range=2d&interval=1d&includePrePost=false`
+    `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=1d&interval=1m&includePrePost=false${crumbParam}`,
+    `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?range=2d&interval=1d&includePrePost=false${crumbParam}`
   ];
 
   for (const url of urls) {
     try {
-      const json = await fetchJSON(url);
+      const json = await fetchJSON(url, session);
       const result = json.chart.result[0];
       const meta = result.meta;
 
@@ -123,7 +192,7 @@ function getASXMarketStatus() {
 }
 
 async function main() {
-  console.log('=== Meridian Intelligence — Live Price Fetch ===');
+  console.log('=== Continuum Intelligence — Live Price Fetch ===');
   console.log(`Time: ${new Date().toISOString()}`);
 
   const marketStatus = getASXMarketStatus();
@@ -132,6 +201,15 @@ async function main() {
   // Ensure data directory exists
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+
+  // Obtain Yahoo Finance session (cookie + crumb)
+  let session = null;
+  try {
+    session = await getYahooSession();
+  } catch (e) {
+    console.error(`  [WARN] Could not obtain Yahoo session: ${e.message}`);
+    console.log('  Attempting without authentication...');
   }
 
   const prices = {};
@@ -144,7 +222,7 @@ async function main() {
       await new Promise(r => setTimeout(r, 200));
     }
 
-    const data = await fetchTickerPrice(ticker);
+    const data = await fetchTickerPrice(ticker, session);
     if (data) {
       prices[data.t] = data;
       successCount++;

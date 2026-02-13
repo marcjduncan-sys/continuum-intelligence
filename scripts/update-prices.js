@@ -4,6 +4,9 @@
  * Fetches latest daily close prices from Yahoo Finance for all tickers
  * in index.html and updates the price field + appends to priceHistory.
  *
+ * Yahoo Finance v8 API requires cookie + crumb authentication.
+ * This script obtains a session before fetching prices.
+ *
  * Designed to run server-side via GitHub Actions (no CORS issues).
  * Usage: node scripts/update-prices.js
  */
@@ -23,9 +26,78 @@ const TICKERS = [
 // Max priceHistory length (keep last 252 trading days = ~1 year)
 const MAX_HISTORY = 252;
 
-function fetchJSON(url) {
+const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
+// --- Yahoo Finance authentication (cookie + crumb) ---
+
+function httpGet(url, options = {}) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' } }, (res) => {
+    const req = https.get(url, {
+      headers: {
+        'User-Agent': USER_AGENT,
+        'Accept': 'text/html,application/json,*/*',
+        ...options.headers
+      },
+      timeout: 15000
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ statusCode: res.statusCode, headers: res.headers, body: data }));
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error('Timeout')); });
+  });
+}
+
+async function getYahooSession() {
+  // Step 1: Hit Yahoo Finance consent endpoint to obtain session cookies
+  console.log('  Obtaining Yahoo Finance session...');
+  const consentRes = await httpGet('https://fc.yahoo.com/', {
+    headers: { 'Accept': 'text/html' }
+  });
+
+  const setCookies = consentRes.headers['set-cookie'];
+  if (!setCookies) {
+    throw new Error('No cookies received from Yahoo Finance');
+  }
+
+  const cookieArray = Array.isArray(setCookies) ? setCookies : [setCookies];
+  const cookies = cookieArray
+    .map(c => c.split(';')[0])
+    .join('; ');
+
+  // Step 2: Get crumb using session cookies
+  const crumbRes = await httpGet('https://query2.finance.yahoo.com/v1/test/getcrumb', {
+    headers: {
+      'Cookie': cookies,
+      'Accept': 'text/plain'
+    }
+  });
+
+  if (crumbRes.statusCode !== 200) {
+    throw new Error(`Crumb request failed: HTTP ${crumbRes.statusCode}`);
+  }
+
+  const crumb = crumbRes.body.trim();
+  if (!crumb || crumb.length < 5) {
+    throw new Error(`Invalid crumb received: "${crumb}"`);
+  }
+
+  console.log('  Session established (crumb obtained)');
+  return { cookies, crumb };
+}
+
+function fetchJSON(url, session) {
+  return new Promise((resolve, reject) => {
+    const headers = {
+      'User-Agent': USER_AGENT,
+      'Accept': 'application/json'
+    };
+    if (session) {
+      headers['Cookie'] = session.cookies;
+    }
+
+    const req = https.get(url, { headers, timeout: 15000 }, (res) => {
       if (res.statusCode !== 200) {
         reject(new Error(`HTTP ${res.statusCode} for ${url}`));
         res.resume();
@@ -37,15 +109,18 @@ function fetchJSON(url) {
         try { resolve(JSON.parse(data)); }
         catch (e) { reject(new Error(`Invalid JSON from ${url}`)); }
       });
-    }).on('error', reject);
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error('Timeout')); });
   });
 }
 
-async function fetchYahoo(ticker) {
+async function fetchYahoo(ticker, session) {
   // Fetch last 5 trading days to get the most recent close
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=5d&interval=1d&includePrePost=false`;
+  const crumbParam = session ? `&crumb=${encodeURIComponent(session.crumb)}` : '';
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=5d&interval=1d&includePrePost=false${crumbParam}`;
   try {
-    const json = await fetchJSON(url);
+    const json = await fetchJSON(url, session);
     const result = json.chart.result[0];
     const meta = result.meta;
     const quote = result.indicators.quote[0];
@@ -186,6 +261,15 @@ async function main() {
   console.log('=== Continuum Intelligence — Price Update ===');
   console.log(`Fetching prices for ${TICKERS.length} tickers...\n`);
 
+  // Obtain Yahoo Finance session (cookie + crumb)
+  let session = null;
+  try {
+    session = await getYahooSession();
+  } catch (e) {
+    console.error(`  [WARN] Could not obtain Yahoo session: ${e.message}`);
+    console.log('  Attempting without authentication...');
+  }
+
   let html = fs.readFileSync(INDEX_PATH, 'utf8');
   let updatedCount = 0;
   let failedCount = 0;
@@ -194,7 +278,7 @@ async function main() {
     // Stagger requests slightly to avoid rate limiting
     if (updatedCount > 0) await new Promise(r => setTimeout(r, 300));
 
-    const data = await fetchYahoo(ticker);
+    const data = await fetchYahoo(ticker, session);
     if (data) {
       html = updateStockData(html, ticker, data);
       updatedCount++;
