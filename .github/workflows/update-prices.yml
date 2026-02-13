@@ -4,6 +4,8 @@ on:
   schedule:
     # Run at 07:00 UTC (6pm AEDT / 5pm AEST) — after ASX close
     - cron: '0 7 * * 1-5'
+    # Run at 22:30 UTC (9:30am AEDT) — pre-market announcements check
+    - cron: '30 22 * * 0-4'
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
 permissions:
@@ -24,8 +26,18 @@ jobs:
       - name: Run update orchestrator
         id: orchestrator
         run: |
-          # Run orchestrator: fetches prices → analyses freshness → injects data
+          # Run orchestrator: fetches prices → hydrates content → analyses freshness
           node scripts/update-orchestrator.js || true
+
+      - name: Fetch ASX announcements
+        id: announcements
+        run: |
+          node scripts/fetch-announcements.js || true
+
+      - name: Fetch live prices snapshot
+        id: liveprices
+        run: |
+          node scripts/fetch-live-prices.js || true
 
       - name: Run freshness monitor
         id: monitor
@@ -34,13 +46,14 @@ jobs:
       - name: Check for changes
         id: changes
         run: |
-          if git diff --quiet index.html; then
+          if git diff --quiet index.html && git diff --quiet data/ 2>/dev/null; then
             echo "changed=false" >> $GITHUB_OUTPUT
             echo "No changes detected."
           else
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "Changes detected:"
             git diff --stat index.html
+            git diff --stat data/ 2>/dev/null || true
           fi
 
       - name: Commit and push
@@ -49,5 +62,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Daily update — prices + freshness monitor — $(date -u +'%d %b %Y')"
+          git add data/ 2>/dev/null || true
+          git commit -m "Daily update — prices + announcements + freshness — $(date -u +'%d %b %Y')"
           git push
