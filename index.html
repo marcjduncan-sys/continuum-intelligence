@@ -4166,33 +4166,50 @@ function renderHypSidebar(data) {
 }
 
 function prepareHypotheses(data) {
+  // Idempotency guard — only process each stock once
+  if (data._hypothesesPrepared) return;
+  data._hypothesesPrepared = true;
+
   // Sort hypotheses by raw score descending (highest = T1)
   var dirMap = { upside: 'dir-up', downside: 'dir-down', neutral: 'dir-neutral' };
   var colorMap = { 'dir-up': 'var(--signal-green)', 'dir-down': 'var(--signal-red)', 'dir-neutral': 'var(--signal-amber)' };
 
-  // Parse raw scores and sort
   var hyps = data.hypotheses;
+
+  // Tag each hypothesis with its original tier number before sorting
+  for (var i = 0; i < hyps.length; i++) {
+    hyps[i]._origTierNum = hyps[i].tier.replace('t', '');
+  }
+
+  // Sort by raw score descending
   hyps.sort(function(a, b) {
     return parseFloat(b.score) - parseFloat(a.score);
   });
 
+  // Build tier remapping: old tier number (string) → new tier number (string)
+  var tierMap = {};
+  var needsRemap = false;
+  for (var i = 0; i < hyps.length; i++) {
+    var newNum = String(i + 1);
+    var oldNum = hyps[i]._origTierNum;
+    tierMap[oldNum] = newNum;
+    if (oldNum !== newNum) needsRemap = true;
+  }
+
   // Reassign tiers, dirClass, and title prefixes
   for (var i = 0; i < hyps.length; i++) {
     var h = hyps[i];
-    var newTier = 't' + (i + 1);
     var oldPrefix = /^T\d+:\s*/;
-    h.tier = newTier;
+    h.tier = 't' + (i + 1);
     h.dirClass = dirMap[h.direction] || 'dir-neutral';
     h.title = 'T' + (i + 1) + ': ' + h.title.replace(oldPrefix, '');
   }
 
   // Reorder verdict scores to match and update colours
   if (data.verdict && data.verdict.scores) {
-    // Build new scores array in same order as sorted hypotheses
     var oldScores = data.verdict.scores.slice();
     var newScores = [];
     for (var i = 0; i < hyps.length; i++) {
-      // Match by raw score value since that's unique per hypothesis
       var rawScore = hyps[i].score;
       var matched = null;
       for (var j = 0; j < oldScores.length; j++) {
@@ -4203,7 +4220,6 @@ function prepareHypotheses(data) {
         }
       }
       if (matched) {
-        // Update label prefix
         matched.label = 'T' + (i + 1) + ' ' + matched.label.replace(/^T\d+\s*/, '');
         matched.scoreColor = colorMap[hyps[i].dirClass] || matched.scoreColor;
         newScores.push(matched);
@@ -4215,31 +4231,50 @@ function prepareHypotheses(data) {
   // Reorder alignment table columns if present
   if (data.evidence && data.evidence.alignmentSummary) {
     var as = data.evidence.alignmentSummary;
-    // The alignment summary has headers and rows that reference T1-T4 columns
-    // We need to track the original column order and remap
-    // Headers format: ['Domain', 'T1 Label', 'T2 Label', 'T3 Label', 'T4 Label']
-    if (as.headers && as.headers.length === 5 && as.rows) {
-      var origHeaders = as.headers.slice(1); // remove 'Domain'
-      var origOrder = [0, 1, 2, 3]; // original T1-T4 positions
-
-      // We need to figure out the sort mapping: which original index ended up at which new position
-      // The hypotheses have already been sorted, so we need the inverse mapping
-      // Since we sorted by score, and verdict scores were reordered similarly,
-      // we can rebuild headers from the hypothesis data
-      var newHeaders = ['Domain'];
+    if (as.headers && as.headers.length >= 5 && as.rows) {
+      // Rebuild headers: preserve non-T columns, regenerate T-columns from sorted hypotheses
+      var nonTCount = as.headers.length - hyps.length;
+      var newHeaders = as.headers.slice(0, nonTCount);
       for (var i = 0; i < hyps.length; i++) {
         newHeaders.push('T' + (i + 1) + ' ' + hyps[i].title.replace(/^T\d+:\s*/, '').substring(0, 15));
       }
-      // For rows, we need to match original hypothesis titles to new order
-      // This is complex, so we rebuild using the score-based matching
-      // Skip column reorder for now - the prepareHypotheses handles the label/color changes
       as.headers = newHeaders;
+
+      // Reorder row column data (t1/t2/t3/t4 properties) to match new tier order
+      if (needsRemap) {
+        var inverseTierMap = {};
+        for (var old in tierMap) {
+          if (tierMap.hasOwnProperty(old)) inverseTierMap[tierMap[old]] = old;
+        }
+        for (var r = 0; r < as.rows.length; r++) {
+          var row = as.rows[r];
+          var orig = { t1: row.t1, t2: row.t2, t3: row.t3, t4: row.t4 };
+          for (var n = 1; n <= 4; n++) {
+            var fromOld = inverseTierMap[String(n)] || String(n);
+            row['t' + n] = orig['t' + fromOld];
+          }
+        }
+        // Reorder summary values
+        if (as.summary) {
+          var sum = as.summary;
+          var origSum = {};
+          for (var n = 1; n <= 4; n++) {
+            origSum['t' + n] = sum['t' + n];
+            origSum['t' + n + 'Color'] = sum['t' + n + 'Color'];
+          }
+          for (var n = 1; n <= 4; n++) {
+            var fromOld = inverseTierMap[String(n)] || String(n);
+            sum['t' + n] = origSum['t' + fromOld];
+            sum['t' + n + 'Color'] = origSum['t' + fromOld + 'Color'];
+          }
+        }
+      }
     }
   }
 
   // Rebuild analyticalLimitations parenthetical scores
-  if (data.evidence && data.evidence.gaps && data.evidence.gaps.analyticalLimitations) {
-    var lim = data.evidence.gaps.analyticalLimitations;
+  if (data.gaps && data.gaps.analyticalLimitations) {
+    var lim = data.gaps.analyticalLimitations;
     var norm = normaliseScores(hyps);
     var scoreStr = '';
     for (var i = 0; i < hyps.length; i++) {
@@ -4247,7 +4282,76 @@ function prepareHypotheses(data) {
       scoreStr += 'T' + (i + 1) + ': ' + norm[i] + '%';
     }
     lim = lim.replace(/\(T1:.*?\)/, '(' + scoreStr + ')');
-    data.evidence.gaps.analyticalLimitations = lim;
+    data.gaps.analyticalLimitations = lim;
+  }
+
+  // Propagate tier remapping to all text fields that reference T1-T4
+  if (needsRemap) {
+    // Replace T-number references atomically (handles swaps correctly)
+    var remapT = function(text) {
+      if (!text || typeof text !== 'string') return text;
+      return text.replace(/\bT([1-4])\b/g, function(m, n) {
+        return 'T' + (tierMap[n] || n);
+      });
+    };
+
+    // Discriminators (Section 05)
+    if (data.discriminators) {
+      if (data.discriminators.intro) data.discriminators.intro = remapT(data.discriminators.intro);
+      if (data.discriminators.nonDiscriminating) data.discriminators.nonDiscriminating = remapT(data.discriminators.nonDiscriminating);
+      if (data.discriminators.rows) {
+        for (var i = 0; i < data.discriminators.rows.length; i++) {
+          var dRow = data.discriminators.rows[i];
+          if (dRow.discriminatesBetween) dRow.discriminatesBetween = remapT(dRow.discriminatesBetween);
+          if (dRow.currentReading) dRow.currentReading = remapT(dRow.currentReading);
+          if (dRow.evidence) dRow.evidence = remapT(dRow.evidence);
+        }
+      }
+    }
+
+    // Tripwires (Section 06)
+    if (data.tripwires) {
+      if (data.tripwires.intro) data.tripwires.intro = remapT(data.tripwires.intro);
+      if (data.tripwires.cards) {
+        for (var i = 0; i < data.tripwires.cards.length; i++) {
+          var twCard = data.tripwires.cards[i];
+          if (twCard.conditions) {
+            for (var c = 0; c < twCard.conditions.length; c++) {
+              var cond = twCard.conditions[c];
+              if (cond.if) cond.if = remapT(cond.if);
+              if (cond.then) cond.then = remapT(cond.then);
+            }
+          }
+        }
+      }
+    }
+
+    // Evidence cards — tags, findings, and tensions may reference T-numbers
+    if (data.evidence && data.evidence.cards) {
+      for (var i = 0; i < data.evidence.cards.length; i++) {
+        var evCard = data.evidence.cards[i];
+        if (evCard.tags) {
+          for (var t = 0; t < evCard.tags.length; t++) {
+            if (evCard.tags[t].text) evCard.tags[t].text = remapT(evCard.tags[t].text);
+          }
+        }
+        if (evCard.finding) evCard.finding = remapT(evCard.finding);
+        if (evCard.tension) evCard.tension = remapT(evCard.tension);
+      }
+    }
+
+    // Gaps — couldntAssess items may reference T-numbers
+    if (data.gaps && data.gaps.couldntAssess) {
+      for (var i = 0; i < data.gaps.couldntAssess.length; i++) {
+        data.gaps.couldntAssess[i] = remapT(data.gaps.couldntAssess[i]);
+      }
+    }
+
+    // Verdict text
+    if (data.verdict && data.verdict.text) data.verdict.text = remapT(data.verdict.text);
+
+    // Skew rationale
+    if (data.skew && data.skew.rationale) data.skew.rationale = remapT(data.skew.rationale);
   }
 }
 
@@ -4440,6 +4544,16 @@ function buildSnapshotFromStock(ticker) {
     tierMap[hyps[i].originalTier] = i;
   }
 
+  // Build T-reference remapper for snapshot text fields
+  var snapRemapT = function(text) {
+    if (!text || typeof text !== 'string') return text;
+    return text.replace(/\bT([1-4])\b/g, function(m, n) {
+      var oldTier = 't' + n;
+      var newIdx = tierMap[oldTier];
+      return newIdx !== undefined ? 'T' + (newIdx + 1) : m;
+    });
+  };
+
   // 2. Normalise scores to 100%
   var sum = 0;
   for (var i = 0; i < hyps.length; i++) sum += hyps[i].score;
@@ -4554,7 +4668,7 @@ function buildSnapshotFromStock(ticker) {
     snapDiscrim.push({
       level: disc.diagnosticity,
       cls: disc.diagnosticityClass.replace('disc-', ''),
-      text: disc.evidence
+      text: snapRemapT(disc.evidence)
     });
   }
 
@@ -4579,8 +4693,8 @@ function buildSnapshotFromStock(ticker) {
       var cond = tw.conditions[co];
       var icon = cond.valence === 'positive' ? '&#9650;' : '&#9660;';
       var iconCls = cond.valence === 'positive' ? 'up' : 'down';
-      var condText = cond.if.replace(/^If\s+/i, '');
-      var thenShort = cond.then.split('.')[0];
+      var condText = snapRemapT(cond.if.replace(/^If\s+/i, ''));
+      var thenShort = snapRemapT(cond.then.split('.')[0]);
       conds.push({ icon: icon, iconCls: iconCls, text: condText + ' &rarr; ' + thenShort });
     }
     snapTripwires.push({ date: tw.date, name: tw.name.replace(/\s*&mdash;.*/, ''), conditions: conds });
