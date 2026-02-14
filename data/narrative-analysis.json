@@ -1,10 +1,10 @@
 {
   "summary": {
-    "runAt": "2026-02-14T03:12:35.201Z",
+    "runAt": "2026-02-14T08:14:54.935Z",
     "tickersAnalyzed": 12,
     "criticalDislocations": 7,
-    "highDislocations": 3,
-    "moderateDislocations": 2,
+    "highDislocations": 2,
+    "moderateDislocations": 3,
     "normal": 0
   },
   "results": {
@@ -16,7 +16,7 @@
           "currentPrice": 118.22,
           "todayReturn": -27.31,
           "drawdownFromPeak": -64.8,
-          "zScore": -20.62,
+          "zScore": -25.64,
           "volumeRatio": 2.5
         },
         "pattern": "GAP_DOWN"
@@ -112,7 +112,7 @@
           "currentPrice": 73.49,
           "todayReturn": -4.46,
           "drawdownFromPeak": -51,
-          "zScore": -5.5,
+          "zScore": -4.2,
           "volumeRatio": 1.2
         },
         "pattern": "DISTRIBUTION"
@@ -208,7 +208,7 @@
           "currentPrice": 150.01,
           "todayReturn": -1.43,
           "drawdownFromPeak": -50,
-          "zScore": -1.25,
+          "zScore": -1.14,
           "volumeRatio": 1.2
         },
         "pattern": "DISTRIBUTION"
@@ -304,7 +304,7 @@
           "currentPrice": 31.94,
           "todayReturn": -0.84,
           "drawdownFromPeak": -20.1,
-          "zScore": -0.48,
+          "zScore": -0.52,
           "volumeRatio": 1.2
         },
         "pattern": "STEADY_DECLINE"
@@ -400,7 +400,7 @@
           "currentPrice": 42.62,
           "todayReturn": -10.41,
           "drawdownFromPeak": -46.7,
-          "zScore": -10.6,
+          "zScore": -11.84,
           "volumeRatio": 2.5
         },
         "pattern": "GAP_DOWN"
@@ -496,7 +496,7 @@
           "currentPrice": 3.03,
           "todayReturn": -1.3,
           "drawdownFromPeak": -39.4,
-          "zScore": -1.23,
+          "zScore": -1.14,
           "volumeRatio": 1.2
         },
         "pattern": "STEADY_DECLINE"
@@ -592,7 +592,7 @@
           "currentPrice": 19.31,
           "todayReturn": -5.11,
           "drawdownFromPeak": -35.6,
-          "zScore": -5.36,
+          "zScore": -3.95,
           "volumeRatio": 2.5
         },
         "pattern": "GAP_DOWN"
@@ -688,7 +688,7 @@
           "currentPrice": 216.17,
           "todayReturn": -0.91,
           "drawdownFromPeak": -13.5,
-          "zScore": -1.35,
+          "zScore": -0.65,
           "volumeRatio": 1.2
         },
         "pattern": "NORMAL"
@@ -779,12 +779,12 @@
     "GMG": {
       "ticker": "GMG",
       "dislocation": {
-        "severity": "HIGH",
+        "severity": "MODERATE",
         "metrics": {
           "currentPrice": 31.02,
           "todayReturn": 2.38,
           "drawdownFromPeak": -11.4,
-          "zScore": 2.14,
+          "zScore": 1.4,
           "volumeRatio": 1.2
         },
         "pattern": "NORMAL"
@@ -801,14 +801,14 @@
           "longTerm": 30,
           "shortTerm": 95,
           "blended": 56,
-          "adjustment": 214,
+          "adjustment": 143,
           "confidence": "LOW"
         },
         "T3": {
           "longTerm": 20,
           "shortTerm": 95,
           "blended": 50,
-          "adjustment": 179,
+          "adjustment": 119,
           "confidence": "LOW"
         },
         "T4": {
@@ -828,9 +828,9 @@
       },
       "narrativeShift": {
         "hasShift": true,
-        "shortTermView": "HIGH: 2.4% move with 11% drawdown signals elevated concern around Cap Rate Expansion. Watch for acceleration or reversal.",
+        "shortTermView": "MODERATE: Price action suggests growing attention to Cap Rate Expansion. Research thesis not yet invalidated but under pressure.",
         "longTermView": "Research-market divergence in Supply Overshoot (75pts), Cap Rate Expansion (65pts), Data Centre Expansion (23.799999999999997pts), AI Infrastructure Moat (23.799999999999997pts). All hypotheses show divergence.",
-        "commentary": "The 11% drawdown from peak is not matched by the static research thesis weights. The 75-point spread in Supply Overshoot between research (20%) and market-implied (95%) views indicates the market is pricing a narrative regime shift that the long-term thesis has not yet incorporated. Action: Accelerate review cycle.",
+        "commentary": "",
         "divergences": [
           {
             "tier": "T3",
@@ -880,7 +880,7 @@
           "currentPrice": 25.78,
           "todayReturn": -2.09,
           "drawdownFromPeak": -26.3,
-          "zScore": -1.74,
+          "zScore": -2.03,
           "volumeRatio": 1.2
         },
         "pattern": "DISTRIBUTION"
@@ -976,7 +976,7 @@
           "currentPrice": 3.03,
           "todayReturn": -0.66,
           "drawdownFromPeak": -39.4,
-          "zScore": -0.71,
+          "zScore": -0.4,
           "volumeRatio": 1.2
         },
         "pattern": "DISTRIBUTION"
@@ -1072,7 +1072,7 @@
           "currentPrice": 21.21,
           "todayReturn": -1.94,
           "drawdownFromPeak": -15.2,
-          "zScore": -1.9,
+          "zScore": -1.35,
           "volumeRatio": 1.2
         },
         "pattern": "STEADY_DECLINE"
@@ -1161,5 +1161,5 @@
       }
     }
   },
-  "generatedAt": "2026-02-14T03:12:35.206Z"
+  "generatedAt": "2026-02-14T08:14:54.940Z"
 }
