@@ -551,24 +551,53 @@ window.generateReport = function (format) {
 
   console.log('[PDF] HTML generated, length:', reportHTML.length);
 
-  // 3. Create a hidden container and inject the HTML
-  var container = document.createElement('div');
-  container.id = 'pdf-container-' + Math.random().toString(36).substr(2, 9);
-  container.style.cssText = 'display:none;';
-  container.innerHTML = reportHTML;
-  document.body.appendChild(container);
+  // 3. Create a complete standalone HTML document
+  var fullDocument = '<!DOCTYPE html>' +
+    '<html>' +
+    '<head>' +
+    '<meta charset="UTF-8">' +
+    '<title>' + escapeHtmlForPdf(stock.ticker) + ' Report</title>' +
+    '<style>' +
+    'body { margin: 0; padding: 0; font-family: Arial, sans-serif; background: white; color: #333; }' +
+    '@page { size: A4; margin: 20mm; }' +
+    '</style>' +
+    '</head>' +
+    '<body>' +
+    reportHTML +
+    '</body>' +
+    '</html>';
 
-  console.log('[PDF] Container created and added to DOM');
+  // 4. Open a new window and write the complete document directly
+  var printWindow = window.open('', 'PrintReport_' + Date.now());
+  
+  console.log('[PDF] Print window opened');
 
-  // 4. Trigger browser print dialog
+  if (!printWindow) {
+    alert('Unable to open print window. Please check if popups are blocked in your browser.');
+    console.error('[PDF] Failed - popup blocked');
+    return;
+  }
+
+  // Write complete document to the new window
+  printWindow.document.write(fullDocument);
+  printWindow.document.close();
+
+  console.log('[PDF] Document written and closed');
+
+  // 5. Wait for rendering, then trigger print dialog
   setTimeout(function() {
-    window.print();
-    console.log('[PDF] Print dialog triggered');
-    
-    // Clean up after a delay to allow print dialog to open
-    setTimeout(function() {
-      document.body.removeChild(container);
-      console.log('[PDF] Container removed');
-    }, 1000);
-  }, 100);
+    try {
+      printWindow.focus();
+      printWindow.print();
+      console.log('[PDF] Print dialog triggered');
+      
+      // Close window after print completes
+      setTimeout(function() {
+        printWindow.close();
+        console.log('[PDF] Window closed after print');
+      }, 1000);
+    } catch (err) {
+      console.error('[PDF] Error during print:', err);
+    }
+  }, 300);
 };
