@@ -9,162 +9,162 @@
     "yearLow": 25.51,
     "drawdown": 5.331753554502361,
     "volume": 1495946,
-    "timestamp": "2026-02-17T05:44:04.897Z"
+    "timestamp": "2026-02-17T10:09:36.187Z"
   },
   "XRO": {
     "ticker": "XRO",
     "price": 78.5,
-    "previousClose": 79.05999755859375,
-    "change": -0.55999755859375,
-    "changePercent": -0.7083197266464863,
+    "previousClose": 78.5,
+    "change": 0,
+    "changePercent": 0,
     "yearHigh": 196.52,
     "yearLow": 72.26,
     "drawdown": 60.05495623855078,
     "volume": 611369,
-    "timestamp": "2026-02-17T05:44:07.059Z"
+    "timestamp": "2026-02-17T10:09:38.245Z"
   },
   "WTC": {
     "ticker": "WTC",
     "price": 47.34,
-    "previousClose": 48.11000061035156,
-    "change": -0.7700006103515591,
-    "changePercent": -1.6005001051400576,
+    "previousClose": 47.34000015258789,
+    "change": -1.5258788721439487e-7,
+    "changePercent": -3.223233771072421e-7,
     "yearHigh": 126.01,
     "yearLow": 40.59,
     "drawdown": 62.431553051345134,
     "volume": 1447364,
-    "timestamp": "2026-02-17T05:44:08.895Z"
+    "timestamp": "2026-02-17T10:09:40.061Z"
   },
   "DRO": {
     "ticker": "DRO",
     "price": 3.25,
-    "previousClose": 3.1600000858306885,
-    "change": 0.08999991416931152,
-    "changePercent": 2.848098472302816,
+    "previousClose": 3.25,
+    "change": 0,
+    "changePercent": 0,
     "yearHigh": 6.705,
     "yearLow": 0.6,
     "drawdown": 51.52870991797166,
     "volume": 10812210,
-    "timestamp": "2026-02-17T05:44:10.785Z"
+    "timestamp": "2026-02-17T10:09:42.159Z"
   },
   "PME": {
     "ticker": "PME",
     "price": 125.96,
-    "previousClose": 116.97000122070312,
-    "change": 8.989998779296869,
-    "changePercent": 7.685730260303428,
+    "previousClose": 125.95999908447266,
+    "change": 9.155273374972239e-7,
+    "changePercent": 7.268397460714835e-7,
     "yearHigh": 336,
     "yearLow": 113.67,
     "drawdown": 62.511904761904766,
     "volume": 756841,
-    "timestamp": "2026-02-17T05:44:12.751Z"
+    "timestamp": "2026-02-17T10:09:44.143Z"
   },
   "GYG": {
     "ticker": "GYG",
     "price": 19.5,
-    "previousClose": 19.1200008392334,
-    "change": 0.37999916076660156,
-    "changePercent": 1.9874432222139866,
+    "previousClose": 19.5,
+    "change": 0,
+    "changePercent": 0,
     "yearHigh": 45.99,
     "yearLow": 18.58,
     "drawdown": 57.599478147423355,
     "volume": 89273,
-    "timestamp": "2026-02-17T05:44:14.628Z"
+    "timestamp": "2026-02-17T10:09:45.918Z"
   },
   "CSL": {
     "ticker": "CSL",
     "price": 151.56,
-    "previousClose": 152.1699981689453,
-    "change": -0.6099981689453102,
-    "changePercent": -0.40086625240546137,
+    "previousClose": 151.55999755859375,
+    "change": 0.0000024414062522737368,
+    "changePercent": 0.0000016108513404599908,
     "yearHigh": 275.79,
     "yearLow": 149.85,
     "drawdown": 45.04514304362015,
     "volume": 894880,
-    "timestamp": "2026-02-17T05:44:16.556Z"
+    "timestamp": "2026-02-17T10:09:47.776Z"
   },
   "MQG": {
     "ticker": "MQG",
     "price": 218.36,
-    "previousClose": 217.00999450683594,
-    "change": 1.3500054931640761,
-    "changePercent": 0.6220936949157658,
+    "previousClose": 218.36000061035156,
+    "change": -6.103515488575795e-7,
+    "changePercent": -2.795161875579539e-7,
     "yearHigh": 238.63,
     "yearLow": 160,
     "drawdown": 8.494321753341987,
     "volume": 431385,
-    "timestamp": "2026-02-17T05:44:18.471Z"
+    "timestamp": "2026-02-17T10:09:49.599Z"
   },
   "GMG": {
     "ticker": "GMG",
     "price": 30.76,
-    "previousClose": 31.200000762939453,
-    "change": -0.44000076293945156,
-    "changePercent": -1.4102588210898417,
+    "previousClose": 30.760000228881836,
+    "change": -2.2888183437430598e-7,
+    "changePercent": -7.440891829363491e-7,
     "yearHigh": 37.31,
     "yearLow": 25.01,
     "drawdown": 17.55561511659073,
     "volume": 2808168,
-    "timestamp": "2026-02-17T05:44:20.326Z"
+    "timestamp": "2026-02-17T10:09:51.409Z"
   },
   "WDS": {
     "ticker": "WDS",
     "price": 25.83,
-    "previousClose": 25.84000015258789,
-    "change": -0.01000015258789233,
-    "changePercent": -0.03870028068436683,
+    "previousClose": 25.829999923706055,
+    "change": 7.629394360719743e-8,
+    "changePercent": 2.9536950767536387e-7,
     "yearHigh": 27.3,
     "yearLow": 18.61,
     "drawdown": 5.384615384615393,
     "volume": 3022439,
-    "timestamp": "2026-02-17T05:44:22.230Z"
+    "timestamp": "2026-02-17T10:09:53.249Z"
   },
   "SIG": {
     "ticker": "SIG",
     "price": 3.02,
-    "previousClose": 3.009999990463257,
-    "change": 0.010000009536743182,
-    "changePercent": 0.33222623150919417,
+    "previousClose": 3.0199999809265137,
+    "change": 1.907348634588857e-8,
+    "changePercent": 6.315723995480611e-7,
     "yearHigh": 3.28,
     "yearLow": 2.7,
     "drawdown": 7.9268292682926775,
     "volume": 8900977,
-    "timestamp": "2026-02-17T05:44:24.093Z"
+    "timestamp": "2026-02-17T10:09:55.568Z"
   },
   "FMG": {
     "ticker": "FMG",
     "price": 20.1,
-    "previousClose": 20.209999084472656,
-    "change": -0.10999908447265483,
-    "changePercent": -0.5442805020073808,
+    "previousClose": 20.100000381469727,
+    "change": -3.8146972514141453e-7,
+    "changePercent": -0.000001897859293043064,
     "yearHigh": 23.38,
     "yearLow": 13.18,
     "drawdown": 14.029084687767313,
     "volume": 5411560,
-    "timestamp": "2026-02-17T05:44:25.930Z"
+    "timestamp": "2026-02-17T10:09:57.426Z"
   },
   "DXS": {
     "ticker": "DXS",
     "price": 6.31,
-    "previousClose": 6.300000190734863,
-    "change": 0.009999809265136328,
-    "changePercent": 0.15872712638711683,
+    "previousClose": 6.309999942779541,
+    "change": 5.7220458593576495e-8,
+    "changePercent": 9.068218559819989e-7,
     "yearHigh": 7.85,
     "yearLow": 6.16,
     "drawdown": 19.61783439490446,
     "volume": 2871683,
-    "timestamp": "2026-02-17T05:44:27.800Z"
+    "timestamp": "2026-02-17T10:09:59.312Z"
   },
   "NAB": {
     "ticker": "NAB",
     "price": 45.34,
-    "previousClose": 45.540000915527344,
-    "change": -0.20000091552734034,
-    "changePercent": -0.4391763537693472,
+    "previousClose": 45.34000015258789,
+    "change": -1.5258788721439487e-7,
+    "changePercent": -3.3654143515852093e-7,
     "yearHigh": 47.25,
     "yearLow": 31.13,
     "drawdown": 4.042328042328036,
     "volume": 3004204,
-    "timestamp": "2026-02-17T05:44:29.795Z"
+    "timestamp": "2026-02-17T10:10:01.210Z"
   }
 }
