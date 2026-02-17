@@ -7,9 +7,10 @@
 - Added `git pull --rebase` race condition protection
 
 ## 2. Remove `|| true` from critical steps in all workflow files
-**Status**: PENDING
-- Keep `|| true` only for genuinely optional steps
-- Critical steps (the main script) should fail the workflow if they error
+**Status**: DONE
+- Removed from `update-orchestrator.js` in update-prices.yml (main pipeline)
+- Removed from `run-automated-analysis.js` in update-prices.yml and live-prices.yml (core analysis)
+- Kept on external API calls (fetch-live-prices, fetch-announcements) and secondary steps
 
 ## 3. Add concurrency groups to all workflows that commit to the repo
 **Status**: PENDING

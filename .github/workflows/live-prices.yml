@@ -33,7 +33,7 @@ jobs:
         run: node scripts/update-stock-json.js || true
 
       - name: Run narrative analysis
-        run: node scripts/run-automated-analysis.js || true
+        run: node scripts/run-automated-analysis.js
 
       - name: Check for changes
         id: changes
