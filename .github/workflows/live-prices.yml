@@ -51,4 +51,5 @@ jobs:
           git add data/live-prices.json
           git add data/narrative-analysis.json 2>/dev/null || true
           git commit -m "Live prices + analysis — $(date -u +'%H:%M UTC %d %b %Y')"
+          git pull --rebase origin main
           git push

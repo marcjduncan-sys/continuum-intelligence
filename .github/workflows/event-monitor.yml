@@ -61,7 +61,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/latest-prices.json data/events/
-          git diff --staged --quiet || (git commit -m "📊 Auto-update: Prices & events [$(date +%Y-%m-%d)]" && git push)
+          git diff --staged --quiet || (git commit -m "📊 Auto-update: Prices & events [$(date +%Y-%m-%d)]" && git pull --rebase origin main && git push)
 
   generate-narratives:
     name: Generate Narrative Updates
@@ -105,7 +105,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/pending-updates.json
-          git diff --staged --quiet || (git commit -m "📝 Auto-generate: Narrative updates [$(date +%Y-%m-%d)]" && git push)
+          git diff --staged --quiet || (git commit -m "📝 Auto-generate: Narrative updates [$(date +%Y-%m-%d)]" && git pull --rebase origin main && git push)
 
   update-html:
     name: Update Website HTML
@@ -138,7 +138,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add index.html
-          git diff --staged --quiet || (git commit -m "🌐 Auto-update: Website refresh [$(date +%Y-%m-%d %H:%M)]" && git push)
+          git diff --staged --quiet || (git commit -m "🌐 Auto-update: Website refresh [$(date +%Y-%m-%d %H:%M)]" && git pull --rebase origin main && git push)
 
   daily-summary:
     name: Send Daily Summary

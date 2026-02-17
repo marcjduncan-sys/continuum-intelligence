@@ -67,4 +67,5 @@ jobs:
           git add index.html
           git add data/ 2>/dev/null || true
           git commit -m "Daily update — prices + announcements + freshness — $(date -u +'%d %b %Y')"
+          git pull --rebase origin main
           git push
