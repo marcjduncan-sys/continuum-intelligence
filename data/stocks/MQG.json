@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "MQG-2026-001",
-  "current_price": 219.65,
+  "current_price": 220.16,
   "priceHistory": [
-    235.07,
     234.37,
     232,
     228.51,
@@ -260,7 +259,8 @@
     216.17,
     217.01,
     218.36,
-    219.65
+    219.65,
+    220.16
   ],
   "reference": {
     "sharesOutstanding": 366,
@@ -288,7 +288,7 @@
     "reviewDate": "11 February 2026",
     "daysSinceReview": 6,
     "priceAtReview": 211.17,
-    "pricePctChange": 4,
+    "pricePctChange": 4.3,
     "nearestCatalyst": "FY26 Full Year Results — MAM & CGM Definitive",
     "nearestCatalystDate": "MAY 2026",
     "nearestCatalystDays": 72,
@@ -1349,5 +1349,5 @@
   "last_extracted": "2026-02-17T22:20:28.106Z",
   "last_updated": "11 February 2026",
   "last_research_update": "2026-02-17T23:19:16.345Z",
-  "last_price_update": "2026-02-17T23:49:44.488Z"
+  "last_price_update": "2026-02-17T23:58:30.560Z"
 }

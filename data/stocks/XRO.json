@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "XRO-2026-001",
-  "current_price": 80.04,
+  "current_price": 80.01,
   "priceHistory": [
-    186.26,
     184.32,
     182.02,
     179.89,
@@ -260,7 +259,8 @@
     73.49,
     79.06,
     78.5,
-    80.04
+    80.04,
+    80.01
   ],
   "reference": {
     "sharesOutstanding": 154,
@@ -1599,5 +1599,5 @@
   "last_extracted": "2026-02-17T22:20:28.028Z",
   "last_updated": "12 February 2026",
   "last_research_update": "2026-02-17T23:19:16.345Z",
-  "last_price_update": "2026-02-17T23:49:44.496Z"
+  "last_price_update": "2026-02-17T23:58:30.567Z"
 }

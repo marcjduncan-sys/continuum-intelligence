@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "PME-2026-001",
-  "current_price": 129.08,
+  "current_price": 129.04,
   "priceHistory": [
-    279.9,
     297.14,
     286.09,
     285.81,
@@ -260,7 +259,8 @@
     118.22,
     116.97,
     125.96,
-    129.08
+    129.08,
+    129.04
   ],
   "reference": {
     "sharesOutstanding": 112,
@@ -288,7 +288,7 @@
     "reviewDate": "10 February 2026",
     "daysSinceReview": 7,
     "priceAtReview": 162.64,
-    "pricePctChange": -20.6,
+    "pricePctChange": -20.7,
     "nearestCatalyst": "1H FY26 Results — The Immediate Test",
     "nearestCatalystDate": "12 FEBRUARY 2026",
     "nearestCatalystDays": -6,
@@ -1338,5 +1338,5 @@
   "last_extracted": "2026-02-17T22:20:28.077Z",
   "last_updated": "10 February 2026",
   "last_research_update": "2026-02-17T23:19:16.345Z",
-  "last_price_update": "2026-02-17T23:49:44.491Z"
+  "last_price_update": "2026-02-17T23:58:30.562Z"
 }

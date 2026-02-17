@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "DRO-2026-001",
-  "current_price": 3.26,
+  "current_price": 3.27,
   "priceHistory": [
-    0.6,
     0.63,
     0.73,
     0.8,
@@ -260,7 +259,8 @@
     3.03,
     3.16,
     3.25,
-    3.26
+    3.26,
+    3.27
   ],
   "reference": {
     "sharesOutstanding": 917,
@@ -288,7 +288,7 @@
     "reviewDate": "10 February 2026",
     "daysSinceReview": 7,
     "priceAtReview": 3.14,
-    "pricePctChange": 3.8,
+    "pricePctChange": 4.1,
     "nearestCatalyst": "FY2025 Full-Year Results — The Definitive Test",
     "nearestCatalystDate": "4 MARCH 2026",
     "nearestCatalystDays": 14,
@@ -1329,5 +1329,5 @@
   "last_extracted": "2026-02-17T22:20:28.062Z",
   "last_updated": "10 February 2026",
   "last_research_update": "2026-02-17T23:19:16.345Z",
-  "last_price_update": "2026-02-17T23:49:44.484Z"
+  "last_price_update": "2026-02-17T23:58:30.555Z"
 }

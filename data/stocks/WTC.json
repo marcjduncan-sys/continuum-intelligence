@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "WTC-2026-001",
-  "current_price": 47.98,
+  "current_price": 48.16,
   "priceHistory": [
-    123.38,
     121.7,
     121.7,
     121.7,
@@ -260,7 +259,8 @@
     42.62,
     48.11,
     47.34,
-    47.98
+    47.98,
+    48.16
   ],
   "reference": {
     "sharesOutstanding": 381,
@@ -287,7 +287,7 @@
     "reviewDate": "10 February 2026",
     "daysSinceReview": 7,
     "priceAtReview": 49.1,
-    "pricePctChange": -2.3,
+    "pricePctChange": -1.9,
     "nearestCatalyst": "FY25 Full-Year Results",
     "nearestCatalystDate": "25 FEBRUARY 2026",
     "nearestCatalystDays": 7,
@@ -1455,5 +1455,5 @@
   "last_extracted": "2026-02-17T22:20:28.049Z",
   "last_updated": "2026-02-14T09:30:00+11:00",
   "last_research_update": "2026-02-17T23:19:16.345Z",
-  "last_price_update": "2026-02-17T23:49:44.495Z"
+  "last_price_update": "2026-02-17T23:58:30.566Z"
 }

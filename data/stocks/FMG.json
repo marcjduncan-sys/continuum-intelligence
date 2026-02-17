@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "FMG-2026-001",
-  "current_price": 20.31,
+  "current_price": 20.28,
   "priceHistory": [
-    19.57,
     19.45,
     18.24,
     18.65,
@@ -260,7 +259,8 @@
     21.21,
     20.21,
     20.1,
-    20.31
+    20.31,
+    20.28
   ],
   "reference": {
     "sharesOutstanding": 3203,
@@ -289,7 +289,7 @@
     "reviewDate": "11 February 2026",
     "daysSinceReview": 6,
     "priceAtReview": 21.39,
-    "pricePctChange": -5,
+    "pricePctChange": -5.2,
     "nearestCatalyst": null,
     "nearestCatalystDate": null,
     "nearestCatalystDays": null,
@@ -1381,5 +1381,5 @@
   "last_extracted": "2026-02-17T22:20:28.141Z",
   "last_updated": "11 February 2026",
   "last_research_update": "2026-02-17T23:19:16.345Z",
-  "last_price_update": "2026-02-17T23:49:44.486Z"
+  "last_price_update": "2026-02-17T23:58:30.557Z"
 }
