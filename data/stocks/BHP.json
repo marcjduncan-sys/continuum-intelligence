@@ -7,7 +7,7 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "BHP-2026-001",
-  "current_price": 50.36,
+  "current_price": 52.74,
   "priceHistory": [
     40.95,
     41.72,
@@ -68,7 +68,8 @@
     51.07,
     52.09,
     51.13,
-    50.36
+    50.36,
+    52.74
   ],
   "reference": {
     "sharesOutstanding": 5078,
@@ -93,11 +94,11 @@
     "reviewDate": "16 February 2026",
     "daysSinceReview": 2,
     "priceAtReview": 50.36,
-    "pricePctChange": 0,
+    "pricePctChange": 4.7,
     "nearestCatalyst": null,
     "nearestCatalystDate": null,
     "nearestCatalystDays": null,
-    "urgency": 0,
+    "urgency": 10,
     "status": "OK",
     "badge": "ok"
   },
@@ -756,5 +757,6 @@
   "weighting": null,
   "last_extracted": "2026-02-17T22:20:28.196Z",
   "last_updated": "16 February 2026",
-  "last_research_update": "2026-02-17T22:25:04.291Z"
+  "last_research_update": "2026-02-17T23:19:16.345Z",
+  "last_price_update": "2026-02-17T23:19:16.281Z"
 }

@@ -7,7 +7,7 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "OCL-2026-001",
-  "current_price": 13.46,
+  "current_price": 13.91,
   "priceHistory": [
     17.42,
     16.75,
@@ -68,7 +68,8 @@
     13.41,
     13.19,
     13.46,
-    13.46
+    13.46,
+    13.91
   ],
   "reference": {
     "sharesOutstanding": 96,
@@ -93,11 +94,11 @@
     "reviewDate": "17 February 2026",
     "daysSinceReview": 1,
     "priceAtReview": 13.45,
-    "pricePctChange": 0.1,
+    "pricePctChange": 3.4,
     "nearestCatalyst": "H1 FY2026 Results",
     "nearestCatalystDate": "Feb-Mar 2026",
     "nearestCatalystDays": 11,
-    "urgency": 0,
+    "urgency": 10,
     "status": "OK",
     "badge": "ok"
   },
@@ -929,5 +930,6 @@
   "weighting": null,
   "last_extracted": "2026-02-17T22:20:28.233Z",
   "last_updated": "17 February 2026",
-  "last_research_update": "2026-02-17T22:25:04.291Z"
+  "last_research_update": "2026-02-17T23:19:16.345Z",
+  "last_price_update": "2026-02-17T23:19:16.287Z"
 }

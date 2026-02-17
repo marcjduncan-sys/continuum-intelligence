@@ -315,10 +315,10 @@
       "what_to_watch": "FY26 ARR growth rate and valuation multiple vs ASX tech peers. If the governance discount narrows and growth holds at 15%+, this narrative holds.",
       "upside": "Stable execution could gradually close the governance discount over 12-18 months.",
       "risk_plain": "If growth slows further or new governance issues surface, even the base case valuation may be too generous.",
-      "survival_score": 0.32,
+      "survival_score": 0.34,
       "status": "LOW",
       "weighted_inconsistency": 2.8,
-      "last_updated": "2026-02-17T22:25:04.291Z"
+      "last_updated": "2026-02-17T23:19:16.345Z"
     },
     "T3": {
       "label": "Risk/Downside",
@@ -339,14 +339,14 @@
       "what_to_watch": "Competitive product launches from FourKites, project44, or new AI-native logistics platforms. Also monitor key engineering talent retention.",
       "upside": null,
       "risk_plain": "While the CargoWise moat is deep, the company's reliance on one person for technical vision is a genuine structural vulnerability.",
-      "survival_score": 0.11,
+      "survival_score": 0.09,
       "status": "VERY_LOW",
       "weighted_inconsistency": 5.8,
-      "last_updated": "2026-02-17T22:25:04.291Z"
+      "last_updated": "2026-02-17T23:19:16.345Z"
     }
   },
   "dominant": "T3",
-  "confidence": "MODERATE",
+  "confidence": "LOW",
   "alert_state": "NORMAL",
   "alert_started": null,
   "presentation": {
@@ -1454,5 +1454,5 @@
   "weighting": null,
   "last_extracted": "2026-02-17T22:20:28.049Z",
   "last_updated": "2026-02-14T09:30:00+11:00",
-  "last_research_update": "2026-02-17T22:25:04.291Z"
+  "last_research_update": "2026-02-17T23:19:16.345Z"
 }

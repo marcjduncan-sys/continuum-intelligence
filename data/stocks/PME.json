@@ -304,10 +304,10 @@
       "what_to_watch": "Contract win rate sustained at FY25 levels or above",
       "upside": "Pro Medicus continues winning major US health system contracts, growing from ~10% to 25%+ market share over the next 5 years. Cloud-native architecture creates structural cost advantage competitors cannot replicate.",
       "risk_plain": null,
-      "survival_score": 0.32,
+      "survival_score": 0.28,
       "status": "LOW",
       "weighted_inconsistency": null,
-      "last_updated": "2026-02-17T22:25:04.291Z"
+      "last_updated": "2026-02-17T23:19:16.345Z"
     },
     "T2": {
       "label": "Valuation Mean-Reversion",
@@ -316,10 +316,10 @@
       "what_to_watch": null,
       "upside": null,
       "risk_plain": "The 163x P/E contracts to a more conventional 50-80x as growth decelerates or market sentiment shifts. Even extraordinary business quality has a price.",
-      "survival_score": 0.22,
+      "survival_score": 0.23,
       "status": "LOW",
       "weighted_inconsistency": null,
-      "last_updated": "2026-02-17T22:25:04.291Z"
+      "last_updated": "2026-02-17T23:19:16.345Z"
     },
     "T3": {
       "label": "Competitive Disruption",
@@ -328,10 +328,10 @@
       "what_to_watch": null,
       "upside": null,
       "risk_plain": "A competitor (existing or new entrant) develops a platform that matches Visage 7's cloud-native architecture, eroding Pro Medicus's structural advantage.",
-      "survival_score": 0.14,
+      "survival_score": 0.16,
       "status": "VERY_LOW",
       "weighted_inconsistency": null,
-      "last_updated": "2026-02-17T22:25:04.291Z"
+      "last_updated": "2026-02-17T23:19:16.345Z"
     },
     "T4": {
       "label": "AI Amplifies the Moat",
@@ -340,13 +340,13 @@
       "what_to_watch": null,
       "upside": "Pro Medicus becomes the platform on which AI radiology tools run, deepening stickiness and expanding per-study economics. Platform companies historically capture more value than point-solution vendors.",
       "risk_plain": null,
-      "survival_score": 0.32,
+      "survival_score": 0.33,
       "status": "LOW",
       "weighted_inconsistency": null,
-      "last_updated": "2026-02-17T22:25:04.291Z"
+      "last_updated": "2026-02-17T23:19:16.345Z"
     }
   },
-  "dominant": "T1",
+  "dominant": "T4",
   "confidence": "LOW",
   "alert_state": "NORMAL",
   "alert_started": null,
@@ -1321,7 +1321,15 @@
     }
   },
   "big_picture": "Pro Medicus (ASX: PME) is a Melbourne-based medical imaging technology company whose Visage 7 platform provides ultra-fast diagnostic image viewing and AI-integrated radiology workflows to hospitals globally. With just 132 employees generating 77% EBITDA margins, Pro Medicus is one of the most capital-efficient healthcare IT companies in the world.",
-  "last_flip": null,
+  "last_flip": {
+    "date": "2026-02-17",
+    "from": "T1",
+    "to": "T4",
+    "trigger": "Automated: survival score shift (US Expansion Accelerates → AI Amplifies the Moat)",
+    "price_at_flip": 125.96,
+    "from_survival": 0.28,
+    "to_survival": 0.33
+  },
   "narrative_history": [],
   "evidence_items": [],
   "price_signals": [],
@@ -1329,5 +1337,5 @@
   "weighting": null,
   "last_extracted": "2026-02-17T22:20:28.077Z",
   "last_updated": "10 February 2026",
-  "last_research_update": "2026-02-17T22:25:04.291Z"
+  "last_research_update": "2026-02-17T23:19:16.345Z"
 }
