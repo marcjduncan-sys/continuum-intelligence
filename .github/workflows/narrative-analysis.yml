@@ -1,35 +1,57 @@
-  name: Narrative Framework Analysis
+name: Narrative Framework Analysis
 
-  on:
-    schedule:
-      - cron: '0 7 * * *'
-      - cron: '0 19 * * *'
-    workflow_dispatch:
-      inputs:
-        tickers:
-          description: 'Tickers to analyze (or all)'
-          required: true
-          default: 'all'
-        severity_threshold:
-          description: 'Minimum severity (NORMAL/MODERATE/HIGH/CRITICAL)'
-          required: true
-          default: 'MODERATE'
+on:
+  schedule:
+    - cron: '0 7 * * *'
+    - cron: '0 19 * * *'
+  workflow_dispatch:
+    inputs:
+      tickers:
+        description: 'Tickers to analyze (or all)'
+        required: true
+        default: 'all'
+      severity_threshold:
+        description: 'Minimum severity (NORMAL/MODERATE/HIGH/CRITICAL)'
+        required: true
+        default: 'MODERATE'
 
-  jobs:
-    analyze:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: write
-        issues: write
+permissions:
+  contents: write
 
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
 
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: '20'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        - name: Run narrative analysis
-          run: node scripts/run-automated-analysis.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run narrative analysis
+        run: node scripts/run-automated-analysis.js
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git add data/narrative-analysis.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected:"
+            git diff --cached --stat
+          fi
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Narrative analysis — $(date -u +'%H:%M UTC %d %b %Y')"
+          git pull --rebase origin main
+          git push
