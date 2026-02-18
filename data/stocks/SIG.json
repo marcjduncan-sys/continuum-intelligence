@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "SIG-2026-001",
-  "current_price": 3.01,
+  "current_price": 2.99,
   "priceHistory": [
-    3.09,
     3.02,
     3.02,
     2.99,
@@ -260,7 +259,8 @@
     3.03,
     3.01,
     3.02,
-    3.01
+    3.01,
+    2.99
   ],
   "reference": {
     "sharesOutstanding": 11540,
@@ -289,7 +289,7 @@
     "reviewDate": "11 February 2026",
     "daysSinceReview": 7,
     "priceAtReview": 3.13,
-    "pricePctChange": -3.8,
+    "pricePctChange": -4.5,
     "nearestCatalyst": null,
     "nearestCatalystDate": null,
     "nearestCatalystDays": null,
@@ -1370,6 +1370,6 @@
   "weighting": null,
   "last_extracted": "2026-02-17T22:20:28.128Z",
   "last_updated": "11 February 2026",
-  "last_research_update": "2026-02-18T00:00:05.019Z",
-  "last_price_update": "2026-02-17T23:49:44.492Z"
+  "last_research_update": "2026-02-18T05:42:01.210Z",
+  "last_price_update": "2026-02-18T05:42:01.104Z"
 }

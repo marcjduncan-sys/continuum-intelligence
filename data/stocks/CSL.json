@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "CSL-2026-001",
-  "current_price": 154.5,
+  "current_price": 152.74,
   "priceHistory": [
-    258.67,
     261,
     262.47,
     264.82,
@@ -260,7 +259,8 @@
     151.56,
     154.38,
     154.53,
-    154.5
+    154.5,
+    152.74
   ],
   "reference": {
     "sharesOutstanding": 483,
@@ -290,7 +290,7 @@
     "reviewDate": "12 February 2026",
     "daysSinceReview": 6,
     "priceAtReview": 165.79,
-    "pricePctChange": -6.8,
+    "pricePctChange": -7.9,
     "nearestCatalyst": "1H FY26 Results — TRIGGERED",
     "nearestCatalystDate": "12 FEBRUARY 2026",
     "nearestCatalystDays": -6,
@@ -318,10 +318,10 @@
       "what_to_watch": "FY26 earnings guidance at H1 result. If guidance stays at 7-10% NPATA growth, the base case holds firm.",
       "upside": "Consistent execution could attract more long-only institutional capital, supporting valuation multiples.",
       "risk_plain": "If growth slips below high single digits, the premium valuation may not be sustainable.",
-      "survival_score": 0.53,
+      "survival_score": 0.54,
       "status": "MODERATE",
       "weighted_inconsistency": 1,
-      "last_updated": "2026-02-18T00:00:05.019Z"
+      "last_updated": "2026-02-18T05:42:01.210Z"
     },
     "T3": {
       "label": "Risk/Downside",
@@ -1483,6 +1483,6 @@
   "weighting": null,
   "last_extracted": "2026-02-17T22:20:28.098Z",
   "last_updated": "2026-02-14T09:30:00+11:00",
-  "last_research_update": "2026-02-18T00:00:05.019Z",
-  "last_price_update": "2026-02-18T00:00:04.619Z"
+  "last_research_update": "2026-02-18T05:42:01.210Z",
+  "last_price_update": "2026-02-18T05:42:01.094Z"
 }

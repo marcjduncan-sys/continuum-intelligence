@@ -7,9 +7,8 @@
   "exchange": "ASX",
   "currency": "A$",
   "reportId": "PME-2026-001",
-  "current_price": 129,
+  "current_price": 123,
   "priceHistory": [
-    286.09,
     285.81,
     283.31,
     283.51,
@@ -260,7 +259,8 @@
     125.96,
     129.08,
     129.04,
-    129
+    129,
+    123
   ],
   "reference": {
     "sharesOutstanding": 112,
@@ -288,7 +288,7 @@
     "reviewDate": "10 February 2026",
     "daysSinceReview": 8,
     "priceAtReview": 162.64,
-    "pricePctChange": -20.7,
+    "pricePctChange": -24.4,
     "nearestCatalyst": "1H FY26 Results — The Immediate Test",
     "nearestCatalystDate": "12 FEBRUARY 2026",
     "nearestCatalystDays": -6,
@@ -304,10 +304,10 @@
       "what_to_watch": "Contract win rate sustained at FY25 levels or above",
       "upside": "Pro Medicus continues winning major US health system contracts, growing from ~10% to 25%+ market share over the next 5 years. Cloud-native architecture creates structural cost advantage competitors cannot replicate.",
       "risk_plain": null,
-      "survival_score": 0.24,
+      "survival_score": 0.21,
       "status": "LOW",
       "weighted_inconsistency": null,
-      "last_updated": "2026-02-18T00:00:05.019Z"
+      "last_updated": "2026-02-18T05:42:01.210Z"
     },
     "T2": {
       "label": "Valuation Mean-Reversion",
@@ -328,10 +328,10 @@
       "what_to_watch": null,
       "upside": null,
       "risk_plain": "A competitor (existing or new entrant) develops a platform that matches Visage 7's cloud-native architecture, eroding Pro Medicus's structural advantage.",
-      "survival_score": 0.18,
-      "status": "VERY_LOW",
+      "survival_score": 0.2,
+      "status": "LOW",
       "weighted_inconsistency": null,
-      "last_updated": "2026-02-18T00:00:05.019Z"
+      "last_updated": "2026-02-18T05:42:01.210Z"
     },
     "T4": {
       "label": "AI Amplifies the Moat",
@@ -340,10 +340,10 @@
       "what_to_watch": null,
       "upside": "Pro Medicus becomes the platform on which AI radiology tools run, deepening stickiness and expanding per-study economics. Platform companies historically capture more value than point-solution vendors.",
       "risk_plain": null,
-      "survival_score": 0.34,
+      "survival_score": 0.35,
       "status": "LOW",
       "weighted_inconsistency": null,
-      "last_updated": "2026-02-18T00:00:05.019Z"
+      "last_updated": "2026-02-18T05:42:01.210Z"
     }
   },
   "dominant": "T4",
@@ -1337,6 +1337,6 @@
   "weighting": null,
   "last_extracted": "2026-02-17T22:20:28.077Z",
   "last_updated": "10 February 2026",
-  "last_research_update": "2026-02-18T00:00:05.019Z",
-  "last_price_update": "2026-02-18T00:00:04.730Z"
+  "last_research_update": "2026-02-18T05:42:01.210Z",
+  "last_price_update": "2026-02-18T05:42:01.102Z"
 }
